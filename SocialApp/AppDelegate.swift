@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let navBarAppearance = UINavigationBar.appearance()
+        let barItemAppearance = UIBarButtonItem.appearance()
+        // barBack item without title customization
+        barItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+        // navBar color map customized
+        navBarAppearance.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        navBarAppearance.barTintColor = #colorLiteral(red: 0.2763281312, green: 0.9572073939, blue: 0.639295324, alpha: 0.789625671)
+        navBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         // Override point for customization after application launch.
         return true
     }
@@ -41,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        
+//        self.saveContext()
     }
 
     // MARK: - Core Data stack
