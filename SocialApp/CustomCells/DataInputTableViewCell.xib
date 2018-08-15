@@ -105,8 +105,8 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="loginTextField" destination="HOG-Zm-SMl" id="Od3-cs-IVx"/>
-                <outlet property="passTextField" destination="PNS-p8-aYf" id="10H-Ag-Zvc"/>
+                <outlet property="numberTextField" destination="HOG-Zm-SMl" id="3vQ-AU-jww"/>
+                <outlet property="passTextField" destination="PNS-p8-aYf" id="iRD-Wb-AsP"/>
             </connections>
             <point key="canvasLocation" x="38" y="262.5"/>
         </tableViewCell>

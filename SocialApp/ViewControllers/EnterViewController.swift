@@ -30,6 +30,7 @@ class EnterViewController: UIViewController {
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "LogRegController") as! LoginViewController
         // send data here
         nextViewController.titleString = "Войдите, чтобы помочь"
+        nextViewController.userType = LogState.vol
         navigationController?.pushViewController(nextViewController,
                                                  animated: true)
     }
@@ -39,6 +40,7 @@ class EnterViewController: UIViewController {
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "LogRegController") as! LoginViewController
         // send data here
         nextViewController.titleString = "Войдите и Вам помогут"
+        nextViewController.userType = LogState.inv
         navigationController?.pushViewController(nextViewController,
                                                  animated: true)
     }

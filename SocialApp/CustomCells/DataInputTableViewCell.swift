@@ -9,15 +9,23 @@
 import UIKit
 import TextFieldEffects
 
-class DataInputTableViewCell: UITableViewCell {
+class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet weak var loginTextField: IsaoTextField!
+    @IBOutlet weak var numberTextField: IsaoTextField!
     
     @IBOutlet weak var passTextField: IsaoTextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        numberTextField.delegate = self
+        numberTextField.keyboardType = .phonePad
+        passTextField.delegate = self
         // Initialization code
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {

@@ -8,17 +8,17 @@
 
 import UIKit
 
+// enum state inv/vol
+enum LogState {
+    case inv
+    case vol
+}
+
 class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var titleString: String?
     private var loginTableView: UITableView!
-    private let myArray: Array = ["Vk/Twitter/Facebook"]
-    
-    // enum state inv/vol
-    public enum LogState {
-        case inv
-        case vol
-    }
+    var userType: LogState = LogState.inv
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpTableView()
         loginTableView.dataSource = self
         loginTableView.delegate = self
+        
         
     }
     
@@ -41,32 +42,35 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // ********************
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // setting up button click
+        self.view.endEditing(true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 || section == 1 {
+        switch userType {
+        case .inv:
             return 1
-        } else {
-            return myArray.count
+        case .vol:
+            return 2
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0{
-            let cell = Bundle.main.loadNibNamed("SocialTableViewCell", owner: self, options: nil)?.first as! SocialTableViewCell
-            return cell
-        } else if indexPath.section == 1{
+        switch userType {
+        case .inv:
             let cell = Bundle.main.loadNibNamed("DataInputTableViewCell", owner: self, options: nil)?.first as! DataInputTableViewCell
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
-            cell.textLabel!.text = "\(myArray[indexPath.row])"
-            return cell
+        case .vol:
+            if indexPath.section == 0{
+                let cell = Bundle.main.loadNibNamed("SocialTableViewCell", owner: self, options: nil)?.first as! SocialTableViewCell
+                return cell
+            } else {
+                let cell = Bundle.main.loadNibNamed("DataInputTableViewCell", owner: self, options: nil)?.first as! DataInputTableViewCell
+                return cell
+            }
         }
     }
 
@@ -78,6 +82,11 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
 
 extension LoginViewController{
+    
+    // Заканчивать редактирование текстового поля при нажатии в "пустоту"
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.view.endEditing(true)
+//    }
     
     func setUpNavingationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
