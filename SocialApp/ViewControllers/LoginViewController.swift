@@ -19,6 +19,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var titleString: String?
     private var loginTableView: UITableView!
     var userType: LogState = LogState.inv
+    var keyboardOnScreen: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,8 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpTableView()
         loginTableView.dataSource = self
         loginTableView.delegate = self
-        
+        // added keyboard observers also delete them!!! to do
+        addKeyboardObservers()
         
     }
     
@@ -35,12 +37,14 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillDisappear(animated)
         if self.isMovingFromParentViewController {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
+            removeKeyboardObservers()
         }
     }
     // ********************
     // tableView setting up
     // ********************
     
+    // implement logic when touch on any cell in tableView -> close keyboard
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.view.endEditing(true)
     }
@@ -83,10 +87,35 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
 extension LoginViewController{
     
-    // Заканчивать редактирование текстового поля при нажатии в "пустоту"
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    func addKeyboardObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func removeKeyboardObservers(){
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: self.view.window)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        if !self.keyboardOnScreen{
+            if let keyboardFrame: NSValue = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                self.view.frame.origin.y -= keyboardHeight/3
+                self.keyboardOnScreen = true
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        if let keyboardFrame: NSValue = sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y += keyboardHeight/3
+            self.keyboardOnScreen = false
+        }
+    }
     
     func setUpNavingationBar() {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -96,11 +125,23 @@ extension LoginViewController{
     func setUpTableView(){
         let displayWidth: CGFloat = self.view.frame.width
         let displayHeight: CGFloat = self.view.frame.height
+        // handle background view touch
+        let tap = UITapGestureRecognizer(target: self, action: #selector(outsideTableTapped))
         
         loginTableView = UITableView(frame: CGRect(x: 0, y: self.topDistance + 40.0, width: displayWidth, height: displayHeight - self.topDistance - 40.0))
         loginTableView.isScrollEnabled = false
         loginTableView.separatorStyle = .none
         loginTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        // case with tapping in clear part of UITableView (without cells)
+        //
+        loginTableView.backgroundView = UIView()
+        loginTableView.addGestureRecognizer(tap)
+        //
         self.view.addSubview(loginTableView)
+    }
+    
+    // close keyboard and stop editing TextField
+    @objc func outsideTableTapped(tap:UITapGestureRecognizer){
+        self.view.endEditing(true)
     }
 }

@@ -7,124 +7,145 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07BF685ADD1D881E9DABFCA0557411BB /* Pods-SocialApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F7F1E72DE80ADCCC8DE84CB9C6E8FEF /* Pods-SocialApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F6D47F19ED0A788B41D1369F8619C2 /* Timeline.swift */; };
-		199C1532B6F524E6B0F0F57C770D6F4A /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960917A02170D41CE6E0EDCB8A793DB /* TextFieldEffects.swift */; };
-		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D565C9C2425E8C72660DD8A43B1E8A75 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A8A1DC752125C286FB26EDB864379B /* TaskDelegate.swift */; };
-		39EEBA1407403111A71F08EE2ECB64D1 /* AkiraTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0010573F17FD3A52F7DF803171C0B1B2 /* AkiraTextField.swift */; };
-		3F2829E8BCFC32282B7112E43CFE5EB5 /* MinoruTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEBDD0734229E4F38B35BA4274AD1DE /* MinoruTextField.swift */; };
-		4619849F4965A4710B5E1B8F57F15BE6 /* MadokaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939392898DB505F521D17A2B0AC35388 /* MadokaTextField.swift */; };
-		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC624F5CB5C27325A75BBF6B8785023 /* Request.swift */; };
-		53C38ECAF5AE93BA80B9BA5920AB8822 /* Pods-SocialApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2BFBA565B4B45030B31ABFD92E5B85 /* Pods-SocialApp-dummy.m */; };
-		54A0EA86393E53EC8DDB6FE205A24E19 /* TextFieldEffects-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 541FF1E56A41C054E89D08FBE4C46889 /* TextFieldEffects-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35619DBFB97C6B4CC832388CE939CFF /* DispatchQueue+Alamofire.swift */; };
-		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015121E75AAEC494759C8D6DB53962F5 /* ServerTrustPolicy.swift */; };
-		6A3884D637583C93D5C9974275A0DED2 /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78D00A4FEEE61B40B8564BAD20C0977 /* YoshikoTextField.swift */; };
-		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2CF81D46CB783359C0AE2093EFD92 /* SessionDelegate.swift */; };
-		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EFA71F4F4B364C8DE416EDBAD5E72 /* Result.swift */; };
+		0302D9DE4A7413A3A1230896336E1B60 /* TextFieldEffects-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C00DC2FFEA967BA08F41012ED6BC9 /* TextFieldEffects-dummy.m */; };
+		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C909F6BF02053D66A9F1D1EFFEEB5891 /* Timeline.swift */; };
+		10FA5D1E7A5B1303F1D94B0B274A652F /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454ADCCC70733B6D12C0EA1A36A9FE1 /* SCLAlertView.swift */; };
+		1874BD64E74C5F83A1907DED1CF7E513 /* YokoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ECCDCE9A0EB61D8BE49E48CFDAAFA03 /* YokoTextField.swift */; };
+		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BC6B4EE580439EA459FAFDF2B0470AE3 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD0FF285AECC9FCB123C60274CA2FDE /* TaskDelegate.swift */; };
+		45F4E09C62DDAC3F1C03B7765190FE81 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2597299A042EE876353CB7B522FCB3 /* TextFieldEffects.swift */; };
+		48E3BE0376DB01BE24352B15B63C523E /* MinoruTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65F3EDEECCC5589B1B5F6743D0BB900 /* MinoruTextField.swift */; };
+		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11DFB0F84CB36A878C38F6988FC8028 /* Request.swift */; };
+		57AE3DE2EF9544D11EA32F4DE7E643CA /* TextFieldEffects-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1EF9A14BA12492BEF4E2918EB7CF6C0 /* TextFieldEffects-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16B6506C1358617DDD970DE3C6E1ED /* DispatchQueue+Alamofire.swift */; };
+		61203E64D28FEACDE256B6F17B7A3534 /* JiroTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDFD518C21C153860EB692E14AAB88A /* JiroTextField.swift */; };
+		62B0049AE4C480F748CBCC5AFFDBC62C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FC33EEF7E9988857CE1E20978AB4A4 /* ServerTrustPolicy.swift */; };
+		6CC066AA1DDC5FAF9769C728917EA3B6 /* SCLAlertView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A86DB0764DD6911DC77612B4E1ACBBAF /* SCLAlertView-dummy.m */; };
+		78E85FDB485EB79E20F9765A2ED1513B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001BC4CAFC9F4F29ABDF9106DD71814D /* SessionDelegate.swift */; };
+		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4E585E7E401314E21989A932CC58F /* Result.swift */; };
 		834F4D9819C6010E611A7E151B8899C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		9909399D652F8E71082FD231EAA8F7A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		9C364C128464F5AEB1C7567587C3748D /* YokoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3AE36A8FE9406803A8FE8FC3130DBE /* YokoTextField.swift */; };
-		9D4369C2FABC243AE7D3C95BAA2EC913 /* TextFieldEffects-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1414023840A34ED2056538F779FEC962 /* TextFieldEffects-dummy.m */; };
-		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301EDDF9CF17D27964FCDFB280326387 /* AFError.swift */; };
-		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA1EB77736D836DE3FC27B6DB8870B8 /* NetworkReachabilityManager.swift */; };
-		A887FF39C16A61B22A5363F66ABB1844 /* IsaoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243E4E8AC27DB915E9E48118B84E6226 /* IsaoTextField.swift */; };
-		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD68CCF3E1042AB95B99E3B284DFD07E /* Alamofire-dummy.m */; };
-		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A7D858D5C42EE7293FFB1245A35FF /* SessionManager.swift */; };
-		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C63D7B7DCB25124E9BD02965C92222 /* MultipartFormData.swift */; };
-		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF4CAADDC323C42B51868AA44B7DFB /* Validation.swift */; };
-		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D1BD4D690034DA775EF16F609BD1F /* ParameterEncoding.swift */; };
-		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3894B1817F199E192DFA503EDF69929 /* Response.swift */; };
-		D09BBCE33EEEFBC10B5407892AAE79D6 /* KaedeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F7FF4105DEB47A1B81A2E5FCAB7F5A /* KaedeTextField.swift */; };
-		D29A82AC85B6707CD9ACD551AECB8544 /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE26A2225E18CE7BA9473050132215F /* HoshiTextField.swift */; };
-		DB41557ED7DC7734DABF4F1D2A39EF79 /* JiroTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B03F23F953EC4C8C71E75A8277CA706 /* JiroTextField.swift */; };
-		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = C223EE45E7EFA374DBA6E27AF7BD7E13 /* Notifications.swift */; };
-		F3E9B4B9AB849D04F5077366F22D0C7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
-		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B053414276DB7AF09D335A554EDE2E3 /* ResponseSerialization.swift */; };
-		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E6C3B13DC87608CF83A41DE77C16FA /* Alamofire.swift */; };
+		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3015F8098D7B1FD61657DC518CF591 /* AFError.swift */; };
+		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E4F9C4FBFC475717222305682D8879 /* NetworkReachabilityManager.swift */; };
+		A81C9D4D34B41445D42C577CD7E9F1AE /* SCLAlertView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 17EE3C07BC95D7390FB7CA1B2E292FE2 /* SCLAlertView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DC48C8958E47852E608ED8FF20A9CF70 /* Alamofire-dummy.m */; };
+		ABC4074A3BA048ED43805D65DF83A1BC /* Pods-SocialApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F7F1E72DE80ADCCC8DE84CB9C6E8FEF /* Pods-SocialApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3722DB70656FE3F5F1949038C664F9A7 /* SessionManager.swift */; };
+		AED02793CC58E75F96FD7F289CA922FE /* IsaoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE7365A1DD3243B8EDA8ED6B52EB3B /* IsaoTextField.swift */; };
+		B0080EA4B1A009122528E06369024E55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
+		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2164F45621108449209D82E7A5FBA6C5 /* MultipartFormData.swift */; };
+		B7C8708DFB66498DF0D0DFE5040EDE86 /* MadokaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43C5B4A955C14324398DD1441286F37 /* MadokaTextField.swift */; };
+		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23C8FCB5B128DE1E596FBF2B96488D67 /* Validation.swift */; };
+		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD3E2BF12A7286FD45AB324E27664F5 /* ParameterEncoding.swift */; };
+		C154A2DD3D6C8E8900A176E14C953FFA /* KaedeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D85272E64959F56772FF4E402130B4 /* KaedeTextField.swift */; };
+		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06826E6390B48CF694608F820B28769 /* Response.swift */; };
+		D8187E4067DC7AC320FDA364179F4076 /* YoshikoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C1FEEF393C6427D3607CAF3A9AE6C /* YoshikoTextField.swift */; };
+		E8D6273F40CE1371663D1AEC9728EAFC /* HoshiTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F35C81526F1DDDC52E12CB768E00CD1 /* HoshiTextField.swift */; };
+		EF075680DC5D22463C00030F9E033131 /* AkiraTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C549ABFD84328393B1E146E1FEF08E9A /* AkiraTextField.swift */; };
+		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2D91C9C83238078A8FC95A9753AEA1 /* Notifications.swift */; };
+		F3C726164A8FB0FA03E34DC4EFAD5325 /* Pods-SocialApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2BFBA565B4B45030B31ABFD92E5B85 /* Pods-SocialApp-dummy.m */; };
+		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669D5CD244A1304AC2F30B5DB1AD4CCD /* ResponseSerialization.swift */; };
+		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDED40E28E7461F2C6F2397571133E /* Alamofire.swift */; };
+		FEA712610EF8124EBA680D6A83AF3879 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CA84230D4F57614BFA21E2974AB235 /* SCLExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		68F8C744891A64BE6E111B94BD3023B7 /* PBXContainerItemProxy */ = {
+		77976E6031C5C8DD633EB7588D049A06 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 28047196BEA0E2054955FBFD2FBA1659;
+			remoteGlobalIDString = E15D86C51FE798968908944A2F825F6A;
 			remoteInfo = TextFieldEffects;
 		};
-		6A8114637E2750B3B8B1AD3E35C1BD29 /* PBXContainerItemProxy */ = {
+		AC5CECC9903B8171CC825062D52CBAB8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 88E9EC28B8B46C3631E6B242B50F4442;
 			remoteInfo = Alamofire;
 		};
+		D95F2E213A34EF52FE8C4316C779F8D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8A7892FF1E4A098C188E98CF19EB8ED;
+			remoteInfo = SCLAlertView;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0010573F17FD3A52F7DF803171C0B1B2 /* AkiraTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AkiraTextField.swift; path = TextFieldEffects/TextFieldEffects/AkiraTextField.swift; sourceTree = "<group>"; };
-		015121E75AAEC494759C8D6DB53962F5 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
-		01E6C3B13DC87608CF83A41DE77C16FA /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
-		03C63D7B7DCB25124E9BD02965C92222 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
+		001BC4CAFC9F4F29ABDF9106DD71814D /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
+		01080FAFB131587F26C85A0F506E4D81 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0457CCF71C3AC1DDB6F1699B12274F8A /* Pods-SocialApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SocialApp.modulemap"; sourceTree = "<group>"; };
-		0B03F23F953EC4C8C71E75A8277CA706 /* JiroTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JiroTextField.swift; path = TextFieldEffects/TextFieldEffects/JiroTextField.swift; sourceTree = "<group>"; };
-		0C9EFA71F4F4B364C8DE416EDBAD5E72 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
-		0F2A7D858D5C42EE7293FFB1245A35FF /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
-		10D61E295C56A3CE8AF1011FC5663DA8 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
-		12F7FF4105DEB47A1B81A2E5FCAB7F5A /* KaedeTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KaedeTextField.swift; path = TextFieldEffects/TextFieldEffects/KaedeTextField.swift; sourceTree = "<group>"; };
-		1414023840A34ED2056538F779FEC962 /* TextFieldEffects-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TextFieldEffects-dummy.m"; sourceTree = "<group>"; };
-		16B3EAD3A6110FE1455AB99267B5DE8F /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		070EEB01D159E86602993999DB3300CC /* Pods_SocialApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SocialApp.framework; path = "Pods-SocialApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A2597299A042EE876353CB7B522FCB3 /* TextFieldEffects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFieldEffects.swift; path = TextFieldEffects/TextFieldEffects/TextFieldEffects.swift; sourceTree = "<group>"; };
+		0ECCDCE9A0EB61D8BE49E48CFDAAFA03 /* YokoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YokoTextField.swift; path = TextFieldEffects/TextFieldEffects/YokoTextField.swift; sourceTree = "<group>"; };
+		0F16B6506C1358617DDD970DE3C6E1ED /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		0F35C81526F1DDDC52E12CB768E00CD1 /* HoshiTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HoshiTextField.swift; path = TextFieldEffects/TextFieldEffects/HoshiTextField.swift; sourceTree = "<group>"; };
+		12E4F9C4FBFC475717222305682D8879 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		13872803064A0617B34ADE095F1A6933 /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		14DED5B33D9D4E220BFC5A6DB9ECB83D /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
 		17691FB4B340E8AE64E641A8BB534C3F /* Pods-SocialApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SocialApp-acknowledgements.plist"; sourceTree = "<group>"; };
-		214F16BD38899DEE04391BF25EB5D529 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		243E4E8AC27DB915E9E48118B84E6226 /* IsaoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IsaoTextField.swift; path = TextFieldEffects/TextFieldEffects/IsaoTextField.swift; sourceTree = "<group>"; };
-		2925B2AE3A545E8C119766D4AA3C1ED0 /* TextFieldEffects.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TextFieldEffects.modulemap; sourceTree = "<group>"; };
-		2960917A02170D41CE6E0EDCB8A793DB /* TextFieldEffects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFieldEffects.swift; path = TextFieldEffects/TextFieldEffects/TextFieldEffects.swift; sourceTree = "<group>"; };
-		301EDDF9CF17D27964FCDFB280326387 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
-		36A5C4B378ED676E66893F58C27D1EB8 /* TextFieldEffects-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TextFieldEffects-prefix.pch"; sourceTree = "<group>"; };
-		40CCD429D8009F653E87153CE2451ED8 /* TextFieldEffects.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TextFieldEffects.xcconfig; sourceTree = "<group>"; };
-		473023C43F3F293968C57F39C65C202F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17EE3C07BC95D7390FB7CA1B2E292FE2 /* SCLAlertView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-umbrella.h"; sourceTree = "<group>"; };
+		1DA38A8D4796EA9B94B75494FB6CD77E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F5902F96B7918508F0F79FF6CC1233B /* SCLAlertView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SCLAlertView.xcconfig; sourceTree = "<group>"; };
+		2164F45621108449209D82E7A5FBA6C5 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
+		23C8FCB5B128DE1E596FBF2B96488D67 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
+		2F3015F8098D7B1FD61657DC518CF591 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
+		3722DB70656FE3F5F1949038C664F9A7 /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
+		43FC33EEF7E9988857CE1E20978AB4A4 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		49D85272E64959F56772FF4E402130B4 /* KaedeTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KaedeTextField.swift; path = TextFieldEffects/TextFieldEffects/KaedeTextField.swift; sourceTree = "<group>"; };
+		4AD0FF285AECC9FCB123C60274CA2FDE /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
 		4F7F1E72DE80ADCCC8DE84CB9C6E8FEF /* Pods-SocialApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SocialApp-umbrella.h"; sourceTree = "<group>"; };
 		537C846D4D820F970E36F1DFE2945F04 /* Pods-SocialApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SocialApp-frameworks.sh"; sourceTree = "<group>"; };
-		541FF1E56A41C054E89D08FBE4C46889 /* TextFieldEffects-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TextFieldEffects-umbrella.h"; sourceTree = "<group>"; };
 		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5B3AE36A8FE9406803A8FE8FC3130DBE /* YokoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YokoTextField.swift; path = TextFieldEffects/TextFieldEffects/YokoTextField.swift; sourceTree = "<group>"; };
-		5EA1EB77736D836DE3FC27B6DB8870B8 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		653D1BD4D690034DA775EF16F609BD1F /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
-		67F6D47F19ED0A788B41D1369F8619C2 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
-		6B053414276DB7AF09D335A554EDE2E3 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
-		6EE26A2225E18CE7BA9473050132215F /* HoshiTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HoshiTextField.swift; path = TextFieldEffects/TextFieldEffects/HoshiTextField.swift; sourceTree = "<group>"; };
+		5DD3E2BF12A7286FD45AB324E27664F5 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
+		60FBB523184F273B9D8722E8E3C05E3C /* TextFieldEffects.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TextFieldEffects.modulemap; sourceTree = "<group>"; };
+		64CA84230D4F57614BFA21E2974AB235 /* SCLExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCLExtensions.swift; path = SCLAlertView/SCLExtensions.swift; sourceTree = "<group>"; };
+		669D5CD244A1304AC2F30B5DB1AD4CCD /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
+		69DAB5AD44680093669D5B3744AA0A24 /* TextFieldEffects.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TextFieldEffects.xcconfig; sourceTree = "<group>"; };
+		6C2D91C9C83238078A8FC95A9753AEA1 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
 		722A99F146F4F1BF9BF4E0D65F9BC191 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		804784B7212474AA202441AAD49CF2E0 /* Pods-SocialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SocialApp.debug.xcconfig"; sourceTree = "<group>"; };
-		903B92E0CD244F0651F36B51770D0DE1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		939392898DB505F521D17A2B0AC35388 /* MadokaTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MadokaTextField.swift; path = TextFieldEffects/TextFieldEffects/MadokaTextField.swift; sourceTree = "<group>"; };
+		80DD33A5538CB190EEE57E3A516F19B2 /* SCLAlertView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SCLAlertView-prefix.pch"; sourceTree = "<group>"; };
+		820B506E1E38E724962F1F7D9EEEF7C7 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8454ADCCC70733B6D12C0EA1A36A9FE1 /* SCLAlertView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SCLAlertView.swift; path = SCLAlertView/SCLAlertView.swift; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9732C266F2ADAC0F96142519707CE0CE /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
+		995C1FEEF393C6427D3607CAF3A9AE6C /* YoshikoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YoshikoTextField.swift; path = TextFieldEffects/TextFieldEffects/YoshikoTextField.swift; sourceTree = "<group>"; };
 		9C2BFBA565B4B45030B31ABFD92E5B85 /* Pods-SocialApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SocialApp-dummy.m"; sourceTree = "<group>"; };
-		9CEBDD0734229E4F38B35BA4274AD1DE /* MinoruTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MinoruTextField.swift; path = TextFieldEffects/TextFieldEffects/MinoruTextField.swift; sourceTree = "<group>"; };
-		A4C2CF81D46CB783359C0AE2093EFD92 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
+		A11DFB0F84CB36A878C38F6988FC8028 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
+		A54E01E9BA31C75892D5B73E00A2E0AA /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
+		A5E4E585E7E401314E21989A932CC58F /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
+		A86DB0764DD6911DC77612B4E1ACBBAF /* SCLAlertView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SCLAlertView-dummy.m"; sourceTree = "<group>"; };
 		B01E0B3B1F3394112C2BDABB142C5249 /* Pods-SocialApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SocialApp-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B78D00A4FEEE61B40B8564BAD20C0977 /* YoshikoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YoshikoTextField.swift; path = TextFieldEffects/TextFieldEffects/YoshikoTextField.swift; sourceTree = "<group>"; };
+		B65F3EDEECCC5589B1B5F6743D0BB900 /* MinoruTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MinoruTextField.swift; path = TextFieldEffects/TextFieldEffects/MinoruTextField.swift; sourceTree = "<group>"; };
 		B8A0AEE650B86037AA152F98E0EE0C80 /* Pods-SocialApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SocialApp-resources.sh"; sourceTree = "<group>"; };
-		BEC624F5CB5C27325A75BBF6B8785023 /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
-		C223EE45E7EFA374DBA6E27AF7BD7E13 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
-		C3894B1817F199E192DFA503EDF69929 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
+		BC6B4EE580439EA459FAFDF2B0470AE3 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
+		BE76CAEB8BAB76E971C1A3670EF895C6 /* TextFieldEffects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TextFieldEffects.framework; path = TextFieldEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1EF9A14BA12492BEF4E2918EB7CF6C0 /* TextFieldEffects-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TextFieldEffects-umbrella.h"; sourceTree = "<group>"; };
+		C549ABFD84328393B1E146E1FEF08E9A /* AkiraTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AkiraTextField.swift; path = TextFieldEffects/TextFieldEffects/AkiraTextField.swift; sourceTree = "<group>"; };
 		C7B9D960A2BEF1EAFE544C0304A210C8 /* Pods-SocialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SocialApp.release.xcconfig"; sourceTree = "<group>"; };
-		C874060323E9E25F092970772C9B7544 /* TextFieldEffects.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TextFieldEffects.framework; path = TextFieldEffects.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8DF4CAADDC323C42B51868AA44B7DFB /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
-		D565C9C2425E8C72660DD8A43B1E8A75 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
-		DD68CCF3E1042AB95B99E3B284DFD07E /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
-		E655BAC3384E355C299A8C48EFF84530 /* Pods_SocialApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SocialApp.framework; path = "Pods-SocialApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9A8A1DC752125C286FB26EDB864379B /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
-		F35619DBFB97C6B4CC832388CE939CFF /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		C909F6BF02053D66A9F1D1EFFEEB5891 /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
+		CA6CC67BB91DC9247B29230EFB456721 /* SCLAlertView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SCLAlertView.framework; path = SCLAlertView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD8C00DC2FFEA967BA08F41012ED6BC9 /* TextFieldEffects-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TextFieldEffects-dummy.m"; sourceTree = "<group>"; };
+		CE446B3919992CBCB229648C9A7A09EF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D06826E6390B48CF694608F820B28769 /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
+		D0CDED40E28E7461F2C6F2397571133E /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
+		DC48C8958E47852E608ED8FF20A9CF70 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
+		E43C5B4A955C14324398DD1441286F37 /* MadokaTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MadokaTextField.swift; path = TextFieldEffects/TextFieldEffects/MadokaTextField.swift; sourceTree = "<group>"; };
+		EBFE7365A1DD3243B8EDA8ED6B52EB3B /* IsaoTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IsaoTextField.swift; path = TextFieldEffects/TextFieldEffects/IsaoTextField.swift; sourceTree = "<group>"; };
+		F0C0427D62EB197843CD040339F1D634 /* TextFieldEffects-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TextFieldEffects-prefix.pch"; sourceTree = "<group>"; };
+		FC0D91AA57CE3ACC87B7D826AEC1F457 /* SCLAlertView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SCLAlertView.modulemap; sourceTree = "<group>"; };
+		FFDFD518C21C153860EB692E14AAB88A /* JiroTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JiroTextField.swift; path = TextFieldEffects/TextFieldEffects/JiroTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8B433DF72E019833D498E91E3BE0952C /* Frameworks */ = {
+		07AC06355D4CCB07A0D33BFED9D06B54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3E9B4B9AB849D04F5077366F22D0C7F /* Foundation.framework in Frameworks */,
+				78E85FDB485EB79E20F9765A2ED1513B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,48 +157,62 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3F213AF295750AF41EC69D78D7193E0 /* Frameworks */ = {
+		DEDE7C9E5939AC3B2EA44E04D077D76D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9909399D652F8E71082FD231EAA8F7A7 /* Foundation.framework in Frameworks */,
+				62B0049AE4C480F748CBCC5AFFDBC62C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E92B8D5FE8852910DF7B8F440FECA343 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0080EA4B1A009122528E06369024E55 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		22538E2038C17459B628EEB0910EF34B /* TextFieldEffects */ = {
+		1D09BED447C3D5A2E4D14C40C32776D0 /* SCLAlertView */ = {
 			isa = PBXGroup;
 			children = (
-				0010573F17FD3A52F7DF803171C0B1B2 /* AkiraTextField.swift */,
-				6EE26A2225E18CE7BA9473050132215F /* HoshiTextField.swift */,
-				243E4E8AC27DB915E9E48118B84E6226 /* IsaoTextField.swift */,
-				0B03F23F953EC4C8C71E75A8277CA706 /* JiroTextField.swift */,
-				12F7FF4105DEB47A1B81A2E5FCAB7F5A /* KaedeTextField.swift */,
-				939392898DB505F521D17A2B0AC35388 /* MadokaTextField.swift */,
-				9CEBDD0734229E4F38B35BA4274AD1DE /* MinoruTextField.swift */,
-				2960917A02170D41CE6E0EDCB8A793DB /* TextFieldEffects.swift */,
-				5B3AE36A8FE9406803A8FE8FC3130DBE /* YokoTextField.swift */,
-				B78D00A4FEEE61B40B8564BAD20C0977 /* YoshikoTextField.swift */,
-				68DC3F872CCD5C8DD4BEC8A50B524EFD /* Support Files */,
+				8454ADCCC70733B6D12C0EA1A36A9FE1 /* SCLAlertView.swift */,
+				64CA84230D4F57614BFA21E2974AB235 /* SCLExtensions.swift */,
+				37F78636D5B78622CB3FE8FE83BDE5F7 /* Support Files */,
 			);
-			name = TextFieldEffects;
-			path = TextFieldEffects;
+			name = SCLAlertView;
+			path = SCLAlertView;
 			sourceTree = "<group>";
 		};
-		230F18D656174F8BFCC5FB601FDBE03E /* Support Files */ = {
+		2B50F91367CF7E3D6F4B7EAB4F2265A5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				16B3EAD3A6110FE1455AB99267B5DE8F /* Alamofire.modulemap */,
-				10D61E295C56A3CE8AF1011FC5663DA8 /* Alamofire.xcconfig */,
-				DD68CCF3E1042AB95B99E3B284DFD07E /* Alamofire-dummy.m */,
-				9732C266F2ADAC0F96142519707CE0CE /* Alamofire-prefix.pch */,
-				D565C9C2425E8C72660DD8A43B1E8A75 /* Alamofire-umbrella.h */,
-				903B92E0CD244F0651F36B51770D0DE1 /* Info.plist */,
+				13872803064A0617B34ADE095F1A6933 /* Alamofire.modulemap */,
+				14DED5B33D9D4E220BFC5A6DB9ECB83D /* Alamofire.xcconfig */,
+				DC48C8958E47852E608ED8FF20A9CF70 /* Alamofire-dummy.m */,
+				A54E01E9BA31C75892D5B73E00A2E0AA /* Alamofire-prefix.pch */,
+				BC6B4EE580439EA459FAFDF2B0470AE3 /* Alamofire-umbrella.h */,
+				1DA38A8D4796EA9B94B75494FB6CD77E /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Alamofire";
+			sourceTree = "<group>";
+		};
+		37F78636D5B78622CB3FE8FE83BDE5F7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				01080FAFB131587F26C85A0F506E4D81 /* Info.plist */,
+				FC0D91AA57CE3ACC87B7D826AEC1F457 /* SCLAlertView.modulemap */,
+				1F5902F96B7918508F0F79FF6CC1233B /* SCLAlertView.xcconfig */,
+				A86DB0764DD6911DC77612B4E1ACBBAF /* SCLAlertView-dummy.m */,
+				80DD33A5538CB190EEE57E3A516F19B2 /* SCLAlertView-prefix.pch */,
+				17EE3C07BC95D7390FB7CA1B2E292FE2 /* SCLAlertView-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SCLAlertView";
 			sourceTree = "<group>";
 		};
 		3ED75D1BB9839567DBA333980B46A7D7 /* Pods-SocialApp */ = {
@@ -198,6 +233,16 @@
 			path = "Target Support Files/Pods-SocialApp";
 			sourceTree = "<group>";
 		};
+		4D26DA28D84EEF59CEB6E5D6DEAD03D3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				99833AC7ABAFE46E431A04059643096D /* Alamofire */,
+				1D09BED447C3D5A2E4D14C40C32776D0 /* SCLAlertView */,
+				6CB7EFAAD8138CEE9F691D5144F6297B /* TextFieldEffects */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5E0D919E635D23B70123790B8308F8EF /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,53 +251,23 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		68DC3F872CCD5C8DD4BEC8A50B524EFD /* Support Files */ = {
+		6CB7EFAAD8138CEE9F691D5144F6297B /* TextFieldEffects */ = {
 			isa = PBXGroup;
 			children = (
-				473023C43F3F293968C57F39C65C202F /* Info.plist */,
-				2925B2AE3A545E8C119766D4AA3C1ED0 /* TextFieldEffects.modulemap */,
-				40CCD429D8009F653E87153CE2451ED8 /* TextFieldEffects.xcconfig */,
-				1414023840A34ED2056538F779FEC962 /* TextFieldEffects-dummy.m */,
-				36A5C4B378ED676E66893F58C27D1EB8 /* TextFieldEffects-prefix.pch */,
-				541FF1E56A41C054E89D08FBE4C46889 /* TextFieldEffects-umbrella.h */,
+				C549ABFD84328393B1E146E1FEF08E9A /* AkiraTextField.swift */,
+				0F35C81526F1DDDC52E12CB768E00CD1 /* HoshiTextField.swift */,
+				EBFE7365A1DD3243B8EDA8ED6B52EB3B /* IsaoTextField.swift */,
+				FFDFD518C21C153860EB692E14AAB88A /* JiroTextField.swift */,
+				49D85272E64959F56772FF4E402130B4 /* KaedeTextField.swift */,
+				E43C5B4A955C14324398DD1441286F37 /* MadokaTextField.swift */,
+				B65F3EDEECCC5589B1B5F6743D0BB900 /* MinoruTextField.swift */,
+				0A2597299A042EE876353CB7B522FCB3 /* TextFieldEffects.swift */,
+				0ECCDCE9A0EB61D8BE49E48CFDAAFA03 /* YokoTextField.swift */,
+				995C1FEEF393C6427D3607CAF3A9AE6C /* YoshikoTextField.swift */,
+				9C75DF9CFF90E750338645B8A24C3D09 /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/TextFieldEffects";
-			sourceTree = "<group>";
-		};
-		6B5C3EDBBF7398C600BB9D25DCACD9BD /* Alamofire */ = {
-			isa = PBXGroup;
-			children = (
-				301EDDF9CF17D27964FCDFB280326387 /* AFError.swift */,
-				01E6C3B13DC87608CF83A41DE77C16FA /* Alamofire.swift */,
-				F35619DBFB97C6B4CC832388CE939CFF /* DispatchQueue+Alamofire.swift */,
-				03C63D7B7DCB25124E9BD02965C92222 /* MultipartFormData.swift */,
-				5EA1EB77736D836DE3FC27B6DB8870B8 /* NetworkReachabilityManager.swift */,
-				C223EE45E7EFA374DBA6E27AF7BD7E13 /* Notifications.swift */,
-				653D1BD4D690034DA775EF16F609BD1F /* ParameterEncoding.swift */,
-				BEC624F5CB5C27325A75BBF6B8785023 /* Request.swift */,
-				C3894B1817F199E192DFA503EDF69929 /* Response.swift */,
-				6B053414276DB7AF09D335A554EDE2E3 /* ResponseSerialization.swift */,
-				0C9EFA71F4F4B364C8DE416EDBAD5E72 /* Result.swift */,
-				015121E75AAEC494759C8D6DB53962F5 /* ServerTrustPolicy.swift */,
-				A4C2CF81D46CB783359C0AE2093EFD92 /* SessionDelegate.swift */,
-				0F2A7D858D5C42EE7293FFB1245A35FF /* SessionManager.swift */,
-				E9A8A1DC752125C286FB26EDB864379B /* TaskDelegate.swift */,
-				67F6D47F19ED0A788B41D1369F8619C2 /* Timeline.swift */,
-				C8DF4CAADDC323C42B51868AA44B7DFB /* Validation.swift */,
-				230F18D656174F8BFCC5FB601FDBE03E /* Support Files */,
-			);
-			name = Alamofire;
-			path = Alamofire;
-			sourceTree = "<group>";
-		};
-		79B9150CE20BB4F7C19B19C3B583010F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6B5C3EDBBF7398C600BB9D25DCACD9BD /* Alamofire */,
-				22538E2038C17459B628EEB0910EF34B /* TextFieldEffects */,
-			);
-			name = Pods;
+			name = TextFieldEffects;
+			path = TextFieldEffects;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -260,10 +275,50 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				79B9150CE20BB4F7C19B19C3B583010F /* Pods */,
-				F37523B785942A31032E9B54CCF854FA /* Products */,
+				4D26DA28D84EEF59CEB6E5D6DEAD03D3 /* Pods */,
+				D79E7BA6F1E7BA20B7A623C44A10B590 /* Products */,
 				AF1AEDB678B54FAD5834DC0AED6DFAA1 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		99833AC7ABAFE46E431A04059643096D /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				2F3015F8098D7B1FD61657DC518CF591 /* AFError.swift */,
+				D0CDED40E28E7461F2C6F2397571133E /* Alamofire.swift */,
+				0F16B6506C1358617DDD970DE3C6E1ED /* DispatchQueue+Alamofire.swift */,
+				2164F45621108449209D82E7A5FBA6C5 /* MultipartFormData.swift */,
+				12E4F9C4FBFC475717222305682D8879 /* NetworkReachabilityManager.swift */,
+				6C2D91C9C83238078A8FC95A9753AEA1 /* Notifications.swift */,
+				5DD3E2BF12A7286FD45AB324E27664F5 /* ParameterEncoding.swift */,
+				A11DFB0F84CB36A878C38F6988FC8028 /* Request.swift */,
+				D06826E6390B48CF694608F820B28769 /* Response.swift */,
+				669D5CD244A1304AC2F30B5DB1AD4CCD /* ResponseSerialization.swift */,
+				A5E4E585E7E401314E21989A932CC58F /* Result.swift */,
+				43FC33EEF7E9988857CE1E20978AB4A4 /* ServerTrustPolicy.swift */,
+				001BC4CAFC9F4F29ABDF9106DD71814D /* SessionDelegate.swift */,
+				3722DB70656FE3F5F1949038C664F9A7 /* SessionManager.swift */,
+				4AD0FF285AECC9FCB123C60274CA2FDE /* TaskDelegate.swift */,
+				C909F6BF02053D66A9F1D1EFFEEB5891 /* Timeline.swift */,
+				23C8FCB5B128DE1E596FBF2B96488D67 /* Validation.swift */,
+				2B50F91367CF7E3D6F4B7EAB4F2265A5 /* Support Files */,
+			);
+			name = Alamofire;
+			path = Alamofire;
+			sourceTree = "<group>";
+		};
+		9C75DF9CFF90E750338645B8A24C3D09 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE446B3919992CBCB229648C9A7A09EF /* Info.plist */,
+				60FBB523184F273B9D8722E8E3C05E3C /* TextFieldEffects.modulemap */,
+				69DAB5AD44680093669D5B3744AA0A24 /* TextFieldEffects.xcconfig */,
+				CD8C00DC2FFEA967BA08F41012ED6BC9 /* TextFieldEffects-dummy.m */,
+				F0C0427D62EB197843CD040339F1D634 /* TextFieldEffects-prefix.pch */,
+				C1EF9A14BA12492BEF4E2918EB7CF6C0 /* TextFieldEffects-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/TextFieldEffects";
 			sourceTree = "<group>";
 		};
 		AF1AEDB678B54FAD5834DC0AED6DFAA1 /* Targets Support Files */ = {
@@ -282,12 +337,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F37523B785942A31032E9B54CCF854FA /* Products */ = {
+		D79E7BA6F1E7BA20B7A623C44A10B590 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				214F16BD38899DEE04391BF25EB5D529 /* Alamofire.framework */,
-				E655BAC3384E355C299A8C48EFF84530 /* Pods_SocialApp.framework */,
-				C874060323E9E25F092970772C9B7544 /* TextFieldEffects.framework */,
+				820B506E1E38E724962F1F7D9EEEF7C7 /* Alamofire.framework */,
+				070EEB01D159E86602993999DB3300CC /* Pods_SocialApp.framework */,
+				CA6CC67BB91DC9247B29230EFB456721 /* SCLAlertView.framework */,
+				BE76CAEB8BAB76E971C1A3670EF895C6 /* TextFieldEffects.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -295,19 +351,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4076DE75C4B8F1039D1FACF455ABE361 /* Headers */ = {
+		00DA413A73C2A3C72ED8FFC655702516 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54A0EA86393E53EC8DDB6FE205A24E19 /* TextFieldEffects-umbrella.h in Headers */,
+				A81C9D4D34B41445D42C577CD7E9F1AE /* SCLAlertView-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		771FB98AD5732730C8894863D1D91610 /* Headers */ = {
+		1AF4DCBEF0C5767173ECF65FFC09A7ED /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07BF685ADD1D881E9DABFCA0557411BB /* Pods-SocialApp-umbrella.h in Headers */,
+				57AE3DE2EF9544D11EA32F4DE7E643CA /* TextFieldEffects-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		372A1DD22E175A31B919A533440F96C8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC4074A3BA048ED43805D65DF83A1BC /* Pods-SocialApp-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,23 +386,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		28047196BEA0E2054955FBFD2FBA1659 /* TextFieldEffects */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 19B4962A8BB00D149E7FA2B1DE99DCFE /* Build configuration list for PBXNativeTarget "TextFieldEffects" */;
-			buildPhases = (
-				A0CD65A5E59E8931D21C1690C10CA7AF /* Sources */,
-				E3F213AF295750AF41EC69D78D7193E0 /* Frameworks */,
-				4076DE75C4B8F1039D1FACF455ABE361 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TextFieldEffects;
-			productName = TextFieldEffects;
-			productReference = C874060323E9E25F092970772C9B7544 /* TextFieldEffects.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 419E5D95491847CD79841B971A8A3277 /* Build configuration list for PBXNativeTarget "Alamofire" */;
@@ -353,26 +400,61 @@
 			);
 			name = Alamofire;
 			productName = Alamofire;
-			productReference = 214F16BD38899DEE04391BF25EB5D529 /* Alamofire.framework */;
+			productReference = 820B506E1E38E724962F1F7D9EEEF7C7 /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AC1DF2AD0B96C14F7E4E495D3240C10E /* Pods-SocialApp */ = {
+		8E07E0FAD701FDC7824ECCB4B658E846 /* Pods-SocialApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0B0ABABCBDD8442A1BCB627F2A66DAE5 /* Build configuration list for PBXNativeTarget "Pods-SocialApp" */;
+			buildConfigurationList = 86596D8403D580E59C34D9999CF774A8 /* Build configuration list for PBXNativeTarget "Pods-SocialApp" */;
 			buildPhases = (
-				2FE16EC67B7367C1475CAAF87F7FC181 /* Sources */,
-				8B433DF72E019833D498E91E3BE0952C /* Frameworks */,
-				771FB98AD5732730C8894863D1D91610 /* Headers */,
+				875F4C3CC8D392E81EE022EF4FF5ABA9 /* Sources */,
+				07AC06355D4CCB07A0D33BFED9D06B54 /* Frameworks */,
+				372A1DD22E175A31B919A533440F96C8 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7F82272265614C109B1297962896E926 /* PBXTargetDependency */,
-				06970D1C35D7DDA7BE527198A743876D /* PBXTargetDependency */,
+				3F1F7C0D34289258F5BBC9CDC78D6988 /* PBXTargetDependency */,
+				D78718EA23A75D49E1E2DF9272D8009A /* PBXTargetDependency */,
+				4FD8E49F7A8EE01C52249564A12DF57B /* PBXTargetDependency */,
 			);
 			name = "Pods-SocialApp";
 			productName = "Pods-SocialApp";
-			productReference = E655BAC3384E355C299A8C48EFF84530 /* Pods_SocialApp.framework */;
+			productReference = 070EEB01D159E86602993999DB3300CC /* Pods_SocialApp.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E15D86C51FE798968908944A2F825F6A /* TextFieldEffects */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DC8662D5FD26E0F491D43230CB416D6 /* Build configuration list for PBXNativeTarget "TextFieldEffects" */;
+			buildPhases = (
+				4D806907434D520C767CA2DC121014C1 /* Sources */,
+				E92B8D5FE8852910DF7B8F440FECA343 /* Frameworks */,
+				1AF4DCBEF0C5767173ECF65FFC09A7ED /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TextFieldEffects;
+			productName = TextFieldEffects;
+			productReference = BE76CAEB8BAB76E971C1A3670EF895C6 /* TextFieldEffects.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E8A7892FF1E4A098C188E98CF19EB8ED /* SCLAlertView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C42CDE9708FA923C32C6F42467C72683 /* Build configuration list for PBXNativeTarget "SCLAlertView" */;
+			buildPhases = (
+				83CC5B142AA955F9E85A7187A27CE2DD /* Sources */,
+				DEDE7C9E5939AC3B2EA44E04D077D76D /* Frameworks */,
+				00DA413A73C2A3C72ED8FFC655702516 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SCLAlertView;
+			productName = SCLAlertView;
+			productReference = CA6CC67BB91DC9247B29230EFB456721 /* SCLAlertView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -392,26 +474,19 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = F37523B785942A31032E9B54CCF854FA /* Products */;
+			productRefGroup = D79E7BA6F1E7BA20B7A623C44A10B590 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */,
-				AC1DF2AD0B96C14F7E4E495D3240C10E /* Pods-SocialApp */,
-				28047196BEA0E2054955FBFD2FBA1659 /* TextFieldEffects */,
+				8E07E0FAD701FDC7824ECCB4B658E846 /* Pods-SocialApp */,
+				E8A7892FF1E4A098C188E98CF19EB8ED /* SCLAlertView */,
+				E15D86C51FE798968908944A2F825F6A /* TextFieldEffects */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2FE16EC67B7367C1475CAAF87F7FC181 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				53C38ECAF5AE93BA80B9BA5920AB8822 /* Pods-SocialApp-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		32B9974868188C4803318E36329C87FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -437,45 +512,69 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A0CD65A5E59E8931D21C1690C10CA7AF /* Sources */ = {
+		4D806907434D520C767CA2DC121014C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39EEBA1407403111A71F08EE2ECB64D1 /* AkiraTextField.swift in Sources */,
-				D29A82AC85B6707CD9ACD551AECB8544 /* HoshiTextField.swift in Sources */,
-				A887FF39C16A61B22A5363F66ABB1844 /* IsaoTextField.swift in Sources */,
-				DB41557ED7DC7734DABF4F1D2A39EF79 /* JiroTextField.swift in Sources */,
-				D09BBCE33EEEFBC10B5407892AAE79D6 /* KaedeTextField.swift in Sources */,
-				4619849F4965A4710B5E1B8F57F15BE6 /* MadokaTextField.swift in Sources */,
-				3F2829E8BCFC32282B7112E43CFE5EB5 /* MinoruTextField.swift in Sources */,
-				9D4369C2FABC243AE7D3C95BAA2EC913 /* TextFieldEffects-dummy.m in Sources */,
-				199C1532B6F524E6B0F0F57C770D6F4A /* TextFieldEffects.swift in Sources */,
-				9C364C128464F5AEB1C7567587C3748D /* YokoTextField.swift in Sources */,
-				6A3884D637583C93D5C9974275A0DED2 /* YoshikoTextField.swift in Sources */,
+				EF075680DC5D22463C00030F9E033131 /* AkiraTextField.swift in Sources */,
+				E8D6273F40CE1371663D1AEC9728EAFC /* HoshiTextField.swift in Sources */,
+				AED02793CC58E75F96FD7F289CA922FE /* IsaoTextField.swift in Sources */,
+				61203E64D28FEACDE256B6F17B7A3534 /* JiroTextField.swift in Sources */,
+				C154A2DD3D6C8E8900A176E14C953FFA /* KaedeTextField.swift in Sources */,
+				B7C8708DFB66498DF0D0DFE5040EDE86 /* MadokaTextField.swift in Sources */,
+				48E3BE0376DB01BE24352B15B63C523E /* MinoruTextField.swift in Sources */,
+				0302D9DE4A7413A3A1230896336E1B60 /* TextFieldEffects-dummy.m in Sources */,
+				45F4E09C62DDAC3F1C03B7765190FE81 /* TextFieldEffects.swift in Sources */,
+				1874BD64E74C5F83A1907DED1CF7E513 /* YokoTextField.swift in Sources */,
+				D8187E4067DC7AC320FDA364179F4076 /* YoshikoTextField.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83CC5B142AA955F9E85A7187A27CE2DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CC066AA1DDC5FAF9769C728917EA3B6 /* SCLAlertView-dummy.m in Sources */,
+				10FA5D1E7A5B1303F1D94B0B274A652F /* SCLAlertView.swift in Sources */,
+				FEA712610EF8124EBA680D6A83AF3879 /* SCLExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		875F4C3CC8D392E81EE022EF4FF5ABA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3C726164A8FB0FA03E34DC4EFAD5325 /* Pods-SocialApp-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		06970D1C35D7DDA7BE527198A743876D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TextFieldEffects;
-			target = 28047196BEA0E2054955FBFD2FBA1659 /* TextFieldEffects */;
-			targetProxy = 68F8C744891A64BE6E111B94BD3023B7 /* PBXContainerItemProxy */;
-		};
-		7F82272265614C109B1297962896E926 /* PBXTargetDependency */ = {
+		3F1F7C0D34289258F5BBC9CDC78D6988 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Alamofire;
 			target = 88E9EC28B8B46C3631E6B242B50F4442 /* Alamofire */;
-			targetProxy = 6A8114637E2750B3B8B1AD3E35C1BD29 /* PBXContainerItemProxy */;
+			targetProxy = AC5CECC9903B8171CC825062D52CBAB8 /* PBXContainerItemProxy */;
+		};
+		4FD8E49F7A8EE01C52249564A12DF57B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TextFieldEffects;
+			target = E15D86C51FE798968908944A2F825F6A /* TextFieldEffects */;
+			targetProxy = 77976E6031C5C8DD633EB7588D049A06 /* PBXContainerItemProxy */;
+		};
+		D78718EA23A75D49E1E2DF9272D8009A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SCLAlertView;
+			target = E8A7892FF1E4A098C188E98CF19EB8ED /* SCLAlertView */;
+			targetProxy = D95F2E213A34EF52FE8C4316C779F8D1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		51991F57228442C2E2C35AAA2627F429 /* Release */ = {
+		4B1BF85A2302DC89E2150562ACABDD34 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40CCD429D8009F653E87153CE2451ED8 /* TextFieldEffects.xcconfig */;
+			baseConfigurationReference = 69DAB5AD44680093669D5B3744AA0A24 /* TextFieldEffects.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -501,14 +600,13 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		5C62205F1D8CC5D5B5126D501D3E0D98 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -566,9 +664,9 @@
 			};
 			name = Release;
 		};
-		A085F8D5144827F7D38B149BCFE6A6BD /* Debug */ = {
+		5E1D5183D9827145AD6BEC086FA368A3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 40CCD429D8009F653E87153CE2451ED8 /* TextFieldEffects.xcconfig */;
+			baseConfigurationReference = 1F5902F96B7918508F0F79FF6CC1233B /* SCLAlertView.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -579,8 +677,8 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TextFieldEffects/TextFieldEffects-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TextFieldEffects/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SCLAlertView/SCLAlertView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCLAlertView/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -588,23 +686,64 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/TextFieldEffects/TextFieldEffects.modulemap";
-				PRODUCT_MODULE_NAME = TextFieldEffects;
-				PRODUCT_NAME = TextFieldEffects;
+				MODULEMAP_FILE = "Target Support Files/SCLAlertView/SCLAlertView.modulemap";
+				PRODUCT_MODULE_NAME = SCLAlertView;
+				PRODUCT_NAME = SCLAlertView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
+		};
+		96B5326A06A20030D1A72D3FD33D47D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7B9D960A2BEF1EAFE544C0304A210C8 /* Pods-SocialApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SocialApp/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SocialApp/Pods-SocialApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		A18C9CC7E37563F2891E7DC87F2DE6CE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10D61E295C56A3CE8AF1011FC5663DA8 /* Alamofire.xcconfig */;
+			baseConfigurationReference = 14DED5B33D9D4E220BFC5A6DB9ECB83D /* Alamofire.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -627,6 +766,43 @@
 				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
 				PRODUCT_MODULE_NAME = Alamofire;
 				PRODUCT_NAME = Alamofire;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B007539A30B5E2D6F5F82914F5D1067B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69DAB5AD44680093669D5B3744AA0A24 /* TextFieldEffects.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TextFieldEffects/TextFieldEffects-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TextFieldEffects/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TextFieldEffects/TextFieldEffects.modulemap";
+				PRODUCT_MODULE_NAME = TextFieldEffects;
+				PRODUCT_NAME = TextFieldEffects;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -700,83 +876,7 @@
 			};
 			name = Debug;
 		};
-		EA0ADC75B20BB62958101306980460E6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10D61E295C56A3CE8AF1011FC5663DA8 /* Alamofire.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
-				PRODUCT_MODULE_NAME = Alamofire;
-				PRODUCT_NAME = Alamofire;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		F2C145BB83A9E08AFCDD18A39936CBAC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7B9D960A2BEF1EAFE544C0304A210C8 /* Pods-SocialApp.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SocialApp/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SocialApp/Pods-SocialApp.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F7F6E916E16740933F6E7643AE63AFFA /* Debug */ = {
+		E839058EC48CCED2E9E33AE0B6436C25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 804784B7212474AA202441AAD49CF2E0 /* Pods-SocialApp.debug.xcconfig */;
 			buildSettings = {
@@ -816,23 +916,86 @@
 			};
 			name = Debug;
 		};
+		EA0ADC75B20BB62958101306980460E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14DED5B33D9D4E220BFC5A6DB9ECB83D /* Alamofire.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire/Alamofire-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Alamofire/Alamofire.modulemap";
+				PRODUCT_MODULE_NAME = Alamofire;
+				PRODUCT_NAME = Alamofire;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F99110F4B0427EF903F10AD747BE727B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F5902F96B7918508F0F79FF6CC1233B /* SCLAlertView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SCLAlertView/SCLAlertView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SCLAlertView/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SCLAlertView/SCLAlertView.modulemap";
+				PRODUCT_MODULE_NAME = SCLAlertView;
+				PRODUCT_NAME = SCLAlertView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0B0ABABCBDD8442A1BCB627F2A66DAE5 /* Build configuration list for PBXNativeTarget "Pods-SocialApp" */ = {
+		1DC8662D5FD26E0F491D43230CB416D6 /* Build configuration list for PBXNativeTarget "TextFieldEffects" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F7F6E916E16740933F6E7643AE63AFFA /* Debug */,
-				F2C145BB83A9E08AFCDD18A39936CBAC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		19B4962A8BB00D149E7FA2B1DE99DCFE /* Build configuration list for PBXNativeTarget "TextFieldEffects" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A085F8D5144827F7D38B149BCFE6A6BD /* Debug */,
-				51991F57228442C2E2C35AAA2627F429 /* Release */,
+				4B1BF85A2302DC89E2150562ACABDD34 /* Debug */,
+				B007539A30B5E2D6F5F82914F5D1067B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -851,6 +1014,24 @@
 			buildConfigurations = (
 				EA0ADC75B20BB62958101306980460E6 /* Debug */,
 				A18C9CC7E37563F2891E7DC87F2DE6CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		86596D8403D580E59C34D9999CF774A8 /* Build configuration list for PBXNativeTarget "Pods-SocialApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E839058EC48CCED2E9E33AE0B6436C25 /* Debug */,
+				96B5326A06A20030D1A72D3FD33D47D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C42CDE9708FA923C32C6F42467C72683 /* Build configuration list for PBXNativeTarget "SCLAlertView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F99110F4B0427EF903F10AD747BE727B /* Debug */,
+				5E1D5183D9827145AD6BEC086FA368A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

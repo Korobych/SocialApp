@@ -5,6 +5,7 @@ use_frameworks!
 target 'SocialApp' do
     pod 'Alamofire', '~> 4.7'
     pod 'TextFieldEffects'
+    pod 'SCLAlertView'
 end
 
 post_install do |installer|
