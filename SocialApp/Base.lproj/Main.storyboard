@@ -65,7 +65,7 @@
         <scene sceneID="KwS-Aj-w8i">
             <objects>
                 <viewController storyboardIdentifier="LogRegController" id="R6y-4E-nPl" customClass="LoginViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" tag="111" contentMode="scaleToFill" id="iGA-gU-iZR">
+                    <view key="view" contentMode="scaleToFill" id="iGA-gU-iZR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

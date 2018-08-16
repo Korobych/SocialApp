@@ -9,7 +9,7 @@
 import Foundation
 // *** INVALID ***
 
-struct InvReg {
+struct InvReg: Codable {
     var id: String // INT
     var name: String
     var number: String // INT
@@ -23,7 +23,7 @@ struct InvReg {
     }
 }
 
-struct InvLog {
+struct InvLog: Codable {
     var number: String // INT
     var password: String
     
@@ -34,7 +34,7 @@ struct InvLog {
 }
 // *** VOLUNTEER ***
 
-struct VolReg {
+struct VolReg: Codable {
     var name: String
     var number: String // INT
     var password: String
@@ -46,7 +46,7 @@ struct VolReg {
     }
 }
 
-struct VolLog {
+struct VolLog: Codable {
     var number: String // INT
     var password: String
     

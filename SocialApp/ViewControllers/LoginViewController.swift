@@ -66,6 +66,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         switch userType {
         case .inv:
             let cell = Bundle.main.loadNibNamed("DataInputTableViewCell", owner: self, options: nil)?.first as! DataInputTableViewCell
+            cell.userType = LogState.inv
             return cell
         case .vol:
             if indexPath.section == 0{
@@ -73,6 +74,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 return cell
             } else {
                 let cell = Bundle.main.loadNibNamed("DataInputTableViewCell", owner: self, options: nil)?.first as! DataInputTableViewCell
+                cell.userType = LogState.vol
                 return cell
             }
         }
