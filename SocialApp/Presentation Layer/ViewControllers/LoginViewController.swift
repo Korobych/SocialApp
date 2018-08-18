@@ -49,6 +49,18 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.view.endEditing(true)
     }
     
+    // Change placeholder of UITextField relying on userType (inv/vol)
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell.reuseIdentifier == "DataInputTableViewCell"{
+            let c = cell as! DataInputTableViewCell
+            if c.userType == .inv {
+                c.numberTextField.placeholder = "ID"
+            } else if c.userType == .vol {
+                c.numberTextField.placeholder = "Номер телефона"
+            }
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         switch userType {
         case .inv:

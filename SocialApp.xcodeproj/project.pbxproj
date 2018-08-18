@@ -11,6 +11,10 @@
 		9802BA8F21237D44001F8426 /* SocialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9802BA8D21237D44001F8426 /* SocialTableViewCell.xib */; };
 		98052AFB21245C98009AE5C7 /* DataInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98052AF921245C98009AE5C7 /* DataInputTableViewCell.swift */; };
 		98052AFC21245C98009AE5C7 /* DataInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98052AFA21245C98009AE5C7 /* DataInputTableViewCell.xib */; };
+		982FE15A2126F6B100C4E5CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE1592126F6B100C4E5CD /* Constants.swift */; };
+		982FE15C2126F85000C4E5CD /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE15B2126F85000C4E5CD /* APIConfiguration.swift */; };
+		982FE15E2126F92C00C4E5CD /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE15D2126F92C00C4E5CD /* APIRouter.swift */; };
+		982FE1602127170C00C4E5CD /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE15F2127170C00C4E5CD /* APIClient.swift */; };
 		9876454F2111D31300C87421 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9876454E2111D31300C87421 /* Media.xcassets */; };
 		989E8843211449F7007D130C /* LogReg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E8842211449F7007D130C /* LogReg.swift */; };
 		989E884621146979007D130C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E884521146979007D130C /* LoginViewController.swift */; };
@@ -31,6 +35,10 @@
 		9802BA8D21237D44001F8426 /* SocialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SocialTableViewCell.xib; sourceTree = "<group>"; };
 		98052AF921245C98009AE5C7 /* DataInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInputTableViewCell.swift; sourceTree = "<group>"; };
 		98052AFA21245C98009AE5C7 /* DataInputTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DataInputTableViewCell.xib; sourceTree = "<group>"; };
+		982FE1592126F6B100C4E5CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		982FE15B2126F85000C4E5CD /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
+		982FE15D2126F92C00C4E5CD /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
+		982FE15F2127170C00C4E5CD /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		9876454E2111D31300C87421 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		989E8842211449F7007D130C /* LogReg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogReg.swift; sourceTree = "<group>"; };
 		989E884521146979007D130C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +92,26 @@
 			path = CustomCells;
 			sourceTree = "<group>";
 		};
+		982FE1572126F5FC00C4E5CD /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				989E884421146954007D130C /* ViewControllers */,
+				9802BA8B21237ADF001F8426 /* CustomCells */,
+			);
+			path = "Presentation Layer";
+			sourceTree = "<group>";
+		};
+		982FE1582126F63C00C4E5CD /* API Network Layer */ = {
+			isa = PBXGroup;
+			children = (
+				982FE15D2126F92C00C4E5CD /* APIRouter.swift */,
+				982FE15B2126F85000C4E5CD /* APIConfiguration.swift */,
+				982FE1592126F6B100C4E5CD /* Constants.swift */,
+				982FE15F2127170C00C4E5CD /* APIClient.swift */,
+			);
+			path = "API Network Layer";
+			sourceTree = "<group>";
+		};
 		989E8841211449D0007D130C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,9 +150,9 @@
 		98E766A62111A8180081345F /* SocialApp */ = {
 			isa = PBXGroup;
 			children = (
-				9802BA8B21237ADF001F8426 /* CustomCells */,
-				989E884421146954007D130C /* ViewControllers */,
 				989E8841211449D0007D130C /* Models */,
+				982FE1572126F5FC00C4E5CD /* Presentation Layer */,
+				982FE1582126F63C00C4E5CD /* API Network Layer */,
 				98E766A72111A8180081345F /* AppDelegate.swift */,
 				98E766AB2111A8180081345F /* Main.storyboard */,
 				98E766B12111A8190081345F /* Assets.xcassets */,
@@ -256,12 +284,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				98E766B02111A8180081345F /* SocialApp.xcdatamodeld in Sources */,
+				982FE15E2126F92C00C4E5CD /* APIRouter.swift in Sources */,
 				98E766AA2111A8180081345F /* EnterViewController.swift in Sources */,
 				98E766A82111A8180081345F /* AppDelegate.swift in Sources */,
 				989E884621146979007D130C /* LoginViewController.swift in Sources */,
+				982FE1602127170C00C4E5CD /* APIClient.swift in Sources */,
+				982FE15C2126F85000C4E5CD /* APIConfiguration.swift in Sources */,
 				9802BA8E21237D44001F8426 /* SocialTableViewCell.swift in Sources */,
 				98052AFB21245C98009AE5C7 /* DataInputTableViewCell.swift in Sources */,
 				989E8843211449F7007D130C /* LogReg.swift in Sources */,
+				982FE15A2126F6B100C4E5CD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

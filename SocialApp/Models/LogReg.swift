@@ -12,7 +12,7 @@ import Foundation
 struct InvReg: Codable {
     var id: String // INT
     var name: String
-    var number: String // INT
+    var number: String
     var password: String
     
     init(id: String, name: String, number: String, password: String ) {
@@ -24,11 +24,11 @@ struct InvReg: Codable {
 }
 
 struct InvLog: Codable {
-    var number: String // INT
+    var id: String // INT
     var password: String
     
-    init(number: String, password: String ) {
-        self.number = number
+    init(id: String, password: String ) {
+        self.id = id
         self.password = password
     }
 }
@@ -36,7 +36,7 @@ struct InvLog: Codable {
 
 struct VolReg: Codable {
     var name: String
-    var number: String // INT
+    var number: String
     var password: String
     
     init(name: String, number: String, password: String ) {
@@ -47,13 +47,18 @@ struct VolReg: Codable {
 }
 
 struct VolLog: Codable {
-    var number: String // INT
+    var number: String 
     var password: String
     
     init(number: String, password: String ) {
         self.number = number
         self.password = password
     }
+}
+
+/// Special for response from server decoding
+struct ServResponse: Codable{
+    let resp : String
 }
 
 
