@@ -14,7 +14,7 @@ enum LogState {
     case vol
 }
 
-class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CustomCellsActionsDelegate {
 
     var titleString: String?
     private var loginTableView: UITableView!
@@ -78,6 +78,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         switch userType {
         case .inv:
             let cell = Bundle.main.loadNibNamed("DataInputTableViewCell", owner: self, options: nil)?.first as! DataInputTableViewCell
+            cell.delegate = self
             cell.userType = LogState.inv
             return cell
         case .vol:
@@ -87,14 +88,17 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
             } else {
                 let cell = Bundle.main.loadNibNamed("DataInputTableViewCell", owner: self, options: nil)?.first as! DataInputTableViewCell
                 cell.userType = LogState.vol
+                cell.delegate = self
                 return cell
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // delegated fucntion
+    func readyToShowGeoView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyboard.instantiateViewController(withIdentifier: "GeoViewController") as! GeoViewController
+        self.present(nextViewController, animated: true, completion: nil)
     }
 
 }
@@ -158,4 +162,8 @@ extension LoginViewController{
     @objc func outsideTableTapped(tap:UITapGestureRecognizer){
         self.view.endEditing(true)
     }
+}
+
+protocol CustomCellsActionsDelegate : class {
+    func readyToShowGeoView()
 }

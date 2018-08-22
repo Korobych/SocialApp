@@ -18,6 +18,7 @@
 		9876454F2111D31300C87421 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9876454E2111D31300C87421 /* Media.xcassets */; };
 		989E8843211449F7007D130C /* LogReg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E8842211449F7007D130C /* LogReg.swift */; };
 		989E884621146979007D130C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E884521146979007D130C /* LoginViewController.swift */; };
+		98C930EC212942B4005DD9D7 /* GeoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C930EB212942B4005DD9D7 /* GeoViewController.swift */; };
 		98E766A82111A8180081345F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E766A72111A8180081345F /* AppDelegate.swift */; };
 		98E766AA2111A8180081345F /* EnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E766A92111A8180081345F /* EnterViewController.swift */; };
 		98E766AD2111A8180081345F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E766AB2111A8180081345F /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		9876454E2111D31300C87421 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		989E8842211449F7007D130C /* LogReg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogReg.swift; sourceTree = "<group>"; };
 		989E884521146979007D130C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		98C930EB212942B4005DD9D7 /* GeoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoViewController.swift; sourceTree = "<group>"; };
 		98E766A42111A8180081345F /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E766A72111A8180081345F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98E766A92111A8180081345F /* EnterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				98E766A92111A8180081345F /* EnterViewController.swift */,
 				989E884521146979007D130C /* LoginViewController.swift */,
+				98C930EB212942B4005DD9D7 /* GeoViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				982FE1602127170C00C4E5CD /* APIClient.swift in Sources */,
 				982FE15C2126F85000C4E5CD /* APIConfiguration.swift in Sources */,
 				9802BA8E21237D44001F8426 /* SocialTableViewCell.swift in Sources */,
+				98C930EC212942B4005DD9D7 /* GeoViewController.swift in Sources */,
 				98052AFB21245C98009AE5C7 /* DataInputTableViewCell.swift in Sources */,
 				989E8843211449F7007D130C /* LogReg.swift in Sources */,
 				982FE15A2126F6B100C4E5CD /* Constants.swift in Sources */,
@@ -437,7 +441,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 25DEBFBD32DAF7B23861FBF8 /* Pods-SocialApp.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconTest;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8LU4P8SUH;
 				INFOPLIST_FILE = SocialApp/Info.plist;
@@ -456,7 +460,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 738C5444111D64D222F7983A /* Pods-SocialApp.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconTest;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F8LU4P8SUH;
 				INFOPLIST_FILE = SocialApp/Info.plist;

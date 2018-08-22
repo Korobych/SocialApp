@@ -10,7 +10,8 @@ import Foundation
 
 struct APIRefference {
     struct ProductionServer {
-        static let baseURL = "http://localhost:3005"
+        static let baseURL = "http://localhost:3000"
+
     }
     
     struct APIParameterKey {
@@ -18,6 +19,7 @@ struct APIRefference {
         static let name = "name"
         static let number = "number"
         static let password = "password"
+        static let geo = "geo"
     }
 }
 

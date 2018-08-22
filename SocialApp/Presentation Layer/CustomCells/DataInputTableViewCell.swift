@@ -19,7 +19,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var loginButton: UIButton!
     
-    
+    weak var delegate: CustomCellsActionsDelegate?
     private var currentTextField: IsaoTextField?
     var userType: LogState = LogState.inv
     
@@ -56,8 +56,13 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                 
                 if error == nil {
                     let status = responseObject?.value(forKey: "resp") as! String
-                    if status == "signIN"{
-                        SCLAlertView().showSuccess("Вход прошел удачно", subTitle: "Продолжите работу")
+                    if status == "signIn"{
+                        let name = responseObject?.value(forKey: "name") as! String
+                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Продолжите работу.")
+                        // create User Profile here! Save it to core data async.
+                        // call for the next view after it.
+                        self.delegate?.readyToShowGeoView()
+                        
                     } else if status == "not in db"{
                         SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден")
                     } else if status == "bad pass"{
@@ -78,8 +83,12 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                 
                 if error == nil {
                     let status = responseObject?.value(forKey: "resp") as! String
-                    if status == "signIN"{
-                        SCLAlertView().showSuccess("Вход прошел удачно", subTitle: "Продолжите работу")
+                    if status == "signIn"{
+                        let name = responseObject?.value(forKey: "name") as! String
+                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Продолжите работу.")
+                        // create User Profile here! Save it to core data async.
+                        // call for the next view after it.
+                        self.delegate?.readyToShowGeoView()
                     } else if status == "not in db"{
                         SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден")
                     } else if status == "bad pass"{

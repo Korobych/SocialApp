@@ -61,6 +61,35 @@
             </objects>
             <point key="canvasLocation" x="972" y="33.733133433283363"/>
         </scene>
+        <!--Geo View Controller-->
+        <scene sceneID="jUA-wy-I0o">
+            <objects>
+                <viewController storyboardIdentifier="GeoViewController" id="jwf-3D-ZJ8" customClass="GeoViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zc3-dU-RPP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0En-iK-ccM">
+                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vk7-tW-MeM" firstAttribute="bottom" secondItem="0En-iK-ccM" secondAttribute="bottom" id="934-5p-Tpl"/>
+                            <constraint firstItem="vk7-tW-MeM" firstAttribute="trailing" secondItem="0En-iK-ccM" secondAttribute="trailing" id="DB5-WO-vbT"/>
+                            <constraint firstItem="0En-iK-ccM" firstAttribute="top" secondItem="vk7-tW-MeM" secondAttribute="top" id="Jlz-wT-Jga"/>
+                            <constraint firstItem="0En-iK-ccM" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" id="p57-f2-IFq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vk7-tW-MeM"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="0En-iK-ccM" id="5z6-Hu-Yrg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5di-ej-fKt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2001" y="-700"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="KwS-Aj-w8i">
             <objects>
@@ -74,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SA1-pg-XTR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1910" y="34"/>
+            <point key="canvasLocation" x="971" y="-700"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0TA-4v-nuX">
