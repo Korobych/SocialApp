@@ -158,8 +158,8 @@ extension LoginViewController{
         loginTableView.isScrollEnabled = false
         loginTableView.separatorStyle = .none
         loginTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        
         // case with tapping in clear part of UITableView (without cells)
-        //
         loginTableView.backgroundView = UIView()
         loginTableView.addGestureRecognizer(tap)
         //

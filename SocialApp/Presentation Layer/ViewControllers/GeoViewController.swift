@@ -14,7 +14,7 @@ import SCLAlertView
 class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     let locationManager = CLLocationManager()
-
+    var activityIndicatorView: UIView!
     @IBOutlet weak var mapView: MKMapView!
 
     @IBOutlet weak var tabBar: UITabBar!
@@ -25,24 +25,22 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         setUpNavigationBar()
         setupMidButton()
         
+        mapView.delegate = self
+        mapView.mapType = .standard
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+        
         if CLLocationManager.locationServicesEnabled(){
             locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
             // call for the location data
             locationManager.requestLocation()
+//            locationManager.startUpdatingLocation()
+            activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
         } else {
             SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
             print("Switch ON Geo services, can't get geolocation.")
         }
-        
-        mapView.delegate = self
-        mapView.mapType = .standard
-        mapView.isZoomEnabled = true
-        mapView.isScrollEnabled = true
-    }
-    
-    @IBAction func decisionButtonTapped(_ sender: UIButton) {
-        
     }
     
     // **************************
@@ -54,17 +52,12 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             print("Координаты: \(lat),\(long)\n")
             
             let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-            //        mapView.mapType = MKMapType.standard
-            
-            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let span = MKCoordinateSpanMake(0.02, 0.02)
             let region = MKCoordinateRegion(center: locValue, span: span)
+            // hide activity indicator here
+            self.activityIndicatorView.removeFromSuperview()
+        
             mapView.setRegion(region, animated: true)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = locValue
-            annotation.title = "You are here!"
-            annotation.subtitle = "damn, i found you!"
-            mapView.addAnnotation(annotation)
         } else {
             print("No coordinates")
         }
@@ -145,4 +138,33 @@ extension GeoViewController{
     @objc func midButtonAction(){
         SCLAlertView().showSuccess("Ура!", subTitle: "Вы нажали на кнопку помощи, теперь вы в деле!", closeButtonTitle: "ОК")
     }
+    
+    func showActivityIndicatorView(uiView: UIView) -> UIView {
+        let container: UIView = UIView()
+        container.frame = uiView.frame
+        container.center = uiView.center
+        container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = uiView.center
+        loadingView.backgroundColor = UIColor.init(red: 0.266, green: 0.266, blue: 0.266, alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        activityIndicator.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+        
+        loadingView.addSubview(activityIndicator)
+        container.addSubview(loadingView)
+        uiView.addSubview(container)
+        
+        activityIndicator.startAnimating()
+        return container
+    }
+    
+    
 }
