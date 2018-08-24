@@ -58,6 +58,29 @@ class APIClient {
         }
     }
     
+    static func volExit(number: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volExit(number: number))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func invExit(id: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invExit(id: id))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
     
     
 }

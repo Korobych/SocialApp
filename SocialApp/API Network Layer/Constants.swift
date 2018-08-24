@@ -10,8 +10,8 @@ import Foundation
 
 struct APIRefference {
     struct ProductionServer {
-        static let baseURL = "http://localhost:3000"
-
+        static let baseURL = "http://206.189.82.200:3000"
+//  DOCKER       static let baseURL = "http://localhost:3000"
     }
     
     struct APIParameterKey {

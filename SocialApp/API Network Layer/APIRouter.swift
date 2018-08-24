@@ -15,6 +15,8 @@ enum APIRouter: APIConfiguration {
     case invLogin(id: String, password: String)
     case volRegistrate(name: String, number: String, password: String)
     case invRegistrate(id: String, name: String, number: String, password: String)
+    case volExit(number: String)
+    case invExit(id: String)
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
@@ -39,6 +41,10 @@ enum APIRouter: APIConfiguration {
             return "/vol/up"
         case .invRegistrate:
             return "/inv/up"
+        case .volExit:
+            return "/vol/ex"
+        case .invExit:
+            return "/inv/ex"
         }
     }
     
@@ -53,6 +59,10 @@ enum APIRouter: APIConfiguration {
             return [APIRefference.APIParameterKey.name : name, APIRefference.APIParameterKey.number : number, APIRefference.APIParameterKey.password : password]
         case .invRegistrate(let id, let name, let number, let password):
             return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.name : name, APIRefference.APIParameterKey.number : number, APIRefference.APIParameterKey.password : password]
+        case .volExit(let number):
+            return [APIRefference.APIParameterKey.number : number]
+        case .invExit(let id):
+            return [APIRefference.APIParameterKey.id : id]
         }
     }
     

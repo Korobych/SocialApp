@@ -14,6 +14,10 @@ enum LogState {
     case vol
 }
 
+protocol CustomCellsActionsDelegate : class {
+    func readyToShowGeoView()
+}
+
 class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CustomCellsActionsDelegate {
 
     var titleString: String?
@@ -27,7 +31,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         setUpTableView()
         loginTableView.dataSource = self
         loginTableView.delegate = self
-        // added keyboard observers also delete them!!! to do
+        // added keyboard observers also delete them!!!
         addKeyboardObservers()
         
     }
@@ -37,8 +41,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillDisappear(animated)
         if self.isMovingFromParentViewController {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
-            removeKeyboardObservers()
         }
+        // remove observers when going away from the view
+        removeKeyboardObservers()
     }
     // ********************
     // tableView setting up
@@ -55,8 +60,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let c = cell as! DataInputTableViewCell
             if c.userType == .inv {
                 c.numberTextField.placeholder = "ID"
+                c.numberTextField.keyboardType = .numberPad
             } else if c.userType == .vol {
                 c.numberTextField.placeholder = "Номер телефона"
+                c.numberTextField.keyboardType = .phonePad
             }
         }
     }
@@ -94,11 +101,12 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    // delegated fucntion
+    // delegated fucntion --- Show next GeoViewController
     func readyToShowGeoView() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "GeoViewController") as! GeoViewController
-        self.present(nextViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+//        self.present(nextViewController, animated: true, completion: nil)
     }
 
 }
@@ -162,8 +170,4 @@ extension LoginViewController{
     @objc func outsideTableTapped(tap:UITapGestureRecognizer){
         self.view.endEditing(true)
     }
-}
-
-protocol CustomCellsActionsDelegate : class {
-    func readyToShowGeoView()
 }

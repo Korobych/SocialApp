@@ -72,23 +72,38 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0En-iK-ccM">
                                 <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuZ-xa-fkb">
+                                <rect key="frame" x="70" y="678" width="274" height="38"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" staticText="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="decisionButtonTapped:" destination="jwf-3D-ZJ8" eventType="touchUpInside" id="DOQ-jl-nzi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="NuZ-xa-fkb" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" constant="70" id="1Ah-SA-Wdz"/>
+                            <constraint firstItem="vk7-tW-MeM" firstAttribute="bottom" secondItem="NuZ-xa-fkb" secondAttribute="bottom" constant="20" id="1GG-pB-3A4"/>
+                            <constraint firstItem="vk7-tW-MeM" firstAttribute="trailing" secondItem="NuZ-xa-fkb" secondAttribute="trailing" constant="70" id="6y9-7R-0Y1"/>
                             <constraint firstItem="vk7-tW-MeM" firstAttribute="bottom" secondItem="0En-iK-ccM" secondAttribute="bottom" id="934-5p-Tpl"/>
                             <constraint firstItem="vk7-tW-MeM" firstAttribute="trailing" secondItem="0En-iK-ccM" secondAttribute="trailing" id="DB5-WO-vbT"/>
-                            <constraint firstItem="0En-iK-ccM" firstAttribute="top" secondItem="vk7-tW-MeM" secondAttribute="top" id="Jlz-wT-Jga"/>
+                            <constraint firstItem="0En-iK-ccM" firstAttribute="top" secondItem="vk7-tW-MeM" secondAttribute="top" id="Zsx-Q0-ZFC"/>
                             <constraint firstItem="0En-iK-ccM" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" id="p57-f2-IFq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vk7-tW-MeM"/>
                     </view>
                     <connections>
+                        <outlet property="decisionButton" destination="NuZ-xa-fkb" id="zMe-yG-wJH"/>
                         <outlet property="mapView" destination="0En-iK-ccM" id="5z6-Hu-Yrg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5di-ej-fKt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="-700"/>
+            <point key="canvasLocation" x="2000.0000000000002" y="-700.27173913043487"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="KwS-Aj-w8i">

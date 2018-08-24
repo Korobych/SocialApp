@@ -26,9 +26,8 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         numberTextField.delegate = self
-        numberTextField.keyboardType = .phonePad
         passTextField.delegate = self
-    
+        setupNotEmptyTextFields()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -45,8 +44,8 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
             currentTextField.resignFirstResponder()
         }
         
-        //request building.
-        // Starting with finding data
+        // request building.
+        // Starting with getting data
         guard let userNumber = numberTextField.text else {return}
         guard let userPassword = passTextField.text else {return}
         
@@ -58,22 +57,25 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                     let status = responseObject?.value(forKey: "resp") as! String
                     if status == "signIn"{
                         let name = responseObject?.value(forKey: "name") as! String
-                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Продолжите работу.")
+                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
                         // create User Profile here! Save it to core data async.
+                        // clean textFields after successful login
+                        self.numberTextField.text = ""
+                        self.passTextField.text = ""
                         // call for the next view after it.
                         self.delegate?.readyToShowGeoView()
                         
                     } else if status == "not in db"{
-                        SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден")
+                        SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден", closeButtonTitle: "ОК")
                     } else if status == "bad pass"{
-                        SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз")
+                        SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз", closeButtonTitle: "ОК")
                     } else {
                         print("some strange status handled!\n\(status)")
                     }
                 } else {
                     if let e = error{
                         print(e.localizedDescription)
-                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.")
+                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
                     }
                 }
             }
@@ -85,14 +87,17 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                     let status = responseObject?.value(forKey: "resp") as! String
                     if status == "signIn"{
                         let name = responseObject?.value(forKey: "name") as! String
-                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Продолжите работу.")
+                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
                         // create User Profile here! Save it to core data async.
+                        // clean textFields after successful login.
+                        self.numberTextField.text = ""
+                        self.passTextField.text = ""
                         // call for the next view after it.
                         self.delegate?.readyToShowGeoView()
                     } else if status == "not in db"{
-                        SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден")
+                        SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден", closeButtonTitle: "ОК")
                     } else if status == "bad pass"{
-                        SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз")
+                        SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз", closeButtonTitle: "ОК")
                     } else {
                         print("some strange status handled!\n\(status)")
                     }
@@ -111,80 +116,88 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
             currentTextField.resignFirstResponder()
         }
         
-        // setting up button to be without build-in "Done" button
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
         switch userType {
         case .inv:
-            let alert = SCLAlertView(appearance: appearance)
+            let alert = SCLAlertView()
             let idTextField = alert.addTextField("ID")
             let nameTextField = alert.addTextField("Ваше имя")
             let numberTextField = alert.addTextField("Номер телефона")
             numberTextField.keyboardType = .phonePad
             let passTextField = alert.addTextField("Пароль")
             alert.addButton("Готово") {
-                // check all of the rows for normal data TODO!!!!
-                print("data from rows is loaded")
-                guard let userID = idTextField.text else {return}
-                guard let userName = nameTextField.text else {return}
-                guard let userNumber = numberTextField.text else {return}
-                guard let userPassword = passTextField.text else {return}
-                APIClient.invRegistrate(id: userID, name: userName, number: userNumber, password: userPassword, completion: { (responseObject, error) in
+                // check all rows and delete whitespaces from strings
+                guard let userID = idTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userName = nameTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userNumber = numberTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userPassword = passTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                // -------------------------------------------------------------
+                // checking for empty TextFields in registration alert
+                if userID.isEmpty || userName.isEmpty || userNumber.isEmpty || userPassword.isEmpty{
                     
-                    if error == nil {
-                        let status = responseObject?.value(forKey: "resp") as! String
-                        if status == "signUP"{
-                            SCLAlertView().showSuccess("Регистрация прошла успешно", subTitle: "Теперь вы можете войти в систему!")
-                        } else if status == "in db"{
-                            SCLAlertView().showError("Ошибка регистрации", subTitle: "Пользователь с такими данными уже найден. Произведите вход в систему.")
+                    SCLAlertView().showError("Неверно введены данные!", subTitle: "Все строки должны быть заполненны!", closeButtonTitle: "ОК")
+                } else {
+                    APIClient.invRegistrate(id: userID, name: userName, number: userNumber, password: userPassword, completion: { (responseObject, error) in
+                        
+                        if error == nil {
+                            let status = responseObject?.value(forKey: "resp") as! String
+                            if status == "signUP"{
+                                SCLAlertView().showSuccess("Регистрация прошла успешно", subTitle: "Теперь вы можете войти в систему!", closeButtonTitle: "ОК")
+                            } else if status == "in db"{
+                                SCLAlertView().showError("Ошибка регистрации", subTitle: "Пользователь с введенным ID уже существует. Произведите вход в систему.", closeButtonTitle: "ОК")
+                            } else {
+                                print("some strange status handled!\n\(status)")
+                            }
                         } else {
-                            print("some strange status handled!\n\(status)")
+                            if let e = error{
+                                print(e.localizedDescription)
+                                // handle more errors here TODO!
+                                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                            }
                         }
-                    } else {
-                        if let e = error{
-                            print(e.localizedDescription)
-                            // handle more errors here TODO!
-                            SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.")
-                        }
-                    }
-                })
+                    })
+                }
                 
             }
-            alert.showEdit("Зарегестрируйтесь!", subTitle: "Заполните все поля")
+            alert.showEdit("Зарегестрируйтесь!", subTitle: "Заполните все поля.", closeButtonTitle: "Закрыть")
         case .vol:
-            let alert = SCLAlertView(appearance: appearance)
+            let alert = SCLAlertView()
             let nameTextField = alert.addTextField("Ваше имя")
             let numberTextField = alert.addTextField("Номер телефона")
-            numberTextField.keyboardType = .phonePad
             let passTextField = alert.addTextField("Пароль")
             alert.addButton("Готово!"){
-                // check all of the rows for normal data TODO!!!!
-                guard let userName = nameTextField.text else {return}
-                guard let userNumber = numberTextField.text else {return}
-                guard let userPassword = passTextField.text else {return}
-                print("data from rows is loaded")
-                APIClient.volRegistrate(name: userName, number: userNumber, password: userPassword){ (responseObject, error) in
+                // check all rows and delete whitespaces from strings
+                guard let userName = nameTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userNumber = numberTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userPassword = passTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                // -------------------------------------------------------------
+                // checking for empty TextFields in registration alert
+                if userName.isEmpty || userNumber.isEmpty || userPassword.isEmpty {
                     
-                    if error == nil {
-                        let status = responseObject?.value(forKey: "resp") as! String
-                        if status == "signUP"{
-                            SCLAlertView().showSuccess("Регистрация прошла успешно", subTitle: "Теперь вы можете войти в систему!")
-                        } else if status == "in db"{
-                            SCLAlertView().showError("Ошибка регистрации", subTitle: "Пользователь с такими данными уже найден. Произведите вход в систему.")
+                    SCLAlertView().showError("Неверно введены данные!", subTitle: "Все строки должны быть заполненны!", closeButtonTitle: "ОК")
+                    
+                } else {
+                    APIClient.volRegistrate(name: userName, number: userNumber, password: userPassword){ (responseObject, error) in
+                        
+                        if error == nil {
+                            let status = responseObject?.value(forKey: "resp") as! String
+                            if status == "signUP"{
+                                SCLAlertView().showSuccess("Регистрация прошла успешно", subTitle: "Теперь вы можете войти в систему!", closeButtonTitle: "ОК")
+                            } else if status == "in db"{
+                                SCLAlertView().showError("Ошибка регистрации", subTitle: "Пользователь с введённым Телефонным номером уже существует. Произведите вход в систему.", closeButtonTitle: "ОК")
+                            } else {
+                                print("some strange status handled!\n\(status)")
+                            }
                         } else {
-                            print("some strange status handled!\n\(status)")
-                        }
-                    } else {
-                        if let e = error{
-                            print(e.localizedDescription)
-                            // handle more errors here TODO!
-                            SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.")
+                            if let e = error{
+                                print(e.localizedDescription)
+                                // handle more errors here TODO!
+                                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                            }
                         }
                     }
                 }
             }
-            alert.showEdit("Зарегестрируйтесь!", subTitle: "Заполните все поля")
+            alert.showEdit("Зарегестрируйтесь!", subTitle: "Заполните все поля.", closeButtonTitle: "Закрыть")
         }
         print("move to registration page")
     }
@@ -195,4 +208,27 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
         // Configure the view for the selected state
     }
     
+}
+
+extension DataInputTableViewCell {
+    
+    // checking for whitespaces or empty text of login TextFields
+    func setupNotEmptyTextFields() {
+        loginButton.isEnabled = false
+        numberTextField.addTarget(self, action: #selector(loginEditingChanged),
+                                  for: .editingChanged)
+        passTextField.addTarget(self, action: #selector(loginEditingChanged),
+                                for: .editingChanged)
+        passTextField.addTarget(self, action: #selector(loginEditingChanged),
+                                for: .editingDidBegin)
+    }
+    
+    @objc func loginEditingChanged(_ textField: UITextField){
+        guard let text = textField.text?.trimmingCharacters(in: .whitespaces) else {return}
+        if !text.isEmpty{
+            self.loginButton.isEnabled = true
+        } else {
+            self.loginButton.isEnabled = false
+        }
+    }
 }
