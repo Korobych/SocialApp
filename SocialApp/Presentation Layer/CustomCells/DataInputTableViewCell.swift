@@ -52,61 +52,32 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
         switch userType {
         case .inv:
             APIClient.invLogin(id: userNumber, password: userPassword){ (responseObject, error) in
-                
-                if error == nil {
-                    let status = responseObject?.value(forKey: "resp") as! String
-                    if status == "signIn"{
-                        let name = responseObject?.value(forKey: "name") as! String
-                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
-                        // create User Profile here! Save it to core data async.
-                        // clean textFields after successful login
-                        self.numberTextField.text = ""
-                        self.passTextField.text = ""
-                        // call for the next view after it.
-                        self.delegate?.readyToShowGeoView()
-                        
-                    } else if status == "not in db"{
-                        SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден", closeButtonTitle: "ОК")
-                    } else if status == "bad pass"{
-                        SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз", closeButtonTitle: "ОК")
-                    } else {
-                        print("some strange status handled!\n\(status)")
-                    }
-                } else {
-                    if let e = error{
-                        print(e.localizedDescription)
-                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
-                    }
+                if self.loginResponseHandler(responseObject: responseObject, error: error){
+                    // delegate it?
+                    //create INV !!! User Profile here! Save it to core data async.
+                    // clean textFields after successful login
+                    self.numberTextField.text = ""
+                    self.passTextField.text = ""
+                    // call for the next view after it.
+                    self.delegate?.readyToShowGeoView()
                 }
             }
+        
         case .vol:
             
             APIClient.volLogin(number: userNumber, password: userPassword) { (responseObject, error) in
-                
-                if error == nil {
-                    let status = responseObject?.value(forKey: "resp") as! String
-                    if status == "signIn"{
-                        let name = responseObject?.value(forKey: "name") as! String
-                        SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
-                        // create User Profile here! Save it to core data async.
-                        // clean textFields after successful login.
-                        self.numberTextField.text = ""
-                        self.passTextField.text = ""
-                        // call for the next view after it.
-                        self.delegate?.readyToShowGeoView()
-                    } else if status == "not in db"{
-                        SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден", closeButtonTitle: "ОК")
-                    } else if status == "bad pass"{
-                        SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз", closeButtonTitle: "ОК")
-                    } else {
-                        print("some strange status handled!\n\(status)")
-                    }
-                } else {
-                    if let e = error{
-                      print(e.localizedDescription)
-                      SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.")
-                    }
+                if self.loginResponseHandler(responseObject: responseObject, error: error) {
+                    // delegate it?
+                    let number = responseObject?.value(forKey: "number") as? String
+                    print(number ?? "no number here")
+                    //create VOL !!! User Profile here! Save it to core data async.
+                    // clean textFields after successful login
+                    self.numberTextField.text = ""
+                    self.passTextField.text = ""
+                    // call for the next view after it.
+                    self.delegate?.readyToShowGeoView()
                 }
+
             }
         }
     }
@@ -211,6 +182,34 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
 }
 
 extension DataInputTableViewCell {
+    
+    // login response handlers
+    func loginResponseHandler(responseObject : NSDictionary?, error: Error?) -> Bool{
+        if error == nil {
+            let status = responseObject?.value(forKey: "resp") as! String
+            if status == "signIn"{
+                let name = responseObject?.value(forKey: "name") as! String
+                SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
+                return true
+                
+            } else if status == "not in db"{
+                SCLAlertView().showError("Повторите вход", subTitle: "Пользователь не найден", closeButtonTitle: "ОК")
+                return false
+            } else if status == "bad pass"{
+                SCLAlertView().showError("Неверный пароль", subTitle: "Введите пароль еще раз", closeButtonTitle: "ОК")
+                return false
+            } else {
+                print("some strange status handled!\n\(status)")
+                return false
+            }
+        } else {
+            if let e = error{
+                print(e.localizedDescription)
+                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+            }
+            return false
+        }
+    }
     
     // checking for whitespaces or empty text of login TextFields
     func setupNotEmptyTextFields() {

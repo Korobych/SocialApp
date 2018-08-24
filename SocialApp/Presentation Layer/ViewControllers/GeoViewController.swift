@@ -16,14 +16,14 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     let locationManager = CLLocationManager()
 
     @IBOutlet weak var mapView: MKMapView!
-    
-    @IBOutlet weak var decisionButton: UIButton!
 
+    @IBOutlet weak var tabBar: UITabBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpNavigationBar()
+        setupMidButton()
         
         if CLLocationManager.locationServicesEnabled(){
             locationManager.delegate = self
@@ -45,9 +45,9 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
     }
     
-    // ********************
+    // **************************
     // LocationManager setting up
-    // ********************
+    // **************************
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lat = locations.last?.coordinate.latitude, let long = locations.last?.coordinate.longitude {
@@ -119,7 +119,30 @@ extension GeoViewController{
         // also delete data from User class and UserDefaults/Core Data here!
     }
     
-    func setUpButtons(){
+    // **************************
+    // TabBar setting up
+    // **************************
+    
+    func setupMidButton() {
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
         
+        var menuButtonFrame = menuButton.frame
+        menuButtonFrame.origin.y = self.view.bounds.height - menuButtonFrame.height
+        menuButtonFrame.origin.x = self.view.bounds.width/2 - menuButtonFrame.size.width/2
+        menuButton.frame = menuButtonFrame
+        menuButton.backgroundColor = UIColor.white
+        menuButton.layer.borderWidth = 1
+        menuButton.layer.borderColor = UIColor.lightGray.cgColor
+        menuButton.layer.cornerRadius = menuButtonFrame.height/2
+        menuButton.setImage(#imageLiteral(resourceName: "handshake_pic"), for: UIControlState.normal)
+        menuButton.contentMode = .scaleAspectFit
+        menuButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        menuButton.addTarget(self, action: #selector(GeoViewController.midButtonAction), for: .touchUpInside)
+        self.view.addSubview(menuButton)
+        self.view.layoutIfNeeded()
+    }
+    
+    @objc func midButtonAction(){
+        SCLAlertView().showSuccess("Ура!", subTitle: "Вы нажали на кнопку помощи, теперь вы в деле!", closeButtonTitle: "ОК")
     }
 }

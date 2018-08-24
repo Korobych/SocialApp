@@ -70,35 +70,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0En-iK-ccM">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="20" width="414" height="667"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuZ-xa-fkb">
-                                <rect key="frame" x="70" y="678" width="274" height="38"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" button="YES" staticText="YES"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="decisionButtonTapped:" destination="jwf-3D-ZJ8" eventType="touchUpInside" id="DOQ-jl-nzi"/>
-                                </connections>
-                            </button>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LzL-TU-Ex6">
+                                <rect key="frame" x="0.0" y="687" width="414" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="featured" id="taL-RT-OWk"/>
+                                    <tabBarItem systemItem="contacts" id="6kq-0q-r3g"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="NuZ-xa-fkb" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" constant="70" id="1Ah-SA-Wdz"/>
-                            <constraint firstItem="vk7-tW-MeM" firstAttribute="bottom" secondItem="NuZ-xa-fkb" secondAttribute="bottom" constant="20" id="1GG-pB-3A4"/>
-                            <constraint firstItem="vk7-tW-MeM" firstAttribute="trailing" secondItem="NuZ-xa-fkb" secondAttribute="trailing" constant="70" id="6y9-7R-0Y1"/>
-                            <constraint firstItem="vk7-tW-MeM" firstAttribute="bottom" secondItem="0En-iK-ccM" secondAttribute="bottom" id="934-5p-Tpl"/>
+                            <constraint firstItem="LzL-TU-Ex6" firstAttribute="top" secondItem="0En-iK-ccM" secondAttribute="bottom" id="1Hw-n2-9eY"/>
+                            <constraint firstItem="LzL-TU-Ex6" firstAttribute="trailing" secondItem="vk7-tW-MeM" secondAttribute="trailing" id="Ccn-qM-yDr"/>
                             <constraint firstItem="vk7-tW-MeM" firstAttribute="trailing" secondItem="0En-iK-ccM" secondAttribute="trailing" id="DB5-WO-vbT"/>
+                            <constraint firstItem="LzL-TU-Ex6" firstAttribute="bottom" secondItem="vk7-tW-MeM" secondAttribute="bottom" id="FB6-MY-bLm"/>
                             <constraint firstItem="0En-iK-ccM" firstAttribute="top" secondItem="vk7-tW-MeM" secondAttribute="top" id="Zsx-Q0-ZFC"/>
                             <constraint firstItem="0En-iK-ccM" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" id="p57-f2-IFq"/>
+                            <constraint firstItem="LzL-TU-Ex6" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" id="vod-W0-IRV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vk7-tW-MeM"/>
                     </view>
                     <connections>
-                        <outlet property="decisionButton" destination="NuZ-xa-fkb" id="zMe-yG-wJH"/>
                         <outlet property="mapView" destination="0En-iK-ccM" id="5z6-Hu-Yrg"/>
+                        <outlet property="tabBar" destination="LzL-TU-Ex6" id="7hC-fU-SUX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5di-ej-fKt" userLabel="First Responder" sceneMemberID="firstResponder"/>
