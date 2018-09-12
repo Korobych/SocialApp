@@ -11,11 +11,11 @@ import Alamofire
 
 enum APIRouter: APIConfiguration {
     
-    case volLogin(number: String, password: String)
+    case volLogin(phone: String, password: String)
     case invLogin(id: String, password: String)
-    case volRegistrate(name: String, number: String, password: String)
-    case invRegistrate(id: String, name: String, number: String, password: String)
-    case volExit(number: String)
+    case volRegistrate(name: String, phone: String, password: String)
+    case invRegistrate(id: String, name: String, phone: String, password: String)
+    case volExit(phone: String)
     case invExit(id: String)
     
     // MARK: - HTTPMethod
@@ -51,16 +51,16 @@ enum APIRouter: APIConfiguration {
     // MARK: - Parameters
     var parameters: Parameters? {
         switch self {
-        case .volLogin(let number, let password):
-            return [APIRefference.APIParameterKey.number : number, APIRefference.APIParameterKey.password : password]
+        case .volLogin(let phone, let password):
+            return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.password : password]
         case .invLogin(let id, let password):
             return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.password : password]
-        case .volRegistrate(let name, let number, let password):
-            return [APIRefference.APIParameterKey.name : name, APIRefference.APIParameterKey.number : number, APIRefference.APIParameterKey.password : password]
-        case .invRegistrate(let id, let name, let number, let password):
-            return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.name : name, APIRefference.APIParameterKey.number : number, APIRefference.APIParameterKey.password : password]
-        case .volExit(let number):
-            return [APIRefference.APIParameterKey.number : number]
+        case .volRegistrate(let name, let phone, let password):
+            return [APIRefference.APIParameterKey.name : name, APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.password : password]
+        case .invRegistrate(let id, let name, let phone, let password):
+            return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.name : name, APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.password : password]
+        case .volExit(let phone):
+            return [APIRefference.APIParameterKey.phone : phone]
         case .invExit(let id):
             return [APIRefference.APIParameterKey.id : id]
         }

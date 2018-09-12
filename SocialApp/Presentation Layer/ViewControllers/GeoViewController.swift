@@ -29,13 +29,14 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.mapType = .standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
+    
         
         if CLLocationManager.locationServicesEnabled(){
             locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
             // call for the location data
             locationManager.requestLocation()
-//            locationManager.startUpdatingLocation()
+            // locationManager.startUpdatingLocation()
             activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
         } else {
             SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
@@ -136,7 +137,7 @@ extension GeoViewController{
     }
     
     @objc func midButtonAction(){
-        SCLAlertView().showSuccess("Ура!", subTitle: "Вы нажали на кнопку помощи, теперь вы в деле!", closeButtonTitle: "ОК")
+        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Вы нажали на кнопку помощи, теперь Вы в деле!", closeButtonTitle: "ОК")
     }
     
     func showActivityIndicatorView(uiView: UIView) -> UIView {

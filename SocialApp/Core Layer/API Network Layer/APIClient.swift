@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 class APIClient {
-    static func volLogin(number: String, password: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.volLogin(number: number, password: password))
+    static func volLogin(phone: String, password: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volLogin(phone: phone, password: password))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -34,8 +34,8 @@ class APIClient {
         }
     }
     
-    static func volRegistrate(name: String, number: String, password: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.volRegistrate(name: name, number: number, password: password))
+    static func volRegistrate(name: String, phone: String, password: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volRegistrate(name: name, phone: phone, password: password))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -46,8 +46,8 @@ class APIClient {
         }
     }
     
-    static func invRegistrate(id: String, name: String, number: String, password: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.invRegistrate(id: id, name: name, number: number, password: password))
+    static func invRegistrate(id: String, name: String, phone: String, password: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invRegistrate(id: id, name: name, phone: phone, password: password))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -58,8 +58,8 @@ class APIClient {
         }
     }
     
-    static func volExit(number: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.volExit(number: number))
+    static func volExit(phone: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volExit(phone: phone))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):

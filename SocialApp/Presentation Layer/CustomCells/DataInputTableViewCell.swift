@@ -13,7 +13,7 @@ import Alamofire
 
 class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
 
-    @IBOutlet weak var numberTextField: IsaoTextField!
+    @IBOutlet weak var phoneTextField: IsaoTextField!
     
     @IBOutlet weak var passTextField: IsaoTextField!
     
@@ -22,10 +22,14 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
     weak var delegate: CustomCellsActionsDelegate?
     private var currentTextField: IsaoTextField?
     var userType: LogState = LogState.inv
+    // hotfix | better to move this logic to LoginViewController
+    private var profileManager: ProfileManagerProtocol = ProfileManager()
+    // later
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        numberTextField.delegate = self
+        profileManager.delegate = self
+        phoneTextField.delegate = self
         passTextField.delegate = self
         setupNotEmptyTextFields()
     }
@@ -46,7 +50,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         // request building.
         // Starting with getting data
-        guard let userNumber = numberTextField.text else {return}
+        guard let userNumber = phoneTextField.text else {return}
         guard let userPassword = passTextField.text else {return}
         
         switch userType {
@@ -54,9 +58,13 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
             APIClient.invLogin(id: userNumber, password: userPassword){ (responseObject, error) in
                 if self.loginResponseHandler(responseObject: responseObject, error: error){
                     // delegate it?
+                    let userName = responseObject?.value(forKey: "name") as! String
+                    let userPhone = responseObject?.value(forKey: "phone") as! String
+                    print(userPhone)
                     //create INV !!! User Profile here! Save it to core data async.
+                    self.profileManager.saveInvProfile(id: userNumber, name: userName, phone: userPhone, password: userPassword, photo: UIImage())
                     // clean textFields after successful login
-                    self.numberTextField.text = ""
+                    self.phoneTextField.text = ""
                     self.passTextField.text = ""
                     // call for the next view after it.
                     self.delegate?.readyToShowGeoView()
@@ -65,14 +73,14 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         case .vol:
             
-            APIClient.volLogin(number: userNumber, password: userPassword) { (responseObject, error) in
+            APIClient.volLogin(phone: userNumber, password: userPassword) { (responseObject, error) in
                 if self.loginResponseHandler(responseObject: responseObject, error: error) {
                     // delegate it?
-                    let number = responseObject?.value(forKey: "number") as? String
-                    print(number ?? "no number here")
+                    let userName = responseObject?.value(forKey: "name") as! String
                     //create VOL !!! User Profile here! Save it to core data async.
+                    self.profileManager.saveVolProfile(name: userName, phone: userNumber, password: userPassword, photo: UIImage())
                     // clean textFields after successful login
-                    self.numberTextField.text = ""
+                    self.phoneTextField.text = ""
                     self.passTextField.text = ""
                     // call for the next view after it.
                     self.delegate?.readyToShowGeoView()
@@ -92,14 +100,14 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
             let alert = SCLAlertView()
             let idTextField = alert.addTextField("ID")
             let nameTextField = alert.addTextField("Ваше имя")
-            let numberTextField = alert.addTextField("Номер телефона")
-            numberTextField.keyboardType = .phonePad
+            let phoneTextField = alert.addTextField("Номер телефона")
+            phoneTextField.keyboardType = .phonePad
             let passTextField = alert.addTextField("Пароль")
             alert.addButton("Готово") {
                 // check all rows and delete whitespaces from strings
                 guard let userID = idTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
                 guard let userName = nameTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
-                guard let userNumber = numberTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userNumber = phoneTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
                 guard let userPassword = passTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
                 // -------------------------------------------------------------
                 // checking for empty TextFields in registration alert
@@ -107,7 +115,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                     
                     SCLAlertView().showError("Неверно введены данные!", subTitle: "Все строки должны быть заполненны!", closeButtonTitle: "ОК")
                 } else {
-                    APIClient.invRegistrate(id: userID, name: userName, number: userNumber, password: userPassword, completion: { (responseObject, error) in
+                    APIClient.invRegistrate(id: userID, name: userName, phone: userNumber, password: userPassword, completion: { (responseObject, error) in
                         
                         if error == nil {
                             let status = responseObject?.value(forKey: "resp") as! String
@@ -133,12 +141,12 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
         case .vol:
             let alert = SCLAlertView()
             let nameTextField = alert.addTextField("Ваше имя")
-            let numberTextField = alert.addTextField("Номер телефона")
+            let phoneTextField = alert.addTextField("Номер телефона")
             let passTextField = alert.addTextField("Пароль")
             alert.addButton("Готово!"){
                 // check all rows and delete whitespaces from strings
                 guard let userName = nameTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
-                guard let userNumber = numberTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+                guard let userNumber = phoneTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
                 guard let userPassword = passTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
                 // -------------------------------------------------------------
                 // checking for empty TextFields in registration alert
@@ -147,7 +155,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                     SCLAlertView().showError("Неверно введены данные!", subTitle: "Все строки должны быть заполненны!", closeButtonTitle: "ОК")
                     
                 } else {
-                    APIClient.volRegistrate(name: userName, number: userNumber, password: userPassword){ (responseObject, error) in
+                    APIClient.volRegistrate(name: userName, phone: userNumber, password: userPassword){ (responseObject, error) in
                         
                         if error == nil {
                             let status = responseObject?.value(forKey: "resp") as! String
@@ -214,7 +222,7 @@ extension DataInputTableViewCell {
     // checking for whitespaces or empty text of login TextFields
     func setupNotEmptyTextFields() {
         loginButton.isEnabled = false
-        numberTextField.addTarget(self, action: #selector(loginEditingChanged),
+        phoneTextField.addTarget(self, action: #selector(loginEditingChanged),
                                   for: .editingChanged)
         passTextField.addTarget(self, action: #selector(loginEditingChanged),
                                 for: .editingChanged)
@@ -228,6 +236,15 @@ extension DataInputTableViewCell {
             self.loginButton.isEnabled = true
         } else {
             self.loginButton.isEnabled = false
+        }
+    }
+}
+
+extension DataInputTableViewCell: ProfileManagerDelegateProtocol{
+    
+    func didFinishSave(success: Bool) {
+        if success{
+            print("\nYAAAAAAY! IT'S SAVED!\n")
         }
     }
 }

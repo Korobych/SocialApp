@@ -106,8 +106,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="loginButton" destination="88Z-PY-r3j" id="Mjc-wl-05O"/>
-                <outlet property="numberTextField" destination="HOG-Zm-SMl" id="3vQ-AU-jww"/>
                 <outlet property="passTextField" destination="PNS-p8-aYf" id="iRD-Wb-AsP"/>
+                <outlet property="phoneTextField" destination="HOG-Zm-SMl" id="oEc-up-qqI"/>
             </connections>
             <point key="canvasLocation" x="38" y="262.5"/>
         </tableViewCell>

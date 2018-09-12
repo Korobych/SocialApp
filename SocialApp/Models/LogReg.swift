@@ -9,56 +9,31 @@
 import Foundation
 // *** INVALID ***
 
-struct InvReg: Codable {
-    var id: String // INT
+struct InvUserModel: Codable {
+    var id: String
     var name: String
-    var number: String
+    var phone: String
     var password: String
     
-    init(id: String, name: String, number: String, password: String ) {
+    init(id: String, name: String, phone: String, password: String ) {
         self.id = id
         self.name = name
-        self.number = number
-        self.password = password
-    }
-}
-
-struct InvLog: Codable {
-    var id: String // INT
-    var password: String
-    
-    init(id: String, password: String ) {
-        self.id = id
+        self.phone = phone
         self.password = password
     }
 }
 // *** VOLUNTEER ***
 
-struct VolReg: Codable {
+struct VolUserModel: Codable {
     var name: String
-    var number: String
+    var phone: String
     var password: String
     
-    init(name: String, number: String, password: String ) {
+    init(name: String, phone: String, password: String ) {
         self.name = name
-        self.number = number
+        self.phone = phone
         self.password = password
     }
-}
-
-struct VolLog: Codable {
-    var number: String 
-    var password: String
-    
-    init(number: String, password: String ) {
-        self.number = number
-        self.password = password
-    }
-}
-
-/// Special for response from server decoding
-struct ServResponse: Codable{
-    let resp : String
 }
 
 

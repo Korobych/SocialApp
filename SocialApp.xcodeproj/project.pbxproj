@@ -15,6 +15,11 @@
 		982FE15C2126F85000C4E5CD /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE15B2126F85000C4E5CD /* APIConfiguration.swift */; };
 		982FE15E2126F92C00C4E5CD /* APIRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE15D2126F92C00C4E5CD /* APIRouter.swift */; };
 		982FE1602127170C00C4E5CD /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982FE15F2127170C00C4E5CD /* APIClient.swift */; };
+		9831DC5221470FA00069AAD3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831DC5121470FA00069AAD3 /* CoreDataStack.swift */; };
+		9831DC54214711470069AAD3 /* CoreDataExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831DC53214711470069AAD3 /* CoreDataExtentions.swift */; };
+		9831DC56214714370069AAD3 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9831DC55214714370069AAD3 /* StorageManager.swift */; };
+		98757ADE21485D1F00AE71F0 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98757ADD21485D1F00AE71F0 /* ProfileService.swift */; };
+		98757AE021485D2A00AE71F0 /* ProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98757ADF21485D2A00AE71F0 /* ProfileManager.swift */; };
 		9876454F2111D31300C87421 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9876454E2111D31300C87421 /* Media.xcassets */; };
 		989E8843211449F7007D130C /* LogReg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E8842211449F7007D130C /* LogReg.swift */; };
 		989E884621146979007D130C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E884521146979007D130C /* LoginViewController.swift */; };
@@ -25,6 +30,7 @@
 		98E766B02111A8180081345F /* SocialApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 98E766AE2111A8180081345F /* SocialApp.xcdatamodeld */; };
 		98E766B22111A8190081345F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98E766B12111A8190081345F /* Assets.xcassets */; };
 		98E766B52111A8190081345F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98E766B32111A8190081345F /* LaunchScreen.storyboard */; };
+		98F913902132F26E00440A9F /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9138F2132F26E00440A9F /* Profile.swift */; };
 		EB0D2EE8C59796EDDCC55637 /* Pods_SocialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C720A538DA6305F27DB7A9 /* Pods_SocialApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +46,11 @@
 		982FE15B2126F85000C4E5CD /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
 		982FE15D2126F92C00C4E5CD /* APIRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRouter.swift; sourceTree = "<group>"; };
 		982FE15F2127170C00C4E5CD /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		9831DC5121470FA00069AAD3 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9831DC53214711470069AAD3 /* CoreDataExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataExtentions.swift; sourceTree = "<group>"; };
+		9831DC55214714370069AAD3 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		98757ADD21485D1F00AE71F0 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		98757ADF21485D2A00AE71F0 /* ProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManager.swift; sourceTree = "<group>"; };
 		9876454E2111D31300C87421 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		989E8842211449F7007D130C /* LogReg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogReg.swift; sourceTree = "<group>"; };
 		989E884521146979007D130C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +63,7 @@
 		98E766B12111A8190081345F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		98E766B42111A8190081345F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		98E766B62111A8190081345F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98F9138F2132F26E00440A9F /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +126,15 @@
 			path = "API Network Layer";
 			sourceTree = "<group>";
 		};
+		98757ADC21485CE600AE71F0 /* Profile Service */ = {
+			isa = PBXGroup;
+			children = (
+				98757ADD21485D1F00AE71F0 /* ProfileService.swift */,
+				98757ADF21485D2A00AE71F0 /* ProfileManager.swift */,
+			);
+			path = "Profile Service";
+			sourceTree = "<group>";
+		};
 		989E8841211449D0007D130C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,16 +176,45 @@
 			children = (
 				989E8841211449D0007D130C /* Models */,
 				982FE1572126F5FC00C4E5CD /* Presentation Layer */,
-				982FE1582126F63C00C4E5CD /* API Network Layer */,
+				98F9138E2132F05A00440A9F /* Service Layer */,
+				98F9138C2132EFF600440A9F /* Core Layer */,
 				98E766A72111A8180081345F /* AppDelegate.swift */,
 				98E766AB2111A8180081345F /* Main.storyboard */,
 				98E766B12111A8190081345F /* Assets.xcassets */,
 				9876454E2111D31300C87421 /* Media.xcassets */,
 				98E766B32111A8190081345F /* LaunchScreen.storyboard */,
 				98E766B62111A8190081345F /* Info.plist */,
-				98E766AE2111A8180081345F /* SocialApp.xcdatamodeld */,
 			);
 			path = SocialApp;
+			sourceTree = "<group>";
+		};
+		98F9138C2132EFF600440A9F /* Core Layer */ = {
+			isa = PBXGroup;
+			children = (
+				98F9138D2132F01F00440A9F /* Profile+CoreData */,
+				982FE1582126F63C00C4E5CD /* API Network Layer */,
+			);
+			path = "Core Layer";
+			sourceTree = "<group>";
+		};
+		98F9138D2132F01F00440A9F /* Profile+CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				98F9138F2132F26E00440A9F /* Profile.swift */,
+				9831DC5121470FA00069AAD3 /* CoreDataStack.swift */,
+				9831DC53214711470069AAD3 /* CoreDataExtentions.swift */,
+				9831DC55214714370069AAD3 /* StorageManager.swift */,
+				98E766AE2111A8180081345F /* SocialApp.xcdatamodeld */,
+			);
+			path = "Profile+CoreData";
+			sourceTree = "<group>";
+		};
+		98F9138E2132F05A00440A9F /* Service Layer */ = {
+			isa = PBXGroup;
+			children = (
+				98757ADC21485CE600AE71F0 /* Profile Service */,
+			);
+			path = "Service Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,15 +339,21 @@
 				98E766B02111A8180081345F /* SocialApp.xcdatamodeld in Sources */,
 				982FE15E2126F92C00C4E5CD /* APIRouter.swift in Sources */,
 				98E766AA2111A8180081345F /* EnterViewController.swift in Sources */,
+				98F913902132F26E00440A9F /* Profile.swift in Sources */,
 				98E766A82111A8180081345F /* AppDelegate.swift in Sources */,
 				989E884621146979007D130C /* LoginViewController.swift in Sources */,
 				982FE1602127170C00C4E5CD /* APIClient.swift in Sources */,
+				98757AE021485D2A00AE71F0 /* ProfileManager.swift in Sources */,
+				98757ADE21485D1F00AE71F0 /* ProfileService.swift in Sources */,
+				9831DC5221470FA00069AAD3 /* CoreDataStack.swift in Sources */,
 				982FE15C2126F85000C4E5CD /* APIConfiguration.swift in Sources */,
 				9802BA8E21237D44001F8426 /* SocialTableViewCell.swift in Sources */,
 				98C930EC212942B4005DD9D7 /* GeoViewController.swift in Sources */,
 				98052AFB21245C98009AE5C7 /* DataInputTableViewCell.swift in Sources */,
+				9831DC54214711470069AAD3 /* CoreDataExtentions.swift in Sources */,
 				989E8843211449F7007D130C /* LogReg.swift in Sources */,
 				982FE15A2126F6B100C4E5CD /* Constants.swift in Sources */,
+				9831DC56214714370069AAD3 /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

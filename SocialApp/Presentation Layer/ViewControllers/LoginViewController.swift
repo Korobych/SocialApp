@@ -19,7 +19,8 @@ protocol CustomCellsActionsDelegate : class {
 }
 
 class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CustomCellsActionsDelegate {
-
+    
+//    private var profileManager: ProfileManagerProtocol = ProfileManager()
     var titleString: String?
     private var loginTableView: UITableView!
     var userType: LogState = LogState.inv
@@ -59,11 +60,11 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if cell.reuseIdentifier == "DataInputTableViewCell"{
             let c = cell as! DataInputTableViewCell
             if c.userType == .inv {
-                c.numberTextField.placeholder = "ID"
-                c.numberTextField.keyboardType = .numberPad
+                c.phoneTextField.placeholder = "ID"
+                c.phoneTextField.keyboardType = .numberPad
             } else if c.userType == .vol {
-                c.numberTextField.placeholder = "Номер телефона"
-                c.numberTextField.keyboardType = .phonePad
+                c.phoneTextField.placeholder = "Номер телефона"
+                c.phoneTextField.keyboardType = .phonePad
             }
         }
     }
