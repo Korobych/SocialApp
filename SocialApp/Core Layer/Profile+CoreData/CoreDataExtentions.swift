@@ -82,6 +82,47 @@ extension AppUser {
         return nil
     }
     
+    static func deleteAppUser(in context: NSManagedObjectContext) -> Bool {
+        guard let model = context.persistentStoreCoordinator?.managedObjectModel else {
+            assertionFailure("Model is not available in context")
+            return false
+        }
+        guard let fetchRequest = AppUser.fetchRequestAppUser(withModel: model) else {
+            return false
+        }
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            assert(results.count < 2, "Multiple AppUsers found!")
+            // There we get rid of App User row
+            if let foundUser = results.first {
+                
+                // FIXIT
+                // *****
+                // add logic with detecting founduser.currentUser and deleting it
+                // *****
+                let userDeleted = User.deleteCurrentAppUser(in: context)
+                foundUser.currentUser = nil
+                context.delete(foundUser)
+                
+                if userDeleted{
+                    return true
+                } else {
+                    print("User entity can't be or already deleted!")
+                    return false
+                }
+                
+            } else {
+                print("There isn't any AppUser in context!")
+                return false
+            }
+            
+        } catch {
+            print("Failed to delete AppUser: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
     static func fetchRequestAppUser(withModel model: NSManagedObjectModel) -> NSFetchRequest<AppUser>? {
         let templateName = "AppUser"
         guard let fetchRequest = model.fetchRequestTemplate(forName: templateName) as? NSFetchRequest<AppUser> else {
@@ -104,6 +145,25 @@ extension User {
             return user
         }
         return nil
+    }
+    
+    static func deleteCurrentAppUser(in context: NSManagedObjectContext) -> Bool{
+        let fetchRequest = NSFetchRequest<User>(entityName: "User")
+        do {
+            let result = try context.fetch(fetchRequest)
+            // FIXIT
+            //*****************************************
+            // add logic with checking what user we are deleting?
+            // because now we are deleting all if them!
+            //*****************************************
+            for user in result {
+                context.delete(user)
+            }
+            return true
+        } catch {
+            print("Failed to delete current user: \(error)")
+            return false
+        }
     }
 }
 

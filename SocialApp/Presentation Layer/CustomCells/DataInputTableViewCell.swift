@@ -62,7 +62,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                     let userPhone = responseObject?.value(forKey: "phone") as! String
                     print(userPhone)
                     //create INV !!! User Profile here! Save it to core data async.
-                    self.profileManager.saveInvProfile(id: userNumber, name: userName, phone: userPhone, password: userPassword, photo: UIImage())
+                    self.profileManager.saveInvProfile(id: userNumber, name: userName, phone: userPhone, password: userPassword, photo: nil)
                     // clean textFields after successful login
                     self.phoneTextField.text = ""
                     self.passTextField.text = ""
@@ -78,7 +78,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
                     // delegate it?
                     let userName = responseObject?.value(forKey: "name") as! String
                     //create VOL !!! User Profile here! Save it to core data async.
-                    self.profileManager.saveVolProfile(name: userName, phone: userNumber, password: userPassword, photo: UIImage())
+                    self.profileManager.saveVolProfile(name: userName, phone: userNumber, password: userPassword, photo: nil)
                     // clean textFields after successful login
                     self.phoneTextField.text = ""
                     self.passTextField.text = ""
@@ -247,4 +247,10 @@ extension DataInputTableViewCell: ProfileManagerDelegateProtocol{
             print("\nYAAAAAAY! IT'S SAVED!\n")
         }
     }
+    
+    // do nothing here
+    func didFinishDeleting(success: Bool) {
+        
+    }
+    
 }

@@ -14,7 +14,7 @@ protocol ProfileManagerProtocol {
     func getProfileInfo()
     func saveInvProfile(id: String?, name: String?, phone: String?, password: String?, photo: UIImage?)
     func saveVolProfile(name: String?, phone: String?, password: String?, photo: UIImage?)
-//    func profileDidChange(photo: UIImage?, name: String?, info: String?) -> Bool
+    func deleteProfile()
 }
 
 protocol ProfileManagerDelegateProtocol: class {
@@ -22,6 +22,7 @@ protocol ProfileManagerDelegateProtocol: class {
 //    do we need it or not?
 //    func didGet(profileViewModel: ProfileViewModel)
     func didFinishSave(success: Bool)
+    func didFinishDeleting(success: Bool)
 }
 
 class ProfileManager: ProfileManagerProtocol {
@@ -39,7 +40,8 @@ class ProfileManager: ProfileManagerProtocol {
     }
     
     func saveInvProfile(id: String?, name: String?, phone: String?, password: String?, photo: UIImage?) {
-        guard let id = id, let name = name, let phone = phone, let password = password, let photo = photo else {
+        // add let photo = photo??
+        guard let id = id, let name = name, let phone = phone, let password = password else {
             self.delegate?.didFinishSave(success: false)
             return
         }
@@ -52,7 +54,8 @@ class ProfileManager: ProfileManagerProtocol {
     }
     
     func saveVolProfile(name: String?, phone: String?, password: String?, photo: UIImage?) {
-        guard let name = name, let phone = phone, let password = password, let photo = photo else {
+        // add let photo = photo??
+        guard let name = name, let phone = phone, let password = password else {
             self.delegate?.didFinishSave(success: false)
             return
         }
@@ -64,17 +67,9 @@ class ProfileManager: ProfileManagerProtocol {
         }
     }
     
-//    func profileDidChange(photo: UIImage?, name: String?, info: String?) -> Bool {
-//        var checkingFlag: Bool = false
-//        guard let lastSavedProfile = lastSavedProfile else {
-//            return true
-//        }
-//
-//        guard let photo = photo, let name = name, let info = info,
-//            !name.isEmpty, !info.isEmpty else {
-//                return false
-//        }
-//        checkingFlag = photo != lastSavedProfile.photo || name != lastSavedProfile.name || info != lastSavedProfile.info
-//        return checkingFlag
-//    }
+    func deleteProfile() {
+        profileService.deleteProfile { [weak self] success in
+            self?.delegate?.didFinishDeleting(success: success)
+        }
+    }
 }

@@ -11,8 +11,7 @@ import Foundation
 protocol ProfileServiceProtocol {
     func getProfile(completion: @escaping (Profile) -> ())
     func saveProfile(_ profile: Profile, completion: @escaping (_ success: Bool) -> ())
-     // UPDATE IT!
-//     func deleteProfile(_ profile: Profile, completion: @escaping (_ success: Bool) -> ())
+    func deleteProfile(completion: @escaping (_ success: Bool) -> ())
 }
 
 class ProfileService: ProfileServiceProtocol {
@@ -31,8 +30,8 @@ class ProfileService: ProfileServiceProtocol {
         dataManager?.write(profile: profile, completion: completion)
     }
     
-    // UPDATE IT!
-//    func deleteProfile(_ profile: Profile, completion: @escaping (_ success: Bool) -> ()){
-//
-//    }
+    func deleteProfile(completion: @escaping (_ success: Bool) -> ()){
+        dataManager = StorageManager(withStack: coreDataStack)
+        dataManager?.delete(completion: completion)
+    }
 }

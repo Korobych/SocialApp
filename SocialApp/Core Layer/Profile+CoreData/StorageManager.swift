@@ -12,6 +12,7 @@ import UIKit
 protocol StorageDataManagerProtocol {
     func write(profile: Profile, completion: @escaping (_ success: Bool) -> ())
     func read(completion: @escaping (_ profile: Profile) -> Void)
+    func delete(completion: @escaping (_ success: Bool) -> ())
 }
 
 class StorageManager: StorageDataManagerProtocol  {
@@ -24,7 +25,7 @@ class StorageManager: StorageDataManagerProtocol  {
     
     func write(profile: Profile, completion: @escaping (_ success: Bool) -> ()){
         
-        guard let appUser = AppUser.insertAppUser(in: dataStack.saveContext!) else {
+        guard let appUser = AppUser.findOrInsertAppUser(in: dataStack.saveContext!) else {
             completion(false)
             return
         }
@@ -78,6 +79,31 @@ class StorageManager: StorageDataManagerProtocol  {
                 completion(profile)
             }
         }
+    }
+    
+    func delete(completion: @escaping (Bool) -> ()) {
+        guard let appUser = AppUser.findAppUser(in: self.dataStack.saveContext!)
+            else {
+                print("There is no App User in data storage.")
+                completion(false)
+                return
+        }
+        guard let user = appUser.currentUser else {
+            print("can't find current app User")
+            completion(false)
+            return
+        }
+        
+        let deleteCompleted = AppUser.deleteAppUser(in: self.dataStack.saveContext!)
+        
+        dataStack.saveContext?.perform {
+            self.dataStack.performSave(context: self.dataStack.saveContext!) {(success) in
+                DispatchQueue.main.async {
+                    completion(success && deleteCompleted)
+                }
+            }
+        }
+        
     }
     
 }

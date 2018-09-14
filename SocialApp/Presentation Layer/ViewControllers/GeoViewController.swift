@@ -14,6 +14,7 @@ import SCLAlertView
 class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     let locationManager = CLLocationManager()
+    private var profileManager: ProfileManagerProtocol = ProfileManager()
     var activityIndicatorView: UIView!
     @IBOutlet weak var mapView: MKMapView!
 
@@ -25,6 +26,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         setUpNavigationBar()
         setupMidButton()
         
+        profileManager.delegate = self
         mapView.delegate = self
         mapView.mapType = .standard
         mapView.isZoomEnabled = true
@@ -94,6 +96,9 @@ extension GeoViewController{
                 let goodExitAlert = UIAlertController(title: "Вы успешно вышли.", message: "Ждем Вас снова 😎!", preferredStyle: UIAlertControllerStyle.alert)
                 self.present(goodExitAlert, animated: true, completion: nil)
                 
+                // also delete data from User class and UserDefaults/Core Data!
+                self.profileManager.deleteProfile()
+                
                 let when = DispatchTime.now() + 2.0
                 DispatchQueue.main.asyncAfter(deadline: when){
                     goodExitAlert.dismiss(animated: true, completion: {
@@ -110,7 +115,6 @@ extension GeoViewController{
             self.present(exitAlert, animated: true, completion: nil)
         
         }
-        // also delete data from User class and UserDefaults/Core Data here!
     }
     
     // **************************
@@ -165,6 +169,20 @@ extension GeoViewController{
         
         activityIndicator.startAnimating()
         return container
+    }
+    
+}
+
+extension GeoViewController: ProfileManagerDelegateProtocol{
+    func didFinishSave(success: Bool) {
+        // do nothing here
+    }
+    
+    // watch this
+    func didFinishDeleting(success: Bool) {
+        if success{
+            print("\nYAAAAAAY! App User deleted!\n")
+        }
     }
     
     
