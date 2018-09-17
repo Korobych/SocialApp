@@ -26,7 +26,6 @@ class ProfileService: ProfileServiceProtocol {
     
     func saveProfile(_ profile: Profile, completion: @escaping (_ success: Bool) -> ()) {
         dataManager = StorageManager(withStack: coreDataStack)
-        print("Зашли в сохранение core data")
         dataManager?.write(profile: profile, completion: completion)
     }
     

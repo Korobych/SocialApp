@@ -125,8 +125,6 @@ class CoreDataStack : CoreDataStackProtocol {
             context.perform { [weak self] in
                 do {
                     try context.save()
-                    print("\nсейв прошёл на ура!\n")
-                    
                 }
                 catch{
                     print("Context save error: \(error)")
@@ -134,7 +132,6 @@ class CoreDataStack : CoreDataStackProtocol {
                 
                 if let parent = context.parent {
                     self?.performSave(context: parent, completionHandler: completionHandler)
-                    print("\nи в parent тоже!\n")
                 } else {
                     completionHandler(true)
                 }

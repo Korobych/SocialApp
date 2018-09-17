@@ -15,6 +15,10 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     let locationManager = CLLocationManager()
     private var profileManager: ProfileManagerProtocol = ProfileManager()
+    // Local profile var added.
+    // | //
+    // ↓ //
+    var currentProfile: Profile!
     var activityIndicatorView: UIView!
     @IBOutlet weak var mapView: MKMapView!
 
@@ -31,7 +35,6 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.mapType = .standard
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
-    
         
         if CLLocationManager.locationServicesEnabled(){
             locationManager.delegate = self
@@ -44,6 +47,12 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
             print("Switch ON Geo services, can't get geolocation.")
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // case of getting local saved profile when the view is shown
+        self.profileManager.getProfileInfo()
     }
     
     // **************************
@@ -88,13 +97,56 @@ extension GeoViewController{
     }
     
     @objc func logOut() {
-        // Logic with exit from account, no api needed
+//        self.profileManager.getProfileInfo()
+        // Logic with exit from account
         DispatchQueue.main.async {
             let exitAlert = UIAlertController(title: "Вы собираетесь выйти из текущего аккаунта!", message: "Уверены, что точно хотите этого?", preferredStyle: UIAlertControllerStyle.alert)
             let confirmAction = UIAlertAction(title: "Да", style: .default){ action in
                 
                 let goodExitAlert = UIAlertController(title: "Вы успешно вышли.", message: "Ждем Вас снова 😎!", preferredStyle: UIAlertControllerStyle.alert)
                 self.present(goodExitAlert, animated: true, completion: nil)
+                // send POST API request to EXIT
+                if self.currentProfile.invId == ""{
+                    // vol case
+                    APIClient.volExit(phone: self.currentProfile.phone, completion: { (responseObject, error) in
+                        if error == nil {
+                            let status = responseObject?.value(forKey: "resp") as! String
+                            if status == "true"{
+                                print("\nУспешный выход из аккаунта на сервере!\n")
+                            } else if status == "false"{
+                                print("\nОшибка! Неуспешный выход из аккаунта на сервере!\n")
+                            } else {
+                                print("some strange status handled!\n\(status)")
+                            }
+                        } else {
+                            if let e = error{
+                                print(e.localizedDescription)
+                                // handle more errors here TODO!
+                                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                            }
+                        }
+                    })
+                } else {
+                    // inv case
+                    APIClient.invExit(id: self.currentProfile.invId, completion: { (responseObject, error) in
+                        if error == nil {
+                            let status = responseObject?.value(forKey: "resp") as! String
+                            if status == "true"{
+                                print("\nУспешный выход из аккаунта на сервере!\n")
+                            } else if status == "false"{
+                                print("\nОшибка! Неуспешный выход из аккаунта на сервере!\n")
+                            } else {
+                                print("some strange status handled!\n\(status)")
+                            }
+                        } else {
+                            if let e = error{
+                                print(e.localizedDescription)
+                                // handle more errors here TODO!
+                                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                            }
+                        }
+                    })
+                }
                 
                 // also delete data from User class and UserDefaults/Core Data!
                 self.profileManager.deleteProfile()
@@ -103,7 +155,7 @@ extension GeoViewController{
                 DispatchQueue.main.asyncAfter(deadline: when){
                     goodExitAlert.dismiss(animated: true, completion: {
                     // removing GeoViewController and show previous LoginView
-                    print("Выход из аккаунта удачно произошел.\n")
+                    print("Выход из аккаунта в UI удачно произошел.\n")
                     self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -178,15 +230,15 @@ extension GeoViewController: ProfileManagerDelegateProtocol{
         // do nothing here
     }
     
-    // watch this
     func didFinishDeleting(success: Bool) {
         if success{
-            print("\nYAAAAAAY! App User deleted!\n")
+            print("\nЛокальный пользователь успешно удален!\n")
         }
     }
     
     func didFinishReading(profile: Profile) {
-        // do nothing here
+        self.currentProfile = profile
+        print("\nЗагрузка профиля в код! Готово!")
     }
     
 }

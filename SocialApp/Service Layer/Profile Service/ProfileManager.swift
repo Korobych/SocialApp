@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 protocol ProfileManagerProtocol {
+    var lastSavedProfile: Profile? {get set}
     var delegate: ProfileManagerDelegateProtocol? {get set}
     func getProfileInfo()
     func saveInvProfile(id: String?, name: String?, phone: String?, password: String?, photo: UIImage?)

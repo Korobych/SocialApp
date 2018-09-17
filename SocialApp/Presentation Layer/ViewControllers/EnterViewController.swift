@@ -81,6 +81,7 @@ extension EnterViewController: ProfileManagerDelegateProtocol{
         // do nothing here
     }
     func didFinishReading(profile: Profile) {
+        print("Профиль из локальной памяти удачно загружен!")
         if profile.invId == "" {
             wantToHelpButtonTapped()
         } else {

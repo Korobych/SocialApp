@@ -191,7 +191,7 @@ class DataInputTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 extension DataInputTableViewCell {
     
-    // login response handlers
+    // Login response handler
     func loginResponseHandler(responseObject : NSDictionary?, error: Error?) -> Bool{
         if error == nil {
             let status = responseObject?.value(forKey: "resp") as! String
@@ -244,7 +244,7 @@ extension DataInputTableViewCell: ProfileManagerDelegateProtocol{
 
     func didFinishSave(success: Bool) {
         if success{
-            print("\nYAAAAAAY! IT'S SAVED!\n")
+            print("\nПользователь удачно сохранен в локальную память!\n")
         }
     }
 
