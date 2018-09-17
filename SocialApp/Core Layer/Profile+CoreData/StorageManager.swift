@@ -55,7 +55,7 @@ class StorageManager: StorageDataManagerProtocol  {
         dataStack.saveContext?.perform {
             guard let appUser = AppUser.findAppUser(in: self.dataStack.saveContext!)
                 else {
-                    print("Completion error")
+                    print("Completion error. Clean start. There isn't profile stored!")
                     return
             }
             guard let user = appUser.currentUser else {
@@ -70,9 +70,9 @@ class StorageManager: StorageDataManagerProtocol  {
             }
             
             if user.inv_id == ""{
-                profile = Profile(volName: user.name ?? "username", phone: user.phone ?? "+79990000000", password: user.password ?? "", photo: customPhoto)
+                profile = Profile(volName: user.name ?? "username", phone: user.phone ?? "yoPhoneNumber", password: user.password ?? "", photo: customPhoto)
             } else {
-                profile = Profile(invId: user.inv_id ?? "userID", name: user.name ?? "username", phone: user.phone ?? "+79990000000", password: user.password ?? "", photo: customPhoto)
+                profile = Profile(invId: user.inv_id ?? "userID", name: user.name ?? "username", phone: user.phone ?? "yoPhoneNumber", password: user.password ?? "", photo: customPhoto)
             }
       
             DispatchQueue.main.async {

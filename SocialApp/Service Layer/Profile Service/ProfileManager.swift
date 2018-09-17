@@ -19,10 +19,9 @@ protocol ProfileManagerProtocol {
 
 protocol ProfileManagerDelegateProtocol: class {
     
-//    do we need it or not?
-//    func didGet(profileViewModel: ProfileViewModel)
     func didFinishSave(success: Bool)
     func didFinishDeleting(success: Bool)
+    func didFinishReading(profile: Profile)
 }
 
 class ProfileManager: ProfileManagerProtocol {
@@ -33,8 +32,8 @@ class ProfileManager: ProfileManagerProtocol {
     
     func getProfileInfo() {
         profileService.getProfile { [weak self] profile in
-//            let profileViewModel = ProfileViewModel(profile: profile)
-//            self?.delegate?.didGet(profileViewModel: profileViewModel)
+
+            self?.delegate?.didFinishReading(profile: profile)
             self?.lastSavedProfile = profile
         }
     }

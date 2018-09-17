@@ -185,5 +185,8 @@ extension GeoViewController: ProfileManagerDelegateProtocol{
         }
     }
     
+    func didFinishReading(profile: Profile) {
+        // do nothing here
+    }
     
 }

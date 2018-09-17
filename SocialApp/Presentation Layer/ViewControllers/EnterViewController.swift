@@ -10,6 +10,8 @@ import UIKit
 
 class EnterViewController: UIViewController {
     
+    private var profileManager: ProfileManagerProtocol = ProfileManager()
+    
     @IBOutlet weak var wantToHelpButton: UIButton!
     @IBOutlet weak var needHelpButton: UIButton!
     
@@ -20,6 +22,8 @@ class EnterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileManager.delegate = self
+        profileManager.getProfileInfo()
         setCustomBackgroundImage()
         setUpButtons(upper: wantToHelpButton, lower: needHelpButton)
     }
@@ -67,6 +71,25 @@ extension EnterViewController{
         
     }
 }
+
+extension EnterViewController: ProfileManagerDelegateProtocol{
+    func didFinishSave(success: Bool) {
+        // do nothing here
+    }
+    
+    func didFinishDeleting(success: Bool) {
+        // do nothing here
+    }
+    func didFinishReading(profile: Profile) {
+        if profile.invId == "" {
+            wantToHelpButtonTapped()
+        } else {
+            needHelpButtonTapped()
+        }
+    }
+    
+}
+
 //Background on any ViewController
 extension UIViewController{
     func setCustomBackgroundImage(){

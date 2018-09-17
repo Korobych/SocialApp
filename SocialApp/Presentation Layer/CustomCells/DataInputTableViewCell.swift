@@ -241,16 +241,19 @@ extension DataInputTableViewCell {
 }
 
 extension DataInputTableViewCell: ProfileManagerDelegateProtocol{
-    
+
     func didFinishSave(success: Bool) {
         if success{
             print("\nYAAAAAAY! IT'S SAVED!\n")
         }
     }
-    
-    // do nothing here
+
     func didFinishDeleting(success: Bool) {
-        
+        // do nothing here
+    }
+    
+    func didFinishReading(profile: Profile) {
+        // do nothing here
     }
     
 }
