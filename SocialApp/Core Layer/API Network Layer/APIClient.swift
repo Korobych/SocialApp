@@ -82,6 +82,87 @@ class APIClient {
         }
     }
     
+    static func volGeoList(completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volGeoList())
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
     
+    static func invlGeoList(completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invGeoList())
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func volHelp(phone: String, lattitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volHelp(phone: phone, lattitude: lattitude, longitude: longitude))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func invHelp(id: String, lattitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invHelp(id: id, lattitude: lattitude, longitude: longitude))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func volGetInv(phone: String, conid: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volGetInv(phone: phone, conid: conid))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func invStopHelp(conid: String, phone: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invStopHelp(conid: conid, phone: phone))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func updateVolGeo(phone: String, lattitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.updateVolGeo(phone: phone, lattitude: lattitude, longitude: longitude))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
 }
-

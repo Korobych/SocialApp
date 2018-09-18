@@ -44,6 +44,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             // locationManager.startUpdatingLocation()
             activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
         } else {
+            // NOGEO FIX !!! NOW WE HAVE BIG TROUBLE WITH IT
             SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
             print("Switch ON Geo services, can't get geolocation.")
         }
@@ -97,7 +98,6 @@ extension GeoViewController{
     }
     
     @objc func logOut() {
-//        self.profileManager.getProfileInfo()
         // Logic with exit from account
         DispatchQueue.main.async {
             let exitAlert = UIAlertController(title: "Вы собираетесь выйти из текущего аккаунта!", message: "Уверены, что точно хотите этого?", preferredStyle: UIAlertControllerStyle.alert)

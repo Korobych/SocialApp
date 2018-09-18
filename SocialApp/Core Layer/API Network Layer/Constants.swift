@@ -18,7 +18,9 @@ struct APIRefference {
         static let name = "name"
         static let phone = "phone"
         static let password = "password"
-        static let geo = "geo"
+        static let lattitude = "lattitude"
+        static let longitude = "longitude"
+        static let conid = "conid"
     }
 }
 

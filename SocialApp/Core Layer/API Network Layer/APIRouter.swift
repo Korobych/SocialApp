@@ -17,17 +17,44 @@ enum APIRouter: APIConfiguration {
     case invRegistrate(id: String, name: String, phone: String, password: String)
     case volExit(phone: String)
     case invExit(id: String)
+    case volGeoList()
+    case invGeoList()
+    case volHelp(phone: String, lattitude: String, longitude: String)
+    case invHelp(id: String, lattitude: String, longitude: String)
+    case volGetInv(phone: String, conid: String)
+    case invStopHelp(conid: String, phone: String)
+    case updateVolGeo(phone: String, lattitude: String, longitude: String)
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
-        // should be with switch (add if needed)
-        //        switch self {
-        //        case .login:
-        //            return .post
-        //        case .profile:
-        //            return .get
-        //        }
-        return .post
+        switch self {
+        case .volLogin:
+            return .post
+        case .invLogin:
+            return .post
+        case .volRegistrate:
+            return .post
+        case .invRegistrate:
+            return .post
+        case .volExit:
+            return .post
+        case .invExit:
+            return .post
+        case .volGeoList:
+            return .get
+        case .invGeoList:
+            return .get
+        case .volHelp:
+            return .post
+        case .invHelp:
+            return .post
+        case .volGetInv:
+            return .post
+        case .invStopHelp:
+            return .post
+        case .updateVolGeo:
+            return .post
+        }
     }
     
     // MARK: - Path
@@ -45,6 +72,20 @@ enum APIRouter: APIConfiguration {
             return "/vol/ex"
         case .invExit:
             return "/inv/ex"
+        case .volGeoList:
+            return "/vol/geolist"
+        case .invGeoList:
+            return "/inv/geolist"
+        case .volHelp:
+            return "/vol/ch"
+        case .invHelp:
+            return "/inv/nh"
+        case .volGetInv:
+            return "/vol/help"
+        case .invStopHelp:
+            return "/inv/stophelp"
+        case .updateVolGeo:
+            return "/vol/gp"
         }
     }
     
@@ -63,6 +104,20 @@ enum APIRouter: APIConfiguration {
             return [APIRefference.APIParameterKey.phone : phone]
         case .invExit(let id):
             return [APIRefference.APIParameterKey.id : id]
+        case .volGeoList:
+            return nil
+        case .invGeoList:
+            return nil
+        case .volHelp(let phone, let lattitude, let longitude):
+            return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.lattitude : lattitude, APIRefference.APIParameterKey.longitude : longitude]
+        case .invHelp(let id, let lattitude, let longitude):
+            return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.lattitude : lattitude, APIRefference.APIParameterKey.longitude : longitude]
+        case .volGetInv(let phone, let conid):
+            return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.conid : conid]
+        case .invStopHelp(let conid, let phone):
+            return [APIRefference.APIParameterKey.conid : conid, APIRefference.APIParameterKey.phone : phone]
+        case .updateVolGeo(let phone, let lattitude, let longitude):
+            return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.lattitude : lattitude, APIRefference.APIParameterKey.longitude : longitude ]
         }
     }
     
