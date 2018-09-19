@@ -196,8 +196,10 @@ extension DataInputTableViewCell {
         if error == nil {
             let status = responseObject?.value(forKey: "resp") as! String
             if status == "signIn"{
-                let name = responseObject?.value(forKey: "name") as! String
-                SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
+//                let name = responseObject?.value(forKey: "name") as! String
+                // ---------------------------------------------
+                // Welcome alert with the logic of name handling
+//                SCLAlertView().showSuccess("Здравствуйте, \(name)!", subTitle: "Приятного пользования приложением.", closeButtonTitle: "Ура")
                 return true
                 
             } else if status == "not in db"{

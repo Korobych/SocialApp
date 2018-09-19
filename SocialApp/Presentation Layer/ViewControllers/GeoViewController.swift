@@ -20,6 +20,10 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // ↓ //
     var currentProfile: Profile!
     var activityIndicatorView: UIView!
+    // Location update logic
+    var currentLocation: [Double] = []
+    var didGetFirstLocation: Bool = false
+    
     @IBOutlet weak var mapView: MKMapView!
 
     @IBOutlet weak var tabBar: UITabBar!
@@ -33,27 +37,54 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         profileManager.delegate = self
         mapView.delegate = self
         mapView.mapType = .standard
-        mapView.isZoomEnabled = true
-        mapView.isScrollEnabled = true
+        NotificationCenter.default.addObserver(self, selector:#selector(locationManagerCustomSetup), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-            // call for the location data
-            locationManager.requestLocation()
-            // locationManager.startUpdatingLocation()
-            activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
-        } else {
-            // NOGEO FIX !!! NOW WE HAVE BIG TROUBLE WITH IT
-            SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
-            print("Switch ON Geo services, can't get geolocation.")
-        }
+        self.locationManagerCustomSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // case of getting local saved profile when the view is shown
         self.profileManager.getProfileInfo()
+    }
+    
+    @objc func locationManagerCustomSetup(){
+        
+        activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
+        
+        if CLLocationManager.locationServicesEnabled(){
+            didGetFirstLocation = false
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            // accuracy non important setting
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            mapView.isZoomEnabled = true
+            mapView.isScrollEnabled = true
+            mapView.showsScale = true
+            mapView.showsCompass = true
+            mapView.alpha = 1.0
+            mapView.showsUserLocation = false
+            
+            locationManager.requestLocation()
+            
+        } else {
+            didGetFirstLocation = false
+            self.activityIndicatorView.removeFromSuperview()
+            SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
+            mapView.alpha = 0.4
+            mapView.isZoomEnabled = false
+            mapView.isScrollEnabled = false
+            mapView.showsUserLocation = false
+            print("\nГеолокация у устройства выключена.\n")
+        }
     }
     
     // **************************
@@ -63,14 +94,22 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lat = locations.last?.coordinate.latitude, let long = locations.last?.coordinate.longitude {
             print("Координаты: \(lat),\(long)\n")
+            // saving current
+            self.currentLocation = [lat, long]
             
-            let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-            let span = MKCoordinateSpanMake(0.02, 0.02)
-            let region = MKCoordinateRegion(center: locValue, span: span)
-            // hide activity indicator here
-            self.activityIndicatorView.removeFromSuperview()
-        
-            mapView.setRegion(region, animated: true)
+            if !self.didGetFirstLocation {
+                mapView.showsUserLocation = true
+                let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
+                let span = MKCoordinateSpanMake(0.02, 0.02)
+                let region = MKCoordinateRegion(center: locValue, span: span)
+                // hide activity indicator here
+                self.activityIndicatorView.removeFromSuperview()
+                mapView.userTrackingMode = .follow
+                mapView.setRegion(region, animated: true)
+                locationManager.startUpdatingLocation()
+                self.didGetFirstLocation = true
+            }
+
         } else {
             print("No coordinates")
         }
@@ -80,7 +119,6 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Ошибка геопозиции: \(error.localizedDescription)")
     }
-    
 }
 
 extension GeoViewController{
@@ -98,6 +136,7 @@ extension GeoViewController{
     }
     
     @objc func logOut() {
+        
         // Logic with exit from account
         DispatchQueue.main.async {
             let exitAlert = UIAlertController(title: "Вы собираетесь выйти из текущего аккаунта!", message: "Уверены, что точно хотите этого?", preferredStyle: UIAlertControllerStyle.alert)
@@ -147,7 +186,7 @@ extension GeoViewController{
                         }
                     })
                 }
-                
+                self.locationManager.stopUpdatingLocation()
                 // also delete data from User class and UserDefaults/Core Data!
                 self.profileManager.deleteProfile()
                 
@@ -193,6 +232,48 @@ extension GeoViewController{
     }
     
     @objc func midButtonAction(){
+        // testing energy consumption
+        mapView.showsUserLocation = false
+        
+        if self.currentProfile.invId == ""{
+            // vol case
+            APIClient.volHelp(phone: self.currentProfile.phone, lattitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
+                if error == nil {
+                    let status = responseObject?.value(forKey: "resp") as! String
+                    if status == "true"{
+                        print("\nТеперь вы готовы помочь! Статус 1.\n")
+                    } else if status == "false"{
+                        print("\nОшибка! Неуспешная попытка volHelp!\n")
+                    } else {
+                        print("some strange status handled!\n\(status)")
+                    }
+                } else {
+                    if let e = error{
+                        print(e.localizedDescription)
+                        // handle more errors here TODO!
+                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                    }
+                }
+            }
+        } else {
+            // inv case
+            APIClient.invHelp(id: self.currentProfile.invId, lattitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
+                if error == nil {
+                    let status = responseObject?.value(forKey: "resp") as! String
+                    if status == "-1"{
+                        print("\nОшибка! Неуспешная попытка invHelp!\n")
+                    } else {
+                        print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
+                    }
+                } else {
+                    if let e = error{
+                        print(e.localizedDescription)
+                        // handle more errors here TODO!
+                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                    }
+                }
+            }
+        }
         SCLAlertView().showSuccess("Поздравляем!", subTitle: "Вы нажали на кнопку помощи, теперь Вы в деле!", closeButtonTitle: "ОК")
     }
     
@@ -201,24 +282,24 @@ extension GeoViewController{
         container.frame = uiView.frame
         container.center = uiView.center
         container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-        
+
         let loadingView: UIView = UIView()
         loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         loadingView.center = uiView.center
         loadingView.backgroundColor = UIColor.init(red: 0.266, green: 0.266, blue: 0.266, alpha: 0.7)
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
-        
+
         let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         activityIndicator.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
         activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
-        
+
         loadingView.addSubview(activityIndicator)
         container.addSubview(loadingView)
         uiView.addSubview(container)
-        
+
         activityIndicator.startAnimating()
         return container
     }
