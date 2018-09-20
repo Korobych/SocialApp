@@ -23,6 +23,10 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // Location update logic
     var currentLocation: [Double] = []
     var didGetFirstLocation: Bool = false
+    // In code volUserModel keeping.
+    // | //
+    // ↓ //
+    var volData: [VolUserModel] = []
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -118,6 +122,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Ошибка геопозиции: \(error.localizedDescription)")
+        self.activityIndicatorView.removeFromSuperview()
     }
 }
 
@@ -233,11 +238,12 @@ extension GeoViewController{
     
     @objc func midButtonAction(){
         // testing energy consumption
-        mapView.showsUserLocation = false
+//        mapView.showsUserLocation = false
+//        locationManager.stopUpdatingLocation()
         
         if self.currentProfile.invId == ""{
             // vol case
-            APIClient.volHelp(phone: self.currentProfile.phone, lattitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
+            APIClient.volHelp(phone: self.currentProfile.phone, latitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
                 if error == nil {
                     let status = responseObject?.value(forKey: "resp") as! String
                     if status == "true"{
@@ -257,13 +263,15 @@ extension GeoViewController{
             }
         } else {
             // inv case
-            APIClient.invHelp(id: self.currentProfile.invId, lattitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
+            APIClient.invHelp(id: self.currentProfile.invId, latitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
                 if error == nil {
                     let status = responseObject?.value(forKey: "resp") as! String
                     if status == "-1"{
                         print("\nОшибка! Неуспешная попытка invHelp!\n")
                     } else {
                         print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
+                        // call for function to show pins of users
+                        self.loadVolPins()
                     }
                 } else {
                     if let e = error{
@@ -274,7 +282,7 @@ extension GeoViewController{
                 }
             }
         }
-        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Вы нажали на кнопку помощи, теперь Вы в деле!", closeButtonTitle: "ОК")
+        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Скоро случится магия.", closeButtonTitle: "ОК")
     }
     
     func showActivityIndicatorView(uiView: UIView) -> UIView {
@@ -304,6 +312,50 @@ extension GeoViewController{
         return container
     }
     
+    func loadVolPins(){
+        APIClient.volGeoList { (responseObject, error) in
+            if error == nil {
+                
+                let responseArray = responseObject?.value(forKey: "resp") as! NSArray
+                for index in (0...responseArray.count - 1){
+                    let item = responseArray[index] as! NSArray
+                    
+                    if item[0] as! String == "" || item[1] as! String == "" || item[3] as! String == "" || item[4] as! String == "" {
+                        continue
+                    }
+                    // Bad things going on here REWRITE
+                    guard let lat = item[0] as? String else {return}
+                    guard let long = item[1] as? String else {return}
+                    guard let status = item[2] as? String else {return}
+                    
+                    let latDouble = Double(lat)!
+                    let longDouble = Double(long)!
+                    let statusInt = Int(status)!
+                    
+                    
+                    let volUser = VolUserModel(name: item[3] as! String, phone: item[4] as! String, latitude: latDouble, longitude: longDouble, status: statusInt)
+                    self.volData.append(volUser)
+                }
+                
+                print(self.volData)
+                // drawing them
+                for user in self.volData{
+                    let pin = CustomPin(title: user.name, subtitle: user.phone, coordinate: CLLocationCoordinate2DMake(user.latitude, user.longitude))
+                    self.mapView.addAnnotation(pin)
+                    print("Есть волонтер на карте!")
+                }
+                
+                
+                
+            } else {
+                if let e = error{
+                    print(e.localizedDescription)
+                    // handle more errors here TODO!
+                    SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                }
+            }
+        }
+    }
 }
 
 extension GeoViewController: ProfileManagerDelegateProtocol{

@@ -24,15 +24,19 @@ struct InvUserModel: Codable {
 }
 // *** VOLUNTEER ***
 
-struct VolUserModel: Codable {
+struct VolUserModel {
     var name: String
     var phone: String
-    var password: String
+    var latitude: Double
+    var longitude: Double
+    var status: Int
     
-    init(name: String, phone: String, password: String ) {
+    init(name: String, phone: String, latitude: Double, longitude: Double, status: Int) {
         self.name = name
         self.phone = phone
-        self.password = password
+        self.latitude = latitude
+        self.longitude = longitude
+        self.status = status
     }
 }
 

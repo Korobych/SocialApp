@@ -106,8 +106,8 @@ class APIClient {
         }
     }
     
-    static func volHelp(phone: String, lattitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.volHelp(phone: phone, lattitude: lattitude, longitude: longitude))
+    static func volHelp(phone: String, latitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.volHelp(phone: phone, latitude: latitude, longitude: longitude))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -118,8 +118,8 @@ class APIClient {
         }
     }
     
-    static func invHelp(id: String, lattitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.invHelp(id: id, lattitude: lattitude, longitude: longitude))
+    static func invHelp(id: String, latitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invHelp(id: id, latitude: latitude, longitude: longitude))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -154,8 +154,8 @@ class APIClient {
         }
     }
     
-    static func updateVolGeo(phone: String, lattitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.updateVolGeo(phone: phone, lattitude: lattitude, longitude: longitude))
+    static func updateVolGeo(phone: String, latitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.updateVolGeo(phone: phone, latitude: latitude, longitude: longitude))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
