@@ -32,18 +32,19 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var mapView: MKMapView!
 
     @IBOutlet weak var tabBar: UITabBar!
+    @IBOutlet weak var reloadButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpNavigationBar()
         setupMidButton()
+        setupReloadButton()
         
         profileManager.delegate = self
         mapView.delegate = self
         mapView.mapType = .standard
         NotificationCenter.default.addObserver(self, selector:#selector(locationManagerCustomSetup), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
-        
     }
     
     deinit {
@@ -52,10 +53,8 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("\nGeoView \(#function).")
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.locationManagerCustomSetup()
     }
     
@@ -65,6 +64,16 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.profileManager.getProfileInfo()
     }
     
+    @IBAction func reloadButtonTapped(_ sender: UIButton) {
+        self.volDataUpdateTimer.fire()
+        // one more time set the region
+        let locValue:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.currentLocation[0], longitude: self.currentLocation[1])
+        // set comfort values (the previous was 0.02, 0.02).
+        let span = MKCoordinateSpanMake(0.04, 0.04)
+        let region = MKCoordinateRegion(center: locValue, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+
     @objc func locationManagerCustomSetup(){
         
         activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
@@ -200,7 +209,7 @@ extension GeoViewController{
                 }
                 self.locationManager.stopUpdatingLocation()
                 // also delete data from User class and UserDefaults/Core Data!
-                self.profileManager.deleteProfile()
+//                self.profileManager.deleteProfile()
                 
                 let when = DispatchTime.now() + 2.0
                 DispatchQueue.main.asyncAfter(deadline: when){
@@ -244,11 +253,19 @@ extension GeoViewController{
         self.view.layoutIfNeeded()
     }
     
+    func setupReloadButton(){
+        self.reloadButton.clipsToBounds = true
+        self.reloadButton.layer.cornerRadius = self.reloadButton.frame.height/2
+        self.reloadButton.setImage(#imageLiteral(resourceName: "reload_pic"), for: .normal)
+        self.reloadButton.contentMode = .scaleAspectFit
+        self.reloadButton.tintColor = UIColor.gray
+        self.reloadButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        self.reloadButton.imageEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+        self.reloadButton.alpha = 0.0
+        self.reloadButton.isEnabled = false
+    }
+    
     @objc func midButtonAction(){
-        // testing energy consumption
-//        mapView.showsUserLocation = false
-//        locationManager.stopUpdatingLocation()
-        
         if self.currentProfile.invId == ""{
             // vol case
             APIClient.volHelp(phone: self.currentProfile.phone, latitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description) { (responseObject, error) in
@@ -280,15 +297,23 @@ extension GeoViewController{
                         print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
                         // call for function to show pins of users
                         self.loadVolPins()
-                        // timer to update set up!
+                        // timer to update set up!  --- selected time is 150 secs
                         DispatchQueue.main.async {
-                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 150, repeats: true) { timer in
                                 // clear map from previous annotations
                                 // TODO: make smarter delete fucntion. If the geo diff is less than const, don't delete it.
                                 self.mapView.removeAnnotations(self.mapView.annotations)
                                 self.loadVolPins()
+                                print("\nТаймер на обновление volGeolist сработал!\n")
                             }
+                            // show reloadButton with animation!
+                            self.reloadButton.isEnabled = true
+                            UIView.animate(withDuration: 1.5, animations: {
+                                self.reloadButton.alpha = 1.0
+                            })
+                            print("\nКнопка обновления отрисована!\n")
                         }
+                        
                     }
                 } else {
                     if let e = error{
@@ -299,7 +324,8 @@ extension GeoViewController{
                 }
             }
         }
-        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Скоро случится магия.", closeButtonTitle: "ОК")
+        // REMOVE -- done only for testing!
+//        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Скоро случится магия.", closeButtonTitle: "ОК")
     }
     
     func showActivityIndicatorView(uiView: UIView) -> UIView {

@@ -80,6 +80,18 @@
                                     <tabBarItem systemItem="more" id="PUl-ws-moX"/>
                                 </items>
                             </tabBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NTz-kA-pf0">
+                                <rect key="frame" x="319" y="512" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="bZr-eL-dHI"/>
+                                </constraints>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="reloadButtonTapped:" destination="jwf-3D-ZJ8" eventType="touchUpInside" id="nhI-Lx-u9N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -89,12 +101,16 @@
                             <constraint firstItem="LzL-TU-Ex6" firstAttribute="bottom" secondItem="vk7-tW-MeM" secondAttribute="bottom" id="FB6-MY-bLm"/>
                             <constraint firstItem="0En-iK-ccM" firstAttribute="top" secondItem="vk7-tW-MeM" secondAttribute="top" id="Zsx-Q0-ZFC"/>
                             <constraint firstItem="0En-iK-ccM" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" id="p57-f2-IFq"/>
+                            <constraint firstItem="NTz-kA-pf0" firstAttribute="trailing" secondItem="Zc3-dU-RPP" secondAttribute="trailingMargin" id="pLF-tk-a9t"/>
+                            <constraint firstItem="NTz-kA-pf0" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" constant="319" id="rPl-qE-aRy"/>
                             <constraint firstItem="LzL-TU-Ex6" firstAttribute="leading" secondItem="vk7-tW-MeM" secondAttribute="leading" id="vod-W0-IRV"/>
+                            <constraint firstItem="LzL-TU-Ex6" firstAttribute="top" secondItem="NTz-kA-pf0" secondAttribute="bottom" constant="100" id="z8i-fq-pRV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vk7-tW-MeM"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="0En-iK-ccM" id="5z6-Hu-Yrg"/>
+                        <outlet property="reloadButton" destination="NTz-kA-pf0" id="6vO-Ee-q2e"/>
                         <outlet property="tabBar" destination="LzL-TU-Ex6" id="7hC-fU-SUX"/>
                     </connections>
                 </viewController>
