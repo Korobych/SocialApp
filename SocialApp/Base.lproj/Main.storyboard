@@ -76,8 +76,8 @@
                                 <rect key="frame" x="0.0" y="687" width="414" height="49"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem title="Item" id="kAY-vz-P1I"/>
-                                    <tabBarItem title="Item" id="PUl-ws-moX"/>
+                                    <tabBarItem title="Профиль" image="tabBarProfile_pic" id="kAY-vz-P1I"/>
+                                    <tabBarItem systemItem="more" id="PUl-ws-moX"/>
                                 </items>
                             </tabBar>
                         </subviews>
@@ -136,4 +136,7 @@
             <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabBarProfile_pic" width="32" height="32"/>
+    </resources>
 </document>

@@ -27,6 +27,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // | //
     // ↓ //
     var volData: [VolUserModel] = []
+    var volDataUpdateTimer: Timer!
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -42,11 +43,15 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         mapView.delegate = self
         mapView.mapType = .standard
         NotificationCenter.default.addObserver(self, selector:#selector(locationManagerCustomSetup), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        self.locationManager.delegate = nil
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        print("\nGeoView \(#function).")
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,13 +103,15 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lat = locations.last?.coordinate.latitude, let long = locations.last?.coordinate.longitude {
             print("Координаты: \(lat),\(long)\n")
-            // saving current
+            // saving current geo(lat, long) to code
             self.currentLocation = [lat, long]
             
             if !self.didGetFirstLocation {
                 mapView.showsUserLocation = true
                 let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
-                let span = MKCoordinateSpanMake(0.02, 0.02)
+                
+                // set comfort values (the previous was 0.02, 0.02).
+                let span = MKCoordinateSpanMake(0.04, 0.04)
                 let region = MKCoordinateRegion(center: locValue, span: span)
                 // hide activity indicator here
                 self.activityIndicatorView.removeFromSuperview()
@@ -200,6 +207,7 @@ extension GeoViewController{
                     goodExitAlert.dismiss(animated: true, completion: {
                     // removing GeoViewController and show previous LoginView
                     print("Выход из аккаунта в UI удачно произошел.\n")
+                    self.volDataUpdateTimer.invalidate()
                     self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -272,6 +280,15 @@ extension GeoViewController{
                         print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
                         // call for function to show pins of users
                         self.loadVolPins()
+                        // timer to update set up!
+                        DispatchQueue.main.async {
+                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
+                                // clear map from previous annotations
+                                // TODO: make smarter delete fucntion. If the geo diff is less than const, don't delete it.
+                                self.mapView.removeAnnotations(self.mapView.annotations)
+                                self.loadVolPins()
+                            }
+                        }
                     }
                 } else {
                     if let e = error{
@@ -312,7 +329,9 @@ extension GeoViewController{
         return container
     }
     
-    func loadVolPins(){
+    @objc func loadVolPins(){
+        // clear volUserModel array before getting new values
+        self.volData = []
         APIClient.volGeoList { (responseObject, error) in
             if error == nil {
                 
@@ -324,6 +343,7 @@ extension GeoViewController{
                         continue
                     }
                     // Bad things going on here REWRITE
+                    // -------------------------------
                     guard let lat = item[0] as? String else {return}
                     guard let long = item[1] as? String else {return}
                     guard let status = item[2] as? String else {return}
@@ -331,30 +351,37 @@ extension GeoViewController{
                     let latDouble = Double(lat)!
                     let longDouble = Double(long)!
                     let statusInt = Int(status)!
-                    
+                    // -------------------------------
                     
                     let volUser = VolUserModel(name: item[3] as! String, phone: item[4] as! String, latitude: latDouble, longitude: longDouble, status: statusInt)
                     self.volData.append(volUser)
+                    self.drawVolPins()
                 }
                 
                 print(self.volData)
-                // drawing them
-                for user in self.volData{
-                    let pin = CustomPin(title: user.name, subtitle: user.phone, coordinate: CLLocationCoordinate2DMake(user.latitude, user.longitude))
-                    self.mapView.addAnnotation(pin)
-                    print("Есть волонтер на карте!")
-                }
-                
-                
                 
             } else {
                 if let e = error{
-                    print(e.localizedDescription)
                     // handle more errors here TODO!
-                    SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                    print("Не удалось получить данные волонтеров. Ошибка: \(e.localizedDescription).")
+                    
                 }
             }
         }
+    }
+    
+    func drawVolPins(){
+        // drawing pins of preloaded vol/geolist
+        // -----
+        // TODO: select only state == 1 volonteers -> green color
+        // TODO: 
+        // -----
+        for user in self.volData{
+            let pin = CustomPin(title: user.name, subtitle: user.phone, coordinate: CLLocationCoordinate2DMake(user.latitude, user.longitude))
+            self.mapView.addAnnotation(pin)
+        }
+        print("Волонтеры расположены на карте!")
+        
     }
 }
 

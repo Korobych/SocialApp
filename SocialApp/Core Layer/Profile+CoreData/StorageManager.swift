@@ -88,7 +88,7 @@ class StorageManager: StorageDataManagerProtocol  {
                 completion(false)
                 return
         }
-        guard let user = appUser.currentUser else {
+        guard let _ = appUser.currentUser else {
             print("can't find current app User")
             completion(false)
             return

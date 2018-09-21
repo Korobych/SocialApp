@@ -107,7 +107,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyboard.instantiateViewController(withIdentifier: "GeoViewController") as! GeoViewController
         self.navigationController?.pushViewController(nextViewController, animated: true)
-//        self.present(nextViewController, animated: true, completion: nil)
     }
 
 }
