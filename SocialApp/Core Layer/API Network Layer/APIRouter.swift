@@ -24,6 +24,7 @@ enum APIRouter: APIConfiguration {
     case volGetInv(phone: String, conid: String)
     case invStopHelp(conid: String, phone: String)
     case updateVolGeo(phone: String, latitude: String, longitude: String)
+    case updateInvGeo(id: String, latitude: String, longitude: String)
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
@@ -53,6 +54,8 @@ enum APIRouter: APIConfiguration {
         case .invStopHelp:
             return .post
         case .updateVolGeo:
+            return .post
+        case .updateInvGeo:
             return .post
         }
     }
@@ -86,6 +89,8 @@ enum APIRouter: APIConfiguration {
             return "/inv/stophelp"
         case .updateVolGeo:
             return "/vol/gp"
+        case .updateInvGeo:
+            return "/inv/gp"
         }
     }
     
@@ -118,6 +123,8 @@ enum APIRouter: APIConfiguration {
             return [APIRefference.APIParameterKey.conid : conid, APIRefference.APIParameterKey.phone : phone]
         case .updateVolGeo(let phone, let latitude, let longitude):
             return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.latitude : latitude, APIRefference.APIParameterKey.longitude : longitude ]
+        case .updateInvGeo(let id, let latitude, let longitude):
+            return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.latitude : latitude, APIRefference.APIParameterKey.longitude : longitude]
         }
     }
     

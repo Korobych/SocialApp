@@ -27,7 +27,11 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // | //
     // ↓ //
     var volData: [VolUserModel] = []
-    var volDataUpdateTimer: Timer!
+    // Timers
+    // | //
+    // ↓ //
+    var volDataUpdateTimer: Timer?
+    var localUserGeoUpdateTimer: Timer?
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -65,7 +69,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     @IBAction func reloadButtonTapped(_ sender: UIButton) {
-        self.volDataUpdateTimer.fire()
+        self.volDataUpdateTimer?.fire()
         // one more time set the region
         let locValue:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: self.currentLocation[0], longitude: self.currentLocation[1])
         // set comfort values (the previous was 0.02, 0.02).
@@ -76,7 +80,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     @objc func locationManagerCustomSetup(){
         
-        activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
+//        activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
         
         if CLLocationManager.locationServicesEnabled(){
             didGetFirstLocation = false
@@ -89,19 +93,23 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapView.showsScale = true
             mapView.showsCompass = true
             mapView.alpha = 1.0
-            mapView.showsUserLocation = false
+            mapView.showsUserLocation = true
             
-            locationManager.requestLocation()
+            locationManager.startUpdatingLocation()
             
         } else {
             didGetFirstLocation = false
-            self.activityIndicatorView.removeFromSuperview()
             SCLAlertView().showError("Невозможно найти геопозицию!", subTitle: "Включите службы геолокации!", closeButtonTitle: "ОК")
             mapView.alpha = 0.4
             mapView.isZoomEnabled = false
             mapView.isScrollEnabled = false
             mapView.showsUserLocation = false
             print("\nГеолокация у устройства выключена.\n")
+            // timer handling
+            // TODO fix CH/ND touch with state = 1
+            if self.localUserGeoUpdateTimer != nil{
+                self.localUserGeoUpdateTimer?.invalidate()
+            }
         }
     }
     
@@ -117,16 +125,11 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             if !self.didGetFirstLocation {
                 mapView.showsUserLocation = true
-                let locValue:CLLocationCoordinate2D = (manager.location?.coordinate)!
-                
                 // set comfort values (the previous was 0.02, 0.02).
                 let span = MKCoordinateSpanMake(0.04, 0.04)
-                let region = MKCoordinateRegion(center: locValue, span: span)
-                // hide activity indicator here
-                self.activityIndicatorView.removeFromSuperview()
+                let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: long), span: span)
                 mapView.userTrackingMode = .follow
                 mapView.setRegion(region, animated: true)
-                locationManager.startUpdatingLocation()
                 self.didGetFirstLocation = true
             }
 
@@ -138,7 +141,6 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Ошибка геопозиции: \(error.localizedDescription)")
-        self.activityIndicatorView.removeFromSuperview()
     }
 }
 
@@ -209,15 +211,22 @@ extension GeoViewController{
                 }
                 self.locationManager.stopUpdatingLocation()
                 // also delete data from User class and UserDefaults/Core Data!
+                // FIXIT ***********
 //                self.profileManager.deleteProfile()
                 
                 let when = DispatchTime.now() + 2.0
                 DispatchQueue.main.asyncAfter(deadline: when){
                     goodExitAlert.dismiss(animated: true, completion: {
-                    // removing GeoViewController and show previous LoginView
-                    print("Выход из аккаунта в UI удачно произошел.\n")
-                    self.volDataUpdateTimer.invalidate()
-                    self.navigationController?.popViewController(animated: true)
+                        // removing GeoViewController and show previous LoginView
+                        print("Выход из аккаунта в UI удачно произошел.\n")
+                        // stop timers
+                        if self.volDataUpdateTimer != nil {
+                            self.volDataUpdateTimer?.invalidate()
+                        }
+                        if self.localUserGeoUpdateTimer != nil{
+                            self.localUserGeoUpdateTimer?.invalidate()
+                        }
+                        self.navigationController?.popViewController(animated: true)
                     })
                 }
                 
@@ -273,6 +282,30 @@ extension GeoViewController{
                     let status = responseObject?.value(forKey: "resp") as! String
                     if status == "true"{
                         print("\nТеперь вы готовы помочь! Статус 1.\n")
+                        let generator = UINotificationFeedbackGenerator()
+                        generator.notificationOccurred(.success)
+                        //timer to update vol geo by 10 seconds
+                        if self.localUserGeoUpdateTimer == nil{
+                            self.localUserGeoUpdateTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
+                                APIClient.updateVolGeo(phone: self.currentProfile.phone, latitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description, completion: { (responseObject, error) in
+                                    if error == nil {
+                                        let status = responseObject?.value(forKey: "resp") as! String
+                                        if status == "false"{
+                                            print("\nОшибка! Неуспешная попытка обновить геопозицию! vol\n")
+                                        } else if status == "true" {
+                                            print("\nГеопозиция в бд обновлена! vol\n")
+                                        }
+                                    } else {
+                                        if let e = error{
+                                            print(e.localizedDescription)
+                                            // handle more errors here TODO!
+                                            SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
                     } else if status == "false"{
                         print("\nОшибка! Неуспешная попытка volHelp!\n")
                     } else {
@@ -297,14 +330,36 @@ extension GeoViewController{
                         print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
                         // call for function to show pins of users
                         self.loadVolPins()
+                        let generator = UINotificationFeedbackGenerator()
+                        generator.notificationOccurred(.success)
+
                         // timer to update set up!  --- selected time is 150 secs
                         DispatchQueue.main.async {
-                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 150, repeats: true) { timer in
+                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 150, repeats: true) { _ in
                                 // clear map from previous annotations
                                 // TODO: make smarter delete fucntion. If the geo diff is less than const, don't delete it.
                                 self.mapView.removeAnnotations(self.mapView.annotations)
                                 self.loadVolPins()
                                 print("\nТаймер на обновление volGeolist сработал!\n")
+                            }
+                            //timer to update inv geo by 10 seconds
+                            self.localUserGeoUpdateTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
+                                APIClient.updateInvGeo(id: self.currentProfile.invId, latitude: self.currentLocation[0].description, longitude: self.currentLocation[1].description, completion: { (responseObject, error) in
+                                    if error == nil {
+                                        let status = responseObject?.value(forKey: "resp") as! String
+                                        if status == "false"{
+                                            print("\nОшибка! Неуспешная попытка обновить геопозицию! inv\n")
+                                        } else if status == "true" {
+                                            print("\nГеопозиция в бд обновлена! inv\n")
+                                        }
+                                    } else {
+                                        if let e = error{
+                                        print(e.localizedDescription)
+                                        // handle more errors here TODO!
+                                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                                        }
+                                    }
+                                })
                             }
                             // show reloadButton with animation!
                             self.reloadButton.isEnabled = true
@@ -328,32 +383,32 @@ extension GeoViewController{
 //        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Скоро случится магия.", closeButtonTitle: "ОК")
     }
     
-    func showActivityIndicatorView(uiView: UIView) -> UIView {
-        let container: UIView = UIView()
-        container.frame = uiView.frame
-        container.center = uiView.center
-        container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-
-        let loadingView: UIView = UIView()
-        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        loadingView.center = uiView.center
-        loadingView.backgroundColor = UIColor.init(red: 0.266, green: 0.266, blue: 0.266, alpha: 0.7)
-        loadingView.clipsToBounds = true
-        loadingView.layer.cornerRadius = 10
-
-        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        activityIndicator.activityIndicatorViewStyle =
-            UIActivityIndicatorViewStyle.whiteLarge
-        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
-
-        loadingView.addSubview(activityIndicator)
-        container.addSubview(loadingView)
-        uiView.addSubview(container)
-
-        activityIndicator.startAnimating()
-        return container
-    }
+//    func showActivityIndicatorView(uiView: UIView) -> UIView {
+//        let container: UIView = UIView()
+//        container.frame = uiView.frame
+//        container.center = uiView.center
+//        container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+//
+//        let loadingView: UIView = UIView()
+//        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+//        loadingView.center = uiView.center
+//        loadingView.backgroundColor = UIColor.init(red: 0.266, green: 0.266, blue: 0.266, alpha: 0.7)
+//        loadingView.clipsToBounds = true
+//        loadingView.layer.cornerRadius = 10
+//
+//        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//        activityIndicator.activityIndicatorViewStyle =
+//            UIActivityIndicatorViewStyle.whiteLarge
+//        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
+//
+//        loadingView.addSubview(activityIndicator)
+//        container.addSubview(loadingView)
+//        uiView.addSubview(container)
+//
+//        activityIndicator.startAnimating()
+//        return container
+//    }
     
     @objc func loadVolPins(){
         // clear volUserModel array before getting new values

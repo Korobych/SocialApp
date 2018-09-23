@@ -165,4 +165,17 @@ class APIClient {
                 }
         }
     }
+    
+    static func updateInvGeo(id: String, latitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.updateInvGeo(id: id, latitude: latitude, longitude: longitude))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+
 }
