@@ -144,8 +144,8 @@ extension LoginViewController{
     }
     
     func setUpNavingationBar() {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationItem.title = titleString
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.title = titleString
     }
     
     func setUpTableView(){
@@ -163,7 +163,7 @@ extension LoginViewController{
         loginTableView.backgroundView = UIView()
         loginTableView.addGestureRecognizer(tap)
         //
-        self.view.addSubview(loginTableView)
+        view.addSubview(loginTableView)
     }
     
     // close keyboard and stop editing TextField

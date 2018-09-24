@@ -13,13 +13,15 @@ struct InvUserModel: Codable {
     var id: String
     var name: String
     var phone: String
-    var password: String
+    var latitude: Double
+    var longitude: Double
     
-    init(id: String, name: String, phone: String, password: String ) {
+    init(id: String, name: String, latitude: Double, longitude: Double, phone: String)  {
         self.id = id
         self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
         self.phone = phone
-        self.password = password
     }
 }
 // *** VOLUNTEER ***

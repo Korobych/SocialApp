@@ -17,7 +17,7 @@ class EnterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func viewDidLoad() {
@@ -97,7 +97,7 @@ extension UIViewController{
         let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
         backgroundImage.image = UIImage(named: "bg_img.jpg")
         backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImage, at: 0)
+        view.insertSubview(backgroundImage, at: 0)
     }
     
     public var topDistance : CGFloat{

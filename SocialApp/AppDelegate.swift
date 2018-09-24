@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         barItemAppearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
         // navBar color map customized
         navBarAppearance.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        navBarAppearance.barTintColor = #colorLiteral(red: 0.2763281312, green: 0.9572073939, blue: 0.639295324, alpha: 0.789625671)
+        navBarAppearance.barTintColor = #colorLiteral(red: 0.2202436289, green: 0.7672206565, blue: 0.5130995929, alpha: 0.789625671)
         navBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         UIApplication.shared.statusBarStyle = .lightContent
     }

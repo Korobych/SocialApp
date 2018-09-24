@@ -23,10 +23,15 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // Location update logic
     var currentLocation: [Double] = []
     var didGetFirstLocation: Bool = false
-    // In code volUserModel keeping.
+    // In code volUserModel keeping from vol/geolist API query.
     // | //
     // ↓ //
     var volData: [VolUserModel] = []
+    // Variables for keeping vol and user data in case it's transaction to them.
+    // | //
+    // ↓ //
+    var chosenInvData: InvUserModel!
+    var chosenVolData: VolUserModel!
     // Timers
     // | //
     // ↓ //
@@ -34,16 +39,19 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var localUserGeoUpdateTimer: Timer?
     
     @IBOutlet weak var mapView: MKMapView!
-
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var reloadButton: UIButton!
+    @IBOutlet weak var conidVerifyButton: UIButton!
+    @IBOutlet weak var conidLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpNavigationBar()
         setupMidButton()
+        setupConidLabel()
         setupReloadButton()
+        setupConidVerifyButton()
         
         profileManager.delegate = self
         mapView.delegate = self
@@ -77,10 +85,84 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let region = MKCoordinateRegion(center: locValue, span: span)
         mapView.setRegion(region, animated: true)
     }
-
-    @objc func locationManagerCustomSetup(){
+    
+    
+    @IBAction func conidVerifyButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Вы почти у цели!", message: "Введите номер, сообщенный собеседником.", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "ОК", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            // handle conid sending here
+            guard let conid = textField.text else {return}
+            if conid != ""{
+                APIClient.volGetInv(phone: self.currentProfile.phone, conid: conid, completion: { (responseObject, error) in
+                    if error == nil {
+                        let status = responseObject?.value(forKey: "resp") as! String
+                        if status == "nice"{
+                            print("\nУспешная связь между инволидом и волонтером!\n")
+                            // parse data to new chosenInvData
+                            let name = responseObject?.value(forKey: "name") as! String
+                            let phone = responseObject?.value(forKey: "phone") as! String
+                            let geoData = responseObject?.value(forKey: "geo") as! NSArray
+                            // Bad things going on here REWRITE
+                            // -------------------------------
+                            guard let lat = geoData[0] as? String else {return}
+                            guard let long = geoData[1] as? String else {return}
+                            
+                            let latDouble = Double(lat)!
+                            let longDouble = Double(long)!
+                            // -------------------------------
+                            self.chosenInvData = InvUserModel(id: "", name: name, latitude: latDouble, longitude: longDouble, phone: phone)
+                            // show him on map
+                            self.drawCurrentInvPin(inv: self.chosenInvData)
+                            // TODO: make a road to this pin.
+                            
+                            // hide conid verification button
+                            self.conidVerifyButton.isEnabled = false
+                            UIView.animate(withDuration: 1, animations: {
+                                self.conidVerifyButton.alpha = 0.0
+                            })
+                            SCLAlertView().showSuccess("Спешите на помощь", subTitle: "Инвалид уже ждет Вас", closeButtonTitle: "ОК")
+                            
+                            
+                        } else if status == "vol not found"{
+                            print("\nОшибка! Такой волонтер не найден!\n")
+                        } else if status == "vol not ready" {
+                            print("\nОшибка! Волонтер не готов помогать!\n")
+                        } else if status == "bad conid" {
+                            print("\nОшибка! Неверный conid!\n")
+                        } else if status == "bad inv find"{
+                            print("\nОшибка! bad inv find!\n")
+                        } else if status == "user not found"{
+                            print("\nОшибка! inv not found!\n")
+                        } else if status == "busy"{
+                            SCLAlertView().showError("Ошибка", subTitle: "Один из вас имеет статус: Занят!", closeButtonTitle: "ОК")
+                            print("\nОшибка! Волонтер и инволид уже заняты!\n")
+                        } else if status == "bad inv set"{
+                            print("\nОшибка! bad inv set!\n")
+                        } else if status == "bad vol set"{
+                            print("\nОшибка! bad vol set!\n")
+                        } else {
+                             print("some strange status handled!\n\(status)")
+                        }
+                    } else {
+                        if let e = error{
+                            print(e.localizedDescription)
+                            // handle more errors here TODO!
+                            SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                        }
+                    }
+                })
+            }
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Номер собеседника..."
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
         
-//        activityIndicatorView = self.showActivityIndicatorView(uiView: self.view)
+    }
+    
+    @objc func locationManagerCustomSetup(){
         
         if CLLocationManager.locationServicesEnabled(){
             didGetFirstLocation = false
@@ -106,7 +188,8 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapView.showsUserLocation = false
             print("\nГеолокация у устройства выключена.\n")
             // timer handling
-            // TODO fix CH/ND touch with state = 1
+            // TODO: fix CH/ND touch with state = 1
+            // if still in app after login, but without geo - we should let person leave the app -> back and send Ch/Nh
             if self.localUserGeoUpdateTimer != nil{
                 self.localUserGeoUpdateTimer?.invalidate()
             }
@@ -147,15 +230,15 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 extension GeoViewController{
     
     func setUpNavigationBar(){
-        self.navigationItem.title = "Social App"
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.title = "Social App"
+        navigationItem.setHidesBackButton(true, animated: false)
         // setting right NavBar button (exit)
         let exitButton = UIButton(type: .custom)
         exitButton.setImage(#imageLiteral(resourceName: "logOut_pic"), for: .normal)
-        exitButton.addTarget(self, action: #selector(GeoViewController.logOut), for: .touchUpInside)
+        exitButton.addTarget(self, action: #selector(logOut), for: .touchUpInside)
         exitButton.contentMode = .scaleAspectFit
         let rightBarItem = UIBarButtonItem(customView: exitButton)
-        self.navigationItem.rightBarButtonItem = rightBarItem
+        navigationItem.rightBarButtonItem = rightBarItem
     }
     
     @objc func logOut() {
@@ -165,7 +248,7 @@ extension GeoViewController{
             let exitAlert = UIAlertController(title: "Вы собираетесь выйти из текущего аккаунта!", message: "Уверены, что точно хотите этого?", preferredStyle: UIAlertControllerStyle.alert)
             let confirmAction = UIAlertAction(title: "Да", style: .default){ action in
                 
-                let goodExitAlert = UIAlertController(title: "Вы успешно вышли.", message: "Ждем Вас снова 😎!", preferredStyle: UIAlertControllerStyle.alert)
+                let goodExitAlert = UIAlertController(title: "Вы успешно вышли.", message: "Ждем Вас снова 😁!", preferredStyle: UIAlertControllerStyle.alert)
                 self.present(goodExitAlert, animated: true, completion: nil)
                 // send POST API request to EXIT
                 if self.currentProfile.invId == ""{
@@ -257,21 +340,64 @@ extension GeoViewController{
         menuButton.setImage(#imageLiteral(resourceName: "handshake_pic"), for: UIControlState.normal)
         menuButton.contentMode = .scaleAspectFit
         menuButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        menuButton.addTarget(self, action: #selector(GeoViewController.midButtonAction), for: .touchUpInside)
+        menuButton.addTarget(self, action: #selector(midButtonAction), for: .touchUpInside)
         self.view.addSubview(menuButton)
         self.view.layoutIfNeeded()
     }
     
     func setupReloadButton(){
-        self.reloadButton.clipsToBounds = true
-        self.reloadButton.layer.cornerRadius = self.reloadButton.frame.height/2
-        self.reloadButton.setImage(#imageLiteral(resourceName: "reload_pic"), for: .normal)
-        self.reloadButton.contentMode = .scaleAspectFit
-        self.reloadButton.tintColor = UIColor.gray
-        self.reloadButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
-        self.reloadButton.imageEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
-        self.reloadButton.alpha = 0.0
-        self.reloadButton.isEnabled = false
+        reloadButton.clipsToBounds = true
+        reloadButton.layer.cornerRadius = reloadButton.frame.height/2
+        reloadButton.setImage(#imageLiteral(resourceName: "reload_pic"), for: .normal)
+        reloadButton.contentMode = .scaleAspectFit
+        reloadButton.tintColor = UIColor.gray
+        reloadButton.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        reloadButton.imageEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+        reloadButton.alpha = 0.0
+        reloadButton.isEnabled = false
+    }
+    
+    func setupConidLabel(){
+        conidLabel.clipsToBounds = true
+        conidLabel.layer.cornerRadius = self.conidLabel.frame.height/3
+        conidLabel.backgroundColor = #colorLiteral(red: 0.2202436289, green: 0.7672206565, blue: 0.5130995929, alpha: 0.789625671)
+        conidLabel.tintColor = UIColor.white
+        conidLabel.text = ""
+        conidLabel.alpha = 0.0
+        conidLabel.isEnabled = false
+    }
+    
+    func setupConidVerifyButton(){
+        conidVerifyButton.clipsToBounds = true
+        conidVerifyButton.layer.cornerRadius = conidVerifyButton.frame.height/2
+        conidVerifyButton.setImage(#imageLiteral(resourceName: "conidVerify_pic"), for: .normal)
+        conidVerifyButton.contentMode = .scaleAspectFit
+        conidVerifyButton.tintColor = UIColor.gray
+        conidVerifyButton.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+        conidVerifyButton.imageEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+        conidVerifyButton.alpha = 0.0
+        conidVerifyButton.isEnabled = false
+    }
+    
+    // show conid label view to inv
+    func showConidLabel(conid: String){
+        if conid != "" {
+            self.conidLabel.text = "Назовите номер: \(conid)"
+            UIView.animate(withDuration: 1.5) {
+                self.conidLabel.alpha = 1.0
+            }
+            
+            UIView.animate(withDuration: 1.0, delay:0, options: [.repeat, .autoreverse], animations: {
+                UIView.setAnimationRepeatCount(3)
+                self.conidLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                
+            }, completion: {completion in
+                UIView.animate(withDuration: 1, animations: {
+                    self.conidLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+                })
+            })
+            self.conidLabel.isEnabled = true
+        }
     }
     
     @objc func midButtonAction(){
@@ -305,6 +431,12 @@ extension GeoViewController{
                                 })
                             }
                         }
+                        // show conidButton with animation!
+                        self.conidVerifyButton.isEnabled = true
+                        UIView.animate(withDuration: 1.5, animations: {
+                            self.conidVerifyButton.alpha = 1.0
+                        })
+                        print("\nКнопка верификации conid отрисована!\n")
 
                     } else if status == "false"{
                         print("\nОшибка! Неуспешная попытка volHelp!\n")
@@ -330,6 +462,7 @@ extension GeoViewController{
                         print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
                         // call for function to show pins of users
                         self.loadVolPins()
+                        self.showConidLabel(conid: status)
                         let generator = UINotificationFeedbackGenerator()
                         generator.notificationOccurred(.success)
 
@@ -382,33 +515,6 @@ extension GeoViewController{
         // REMOVE -- done only for testing!
 //        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Скоро случится магия.", closeButtonTitle: "ОК")
     }
-    
-//    func showActivityIndicatorView(uiView: UIView) -> UIView {
-//        let container: UIView = UIView()
-//        container.frame = uiView.frame
-//        container.center = uiView.center
-//        container.backgroundColor = UIColor.black.withAlphaComponent(0.3)
-//
-//        let loadingView: UIView = UIView()
-//        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-//        loadingView.center = uiView.center
-//        loadingView.backgroundColor = UIColor.init(red: 0.266, green: 0.266, blue: 0.266, alpha: 0.7)
-//        loadingView.clipsToBounds = true
-//        loadingView.layer.cornerRadius = 10
-//
-//        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-//        activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-//        activityIndicator.activityIndicatorViewStyle =
-//            UIActivityIndicatorViewStyle.whiteLarge
-//        activityIndicator.center = CGPoint(x: loadingView.frame.size.width/2, y: loadingView.frame.size.height/2)
-//
-//        loadingView.addSubview(activityIndicator)
-//        container.addSubview(loadingView)
-//        uiView.addSubview(container)
-//
-//        activityIndicator.startAnimating()
-//        return container
-//    }
     
     @objc func loadVolPins(){
         // clear volUserModel array before getting new values
@@ -463,6 +569,12 @@ extension GeoViewController{
         }
         print("Волонтеры расположены на карте!")
         
+    }
+    
+    func drawCurrentInvPin(inv: InvUserModel){
+        let pin = CustomPin(title: inv.name, subtitle: inv.phone, coordinate: CLLocationCoordinate2DMake(inv.latitude, inv.longitude))
+        self.mapView.addAnnotation(pin)
+        print("Найденный инволид размещен на карте!")
     }
 }
 
