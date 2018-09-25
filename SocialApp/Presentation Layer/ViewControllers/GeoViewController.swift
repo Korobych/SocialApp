@@ -37,6 +37,8 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     // ↓ //
     var volDataUpdateTimer: Timer?
     var localUserGeoUpdateTimer: Timer?
+    var helperInfoGetTimer: Timer?
+    var helperGeoGetTimer: Timer?
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tabBar: UITabBar!
@@ -168,8 +170,6 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             didGetFirstLocation = false
             locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
-            // accuracy non important setting
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             mapView.isZoomEnabled = true
             mapView.isScrollEnabled = true
             mapView.showsScale = true
@@ -178,6 +178,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapView.showsUserLocation = true
             
             locationManager.startUpdatingLocation()
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             
         } else {
             didGetFirstLocation = false
@@ -202,11 +203,11 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let lat = locations.last?.coordinate.latitude, let long = locations.last?.coordinate.longitude {
-            print("Координаты: \(lat),\(long)\n")
             // saving current geo(lat, long) to code
             self.currentLocation = [lat, long]
             
             if !self.didGetFirstLocation {
+                print("Координаты: \(lat),\(long)\n")
                 mapView.showsUserLocation = true
                 // set comfort values (the previous was 0.02, 0.02).
                 let span = MKCoordinateSpanMake(0.04, 0.04)
@@ -252,7 +253,8 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         {
             return
         }
-       
+        
+        // TODO: Not empty or nill content inside annotation
         let userAnnotation = view.annotation as! CustomPin
         let views = Bundle.main.loadNibNamed("CustomCalloutView", owner: nil, options: nil)
         let calloutView = views?[0] as! CustomCalloutView
@@ -360,6 +362,12 @@ extension GeoViewController{
                         if self.localUserGeoUpdateTimer != nil{
                             self.localUserGeoUpdateTimer?.invalidate()
                         }
+                        if self.helperInfoGetTimer != nil{
+                            self.helperInfoGetTimer?.invalidate()
+                        }
+                        if self.helperGeoGetTimer != nil{
+                            self.helperGeoGetTimer?.invalidate()
+                        }
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -372,10 +380,6 @@ extension GeoViewController{
         
         }
     }
-    
-    // **************************
-    // TabBar setting up
-    // **************************
     
     func setupMidButton() {
         let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
@@ -434,13 +438,13 @@ extension GeoViewController{
     func showConidLabel(conid: String){
         if conid != "" {
             self.conidLabel.text = "Назовите номер: \(conid)"
-            UIView.animate(withDuration: 1.5) {
+            UIView.animate(withDuration: 1) {
                 self.conidLabel.alpha = 1.0
             }
             
             UIView.animate(withDuration: 1.0, delay:0, options: [.repeat, .autoreverse], animations: {
                 UIView.setAnimationRepeatCount(3)
-                self.conidLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.conidLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
                 
             }, completion: {completion in
                 UIView.animate(withDuration: 1, animations: {
@@ -471,6 +475,8 @@ extension GeoViewController{
                                             print("\nОшибка! Неуспешная попытка обновить геопозицию! vol\n")
                                         } else if status == "true" {
                                             print("\nГеопозиция в бд обновлена! vol\n")
+                                        } else {
+                                            print("some strange status \(status)")
                                         }
                                     } else {
                                         if let e = error{
@@ -517,12 +523,11 @@ extension GeoViewController{
                         let generator = UINotificationFeedbackGenerator()
                         generator.notificationOccurred(.success)
 
-                        // timer to update set up!  --- selected time is 150 secs
+                        // timer to update set up!  --- selected time is 120 secs
                         DispatchQueue.main.async {
-                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 150, repeats: true) { _ in
+                            self.volDataUpdateTimer = Timer.scheduledTimer(withTimeInterval: 120, repeats: true) { _ in
                                 // clear map from previous annotations
                                 // TODO: make smarter delete fucntion. If the geo diff is less than const, don't delete it.
-                                self.mapView.removeAnnotations(self.mapView.annotations)
                                 self.loadVolPins()
                                 print("\nТаймер на обновление volGeolist сработал!\n")
                             }
@@ -535,6 +540,8 @@ extension GeoViewController{
                                             print("\nОшибка! Неуспешная попытка обновить геопозицию! inv\n")
                                         } else if status == "true" {
                                             print("\nГеопозиция в бд обновлена! inv\n")
+                                        } else {
+                                            print("some strange status \(status)")
                                         }
                                     } else {
                                         if let e = error{
@@ -545,6 +552,8 @@ extension GeoViewController{
                                     }
                                 })
                             }
+                            // add timer for getting helperInfo
+                            self.helperInfoTimer()
                             // show reloadButton with animation!
                             self.reloadButton.isEnabled = true
                             UIView.animate(withDuration: 1.5, animations: {
@@ -563,8 +572,6 @@ extension GeoViewController{
                 }
             }
         }
-        // REMOVE -- done only for testing!
-//        SCLAlertView().showSuccess("Поздравляем!", subTitle: "Скоро случится магия.", closeButtonTitle: "ОК")
     }
     
     @objc func loadVolPins(){
@@ -609,25 +616,127 @@ extension GeoViewController{
     }
     
     func drawVolPins(){
-        // drawing pins of preloaded vol/geolist
-        // -----
-        // TODO: select only state == 1 volonteers -> green color
-        // TODO: 
-        // -----
-        for user in self.volData{
-            let pin = CustomPin(title: user.name, subtitle: user.phone, coordinate: CLLocationCoordinate2DMake(user.latitude, user.longitude))
+        // added logic with reentering the app
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        if self.chosenVolData != nil{
+            let pin = CustomPin(title: self.chosenVolData.name, subtitle: self.chosenVolData.phone, coordinate: CLLocationCoordinate2DMake(self.chosenVolData.latitude, self.chosenVolData.longitude))
             self.mapView.addAnnotation(pin)
+        } else{
+            for user in self.volData{
+                if user.status == 2{
+                    guard let vol = self.chosenVolData else {return}
+                    if user.name == vol.name && user.phone == vol.phone {
+                        let pin = CustomPin(title: user.name, subtitle: user.phone, coordinate: CLLocationCoordinate2DMake(user.latitude, user.longitude))
+                        self.mapView.addAnnotation(pin)
+                        break
+                    }
+                }
+                if user.status == 1{
+                    let pin = CustomPin(title: user.name, subtitle: user.phone, coordinate: CLLocationCoordinate2DMake(user.latitude, user.longitude))
+                    self.mapView.addAnnotation(pin)
+                }
+            }
+            print("Волонтеры расположены на карте!")
         }
-        print("Волонтеры расположены на карте!")
         
     }
     
+    func helperInfoTimer(){
+        // detect that current user = inv and start timer (waiting for vol info)
+        if self.currentProfile.invId != ""{
+            if self.helperGeoGetTimer == nil{
+                self.helperInfoGetTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { (timer) in
+                    APIClient.helperInfo(id: self.currentProfile.invId , completion: { (responseObject, error) in
+                        if error == nil {
+                            let status = responseObject?.value(forKey: "resp") as! String
+                            if status == "bad"{
+                                // TODO: alert after a few timer firing, telling the user not to wait for the phoned vol. And search for another one
+                                print("Помощь все еще не найдена.")
+                            } else if status == "true" {
+                                print("Волонтер найден!")
+                                SCLAlertView().showSuccess("Волонтер подтвердил помощь", subTitle: "Ожидайте волонтера. Следите за его передвижением на карте.", closeButtonTitle: "ОК")
+                                let name = responseObject?.value(forKey: "name") as! String
+                                let phone = responseObject?.value(forKey: "phone") as! String
+                                let latitude = responseObject?.value(forKey: "latitude") as! String
+                                let longitude = responseObject?.value(forKey: "longitude") as! String
+                                
+                                guard let latDouble = Double(latitude) else {return}
+                                guard let longDouble = Double(longitude) else {return}
+                                // FIXIT: we already have data in volUserModel, better to filter it and get chosen vol.
+                                let chosenVol = VolUserModel(name: name, phone: phone, latitude: latDouble, longitude: longDouble, status: 2)
+                                self.chosenVolData = chosenVol
+                                self.drawVolPins()
+                                // we don't need this timer anymore -> exetung chosen user geo data update timer (to be done)
+                                self.helperInfoGetTimer?.invalidate()
+                                self.helperGeoTimer()
+                            } else {
+                                print("strange status \(status)")
+                            }
+                        } else {
+                            if let e = error{
+                                print(e.localizedDescription)
+                                // handle more errors here TODO!
+                                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                            }
+                        }
+                    })
+                })
+            }
+        }
+    }
+    
+    func helperGeoTimer(){
+        // detect that current user = inv and start timer (waiting for vol GEO)
+        if self.currentProfile.invId != ""{
+            if self.helperGeoGetTimer == nil {
+                self.helperGeoGetTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { (timer) in
+                    APIClient.helperGeo(id: self.currentProfile.invId, completion: { (responseObject, error) in
+                        if error == nil {
+                            let status = responseObject?.value(forKey: "resp") as! String
+                            if status == "bad"{
+                                print("\nОшибка! Неуспешная попытка обновить геопозицию привязанного волонтера! inv\n")
+                            } else if status == "nice" {
+                                let latitude = responseObject?.value(forKey: "latitude") as! String
+                                let longitude = responseObject?.value(forKey: "longitude") as! String
+                                
+                                guard let latDouble = Double(latitude) else {return}
+                                guard let longDouble = Double(longitude) else {return}
+                                guard var vol = self.chosenVolData else {return}
+                                vol.latitude = latDouble
+                                vol.longitude = longDouble
+                                self.drawCurrentVolPin(vol: vol)
+                                print("\nГеоданные привязанного волонтера обновлены.\n")
+                            } else {
+                                print("some strange status \(status)")
+                            }
+                        } else {
+                            if let e = error{
+                                print(e.localizedDescription)
+                                // handle more errors here TODO!
+                                SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                            }
+                        }
+                    })
+                })
+            }
+        }
+    }
+    
     func drawCurrentInvPin(inv: InvUserModel){
+        // clear all pins if needed
         let pin = CustomPin(title: inv.name, subtitle: inv.phone, coordinate: CLLocationCoordinate2DMake(inv.latitude, inv.longitude))
         self.mapView.addAnnotation(pin)
         print("Найденный инволид размещен на карте!")
     }
     
+    func drawCurrentVolPin(vol: VolUserModel){
+        // clear all pins if needed
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        let pin = CustomPin(title: vol.name, subtitle: vol.phone, coordinate: CLLocationCoordinate2DMake(vol.latitude, vol.longitude))
+        self.mapView.addAnnotation(pin)
+        print("Найденный инволид размещен на карте!")
+    }
+
     @objc func callPhoneNumber(sender: UIButton)
     {
         let v = sender.superview as! CustomCalloutView

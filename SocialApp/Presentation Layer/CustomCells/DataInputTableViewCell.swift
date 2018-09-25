@@ -195,7 +195,7 @@ extension DataInputTableViewCell {
     func loginResponseHandler(responseObject : NSDictionary?, error: Error?) -> Bool{
         if error == nil {
             let status = responseObject?.value(forKey: "resp") as! String
-            if status == "signIn"{
+            if status == "signIn" || status == "comeback"{
 //                let name = responseObject?.value(forKey: "name") as! String
                 // ---------------------------------------------
                 // Welcome alert with the logic of name handling

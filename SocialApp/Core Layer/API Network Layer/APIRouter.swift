@@ -22,9 +22,11 @@ enum APIRouter: APIConfiguration {
     case volHelp(phone: String, latitude: String, longitude: String)
     case invHelp(id: String, latitude: String, longitude: String)
     case volGetInv(phone: String, conid: String)
-    case invStopHelp(conid: String, phone: String)
+    case invStopHelp(conid: String, phone: String, review: String)
     case updateVolGeo(phone: String, latitude: String, longitude: String)
     case updateInvGeo(id: String, latitude: String, longitude: String)
+    case helperInfo(id: String)
+    case helperGeo(id: String)
     
     // MARK: - HTTPMethod
     var method: HTTPMethod {
@@ -56,6 +58,10 @@ enum APIRouter: APIConfiguration {
         case .updateVolGeo:
             return .post
         case .updateInvGeo:
+            return .post
+        case .helperInfo:
+            return .post
+        case .helperGeo:
             return .post
         }
     }
@@ -91,6 +97,10 @@ enum APIRouter: APIConfiguration {
             return "/vol/gp"
         case .updateInvGeo:
             return "/inv/gp"
+        case .helperInfo:
+            return "/inv/helperinfo"
+        case .helperGeo:
+            return "/inv/volgeo"
         }
     }
     
@@ -119,12 +129,16 @@ enum APIRouter: APIConfiguration {
             return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.latitude : latitude, APIRefference.APIParameterKey.longitude : longitude]
         case .volGetInv(let phone, let conid):
             return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.conid : conid]
-        case .invStopHelp(let conid, let phone):
-            return [APIRefference.APIParameterKey.conid : conid, APIRefference.APIParameterKey.phone : phone]
+        case .invStopHelp(let conid, let phone, let review):
+            return [APIRefference.APIParameterKey.conid : conid, APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.review : review]
         case .updateVolGeo(let phone, let latitude, let longitude):
             return [APIRefference.APIParameterKey.phone : phone, APIRefference.APIParameterKey.latitude : latitude, APIRefference.APIParameterKey.longitude : longitude ]
         case .updateInvGeo(let id, let latitude, let longitude):
             return [APIRefference.APIParameterKey.id : id, APIRefference.APIParameterKey.latitude : latitude, APIRefference.APIParameterKey.longitude : longitude]
+        case .helperInfo(let id):
+            return [APIRefference.APIParameterKey.id : id]
+        case .helperGeo(let id):
+            return [APIRefference.APIParameterKey.id : id]
         }
     }
     

@@ -142,8 +142,8 @@ class APIClient {
         }
     }
     
-    static func invStopHelp(conid: String, phone: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
-        Alamofire.request(APIRouter.invStopHelp(conid: conid, phone: phone))
+    static func invStopHelp(conid: String, phone: String, review: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.invStopHelp(conid: conid, phone: phone, review: review))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
@@ -168,6 +168,30 @@ class APIClient {
     
     static func updateInvGeo(id: String, latitude: String, longitude: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
         Alamofire.request(APIRouter.updateInvGeo(id: id, latitude: latitude, longitude: longitude))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func helperInfo(id: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.helperInfo(id: id))
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(let value):
+                    completion(value as? NSDictionary, nil)
+                case .failure(let error):
+                    completion(nil, error)
+                }
+        }
+    }
+    
+    static func helperGeo(id: String, completion: @escaping (NSDictionary?, Error?) -> ()) {
+        Alamofire.request(APIRouter.helperGeo(id: id))
             .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):

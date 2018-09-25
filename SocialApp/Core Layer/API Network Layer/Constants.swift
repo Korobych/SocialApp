@@ -21,6 +21,7 @@ struct APIRefference {
         static let latitude = "latitude"
         static let longitude = "longitude"
         static let conid = "conid"
+        static let review = "review"
     }
 }
 
