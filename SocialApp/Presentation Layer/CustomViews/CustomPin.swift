@@ -20,6 +20,3 @@ class CustomPin: NSObject, MKAnnotation {
         self.coordinate = coordinate
     }
 }
-// *************************************
-// CutomMKAnnotationView to be done here
-// *************************************

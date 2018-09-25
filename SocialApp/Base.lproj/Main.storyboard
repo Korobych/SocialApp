@@ -183,6 +183,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="tabBarProfile_pic" width="32" height="32"/>
+        <image name="tabBarProfile_pic" width="24" height="24"/>
     </resources>
 </document>

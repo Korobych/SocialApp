@@ -24,6 +24,9 @@
 		9876454F2111D31300C87421 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9876454E2111D31300C87421 /* Media.xcassets */; };
 		989E8843211449F7007D130C /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E8842211449F7007D130C /* Models.swift */; };
 		989E884621146979007D130C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989E884521146979007D130C /* LoginViewController.swift */; };
+		98BBC949215A38D400434D33 /* CustomVolAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBC948215A38D400434D33 /* CustomVolAnnotationView.swift */; };
+		98BBC94F215A3EFA00434D33 /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBC94E215A3EFA00434D33 /* CustomCalloutView.swift */; };
+		98BBC951215A3F0B00434D33 /* CustomCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BBC950215A3F0B00434D33 /* CustomCalloutView.xib */; };
 		98C930EC212942B4005DD9D7 /* GeoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C930EB212942B4005DD9D7 /* GeoViewController.swift */; };
 		98E766A82111A8180081345F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E766A72111A8180081345F /* AppDelegate.swift */; };
 		98E766AA2111A8180081345F /* EnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E766A92111A8180081345F /* EnterViewController.swift */; };
@@ -56,6 +59,9 @@
 		9876454E2111D31300C87421 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		989E8842211449F7007D130C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		989E884521146979007D130C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		98BBC948215A38D400434D33 /* CustomVolAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVolAnnotationView.swift; sourceTree = "<group>"; };
+		98BBC94E215A3EFA00434D33 /* CustomCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
+		98BBC950215A3F0B00434D33 /* CustomCalloutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCalloutView.xib; sourceTree = "<group>"; };
 		98C930EB212942B4005DD9D7 /* GeoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoViewController.swift; sourceTree = "<group>"; };
 		98E766A42111A8180081345F /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98E766A72111A8180081345F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				9855487A2154086C005F5CFD /* CustomPin.swift */,
+				98BBC948215A38D400434D33 /* CustomVolAnnotationView.swift */,
+				98BBC94E215A3EFA00434D33 /* CustomCalloutView.swift */,
+				98BBC950215A3F0B00434D33 /* CustomCalloutView.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -298,6 +307,7 @@
 				9802BA8F21237D44001F8426 /* SocialTableViewCell.xib in Resources */,
 				98E766B22111A8190081345F /* Assets.xcassets in Resources */,
 				9876454F2111D31300C87421 /* Media.xcassets in Resources */,
+				98BBC951215A3F0B00434D33 /* CustomCalloutView.xib in Resources */,
 				98E766AD2111A8180081345F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +371,9 @@
 				982FE1602127170C00C4E5CD /* APIClient.swift in Sources */,
 				98757AE021485D2A00AE71F0 /* ProfileManager.swift in Sources */,
 				98757ADE21485D1F00AE71F0 /* ProfileService.swift in Sources */,
+				98BBC94F215A3EFA00434D33 /* CustomCalloutView.swift in Sources */,
 				9831DC5221470FA00069AAD3 /* CoreDataStack.swift in Sources */,
+				98BBC949215A38D400434D33 /* CustomVolAnnotationView.swift in Sources */,
 				982FE15C2126F85000C4E5CD /* APIConfiguration.swift in Sources */,
 				9802BA8E21237D44001F8426 /* SocialTableViewCell.swift in Sources */,
 				9855487B2154086C005F5CFD /* CustomPin.swift in Sources */,

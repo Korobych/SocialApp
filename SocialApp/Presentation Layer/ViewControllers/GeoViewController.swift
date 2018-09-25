@@ -97,7 +97,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 APIClient.volGetInv(phone: self.currentProfile.phone, conid: conid, completion: { (responseObject, error) in
                     if error == nil {
                         let status = responseObject?.value(forKey: "resp") as! String
-                        if status == "nice"{
+                        if status == "nice" || status == "vol recovery"{
                             print("\nУспешная связь между инволидом и волонтером!\n")
                             // parse data to new chosenInvData
                             let name = responseObject?.value(forKey: "name") as! String
@@ -224,6 +224,57 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Ошибка геопозиции: \(error.localizedDescription)")
+    }
+    
+    // **************************
+    // MkAnnotation setting up
+    // **************************
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation
+        {
+            return nil
+        }
+        var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "Pin")
+        if annotationView == nil{
+            annotationView = CustomVolAnnotationView(annotation: annotation, reuseIdentifier: "Pin")
+            annotationView?.canShowCallout = false
+        }else{
+            annotationView?.annotation = annotation
+        }
+        annotationView?.image = UIImage(named: "userPin_pic")
+        return annotationView
+
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if view.annotation is MKUserLocation
+        {
+            return
+        }
+       
+        let userAnnotation = view.annotation as! CustomPin
+        let views = Bundle.main.loadNibNamed("CustomCalloutView", owner: nil, options: nil)
+        let calloutView = views?[0] as! CustomCalloutView
+        calloutView.nameLabel.text = userAnnotation.title
+        calloutView.phoneLabel.text = userAnnotation.subtitle
+        let button = UIButton(frame: calloutView.callButton.frame)
+        button.addTarget(self, action: #selector(callPhoneNumber(sender:)), for: .touchUpInside)
+        calloutView.addSubview(button)
+      
+        calloutView.center = CGPoint(x: view.bounds.size.width / 2, y: -calloutView.bounds.size.height*0.52)
+        view.addSubview(calloutView)
+        mapView.setCenter((view.annotation?.coordinate)!, animated: true)
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if view.isKind(of: CustomVolAnnotationView.self)
+        {
+            for subview in view.subviews
+            {
+                subview.removeFromSuperview()
+            }
+        }
     }
 }
 
@@ -575,6 +626,18 @@ extension GeoViewController{
         let pin = CustomPin(title: inv.name, subtitle: inv.phone, coordinate: CLLocationCoordinate2DMake(inv.latitude, inv.longitude))
         self.mapView.addAnnotation(pin)
         print("Найденный инволид размещен на карте!")
+    }
+    
+    @objc func callPhoneNumber(sender: UIButton)
+    {
+        let v = sender.superview as! CustomCalloutView
+        if let url = URL(string: "telprompt://\(v.phoneLabel.text!)"), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
     }
 }
 
