@@ -40,10 +40,13 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var helperInfoGetTimer: Timer?
     var helperGeoGetTimer: Timer?
     
+    var conId: String!
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tabBar: UITabBar!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var conidVerifyButton: UIButton!
+    @IBOutlet weak var stopHelpButton: UIButton!
     @IBOutlet weak var conidLabel: UILabel!
     
     override func viewDidLoad() {
@@ -54,6 +57,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         setupConidLabel()
         setupReloadButton()
         setupConidVerifyButton()
+        setupStopHelpButton()
         
         profileManager.delegate = self
         mapView.delegate = self
@@ -100,12 +104,12 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     if error == nil {
                         let status = responseObject?.value(forKey: "resp") as! String
                         if status == "nice" || status == "vol recovery"{
-                            print("\nУспешная связь между инволидом и волонтером!\n")
+                            print("\nУспешная связь между инвалидом и волонтером!\n")
                             // parse data to new chosenInvData
                             let name = responseObject?.value(forKey: "name") as! String
                             let phone = responseObject?.value(forKey: "phone") as! String
                             let geoData = responseObject?.value(forKey: "geo") as! NSArray
-                            // Bad things going on here REWRITE
+                            // TODO: Bad things going on here REWRITE
                             // -------------------------------
                             guard let lat = geoData[0] as? String else {return}
                             guard let long = geoData[1] as? String else {return}
@@ -116,8 +120,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                             self.chosenInvData = InvUserModel(id: "", name: name, latitude: latDouble, longitude: longDouble, phone: phone)
                             // show him on map
                             self.drawCurrentInvPin(inv: self.chosenInvData)
-                            // TODO: make a road to this pin.
-                            
+    
                             // hide conid verification button
                             self.conidVerifyButton.isEnabled = false
                             UIView.animate(withDuration: 1, animations: {
@@ -138,7 +141,7 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                             print("\nОшибка! inv not found!\n")
                         } else if status == "busy"{
                             SCLAlertView().showError("Ошибка", subTitle: "Один из вас имеет статус: Занят!", closeButtonTitle: "ОК")
-                            print("\nОшибка! Волонтер и инволид уже заняты!\n")
+                            print("\nОшибка! Волонтер и инвалид уже заняты!\n")
                         } else if status == "bad inv set"{
                             print("\nОшибка! bad inv set!\n")
                         } else if status == "bad vol set"{
@@ -161,7 +164,43 @@ class GeoViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func stopHelpButtonTapped(_ sender: UIButton) {
+        // setting up uialert sheets
+        let stopHelpAlert = UIAlertController(title: "Завершить сессию?", message: "Укажите состояние", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let okButton = UIAlertAction(title: "Мне помогли", style: .default) { (alert) in
+            
+            print("Хорошее завершение сессии")
+            
+            let ratingAlert = UIAlertController(title: "Оцените помощь волонтера", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            let goodButton = UIAlertAction(title: "Хорошо", style: .default) { (alert) in
+                // good send
+                self.stopHelp(review: "good")
+            }
+            let badButton = UIAlertAction(title: "Плохо", style: .destructive) { (alert) in
+                // bad send
+                self.stopHelp(review: "bad")
+            }
+            ratingAlert.addAction(goodButton)
+            ratingAlert.addAction(badButton)
+            self.present(ratingAlert, animated: true, completion: nil)
+            
+        }
+        let dropButton = UIAlertAction(title: "Помощь больше не нужна", style: .destructive) { (alert) in
+            self.stopHelp(review: "none")
+            print("Дроп со стороны инвалида")
+        }
+        let deleteButton = UIAlertAction(title: "Отмена. Верните меня обратно", style: .cancel) { (alert) in
+            print("missclick")
+        }
         
+        stopHelpAlert.addAction(okButton)
+        stopHelpAlert.addAction(dropButton)
+        stopHelpAlert.addAction(deleteButton)
+        
+        self.present(stopHelpAlert, animated: true, completion: nil)
     }
     
     @objc func locationManagerCustomSetup(){
@@ -434,6 +473,19 @@ extension GeoViewController{
         conidVerifyButton.isEnabled = false
     }
     
+    func setupStopHelpButton(){
+        stopHelpButton.clipsToBounds = true
+        stopHelpButton.layer.cornerRadius = stopHelpButton.frame.height/2
+        stopHelpButton.setImage(UIImage(named: "stopHelp_pic"), for: .normal)
+        stopHelpButton.contentMode = .scaleAspectFit
+        stopHelpButton.tintColor = UIColor.white
+        stopHelpButton.backgroundColor = UIColor.red.withAlphaComponent(0.6)
+        stopHelpButton.imageEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+        stopHelpButton.alpha = 0.0
+        stopHelpButton.isEnabled = false
+    }
+    
+    
     // show conid label view to inv
     func showConidLabel(conid: String){
         if conid != "" {
@@ -453,6 +505,13 @@ extension GeoViewController{
             })
             self.conidLabel.isEnabled = true
         }
+    }
+    
+    func hideConidLabel(){
+        UIView.animate(withDuration: 1) {
+            self.conidLabel.alpha = 0.0
+        }
+        conidLabel.isEnabled = false
     }
     
     @objc func midButtonAction(){
@@ -518,6 +577,7 @@ extension GeoViewController{
                     } else {
                         print("\nОтлично! Поиск волонтера сейчас начнется! Ваш conID = \(status).\n")
                         // call for function to show pins of users
+                        self.conId = status
                         self.loadVolPins()
                         self.showConidLabel(conid: status)
                         let generator = UINotificationFeedbackGenerator()
@@ -587,7 +647,7 @@ extension GeoViewController{
                     if item[0] as! String == "" || item[1] as! String == "" || item[3] as! String == "" || item[4] as! String == "" {
                         continue
                     }
-                    // Bad things going on here REWRITE
+                    // TODO: Bad things going on here REWRITE
                     // -------------------------------
                     guard let lat = item[0] as? String else {return}
                     guard let long = item[1] as? String else {return}
@@ -654,6 +714,7 @@ extension GeoViewController{
                                 print("Помощь все еще не найдена.")
                             } else if status == "true" {
                                 print("Волонтер найден!")
+                                self.hideConidLabel()
                                 SCLAlertView().showSuccess("Волонтер подтвердил помощь", subTitle: "Ожидайте волонтера. Следите за его передвижением на карте.", closeButtonTitle: "ОК")
                                 let name = responseObject?.value(forKey: "name") as! String
                                 let phone = responseObject?.value(forKey: "phone") as! String
@@ -669,6 +730,13 @@ extension GeoViewController{
                                 // we don't need this timer anymore -> exetung chosen user geo data update timer (to be done)
                                 self.helperInfoGetTimer?.invalidate()
                                 self.helperGeoTimer()
+                                
+                                // show stopHelpButton with animation!
+                                self.stopHelpButton.isEnabled = true
+                                UIView.animate(withDuration: 1, animations: {
+                                    self.stopHelpButton.alpha = 1.0
+                                })
+                                print("\nКнопка stopHelp отрисована!\n")
                             } else {
                                 print("strange status \(status)")
                             }
@@ -696,6 +764,7 @@ extension GeoViewController{
                             if status == "bad"{
                                 print("\nОшибка! Неуспешная попытка обновить геопозицию привязанного волонтера! inv\n")
                             } else if status == "nice" {
+                                // TODO: bad things. rewrite
                                 let latitude = responseObject?.value(forKey: "latitude") as! String
                                 let longitude = responseObject?.value(forKey: "longitude") as! String
                                 
@@ -726,7 +795,7 @@ extension GeoViewController{
         // clear all pins if needed
         let pin = CustomPin(title: inv.name, subtitle: inv.phone, coordinate: CLLocationCoordinate2DMake(inv.latitude, inv.longitude))
         self.mapView.addAnnotation(pin)
-        print("Найденный инволид размещен на карте!")
+        print("Найденный инвалид размещен на карте!")
     }
     
     func drawCurrentVolPin(vol: VolUserModel){
@@ -734,7 +803,7 @@ extension GeoViewController{
         self.mapView.removeAnnotations(self.mapView.annotations)
         let pin = CustomPin(title: vol.name, subtitle: vol.phone, coordinate: CLLocationCoordinate2DMake(vol.latitude, vol.longitude))
         self.mapView.addAnnotation(pin)
-        print("Найденный инволид размещен на карте!")
+        print("Найденный волонтер размещен на карте!")
     }
 
     @objc func callPhoneNumber(sender: UIButton)
@@ -745,6 +814,38 @@ extension GeoViewController{
                 UIApplication.shared.open(url)
             } else {
                 UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
+    func stopHelp(review: String){
+        if self.currentProfile.invId != "" {
+            APIClient.invStopHelp(conid: self.conId, phone: self.chosenVolData.phone, review: review) { (responseObject, error) in
+                if error == nil {
+                    let status = responseObject?.value(forKey: "resp") as! String
+                    if status == "true"{
+                        print("\nУспешное завершение сессии!\n")
+                        // hide stopHelp button + stop helperGeoGetTimer and localUserGeoUpdateTimer + clear annotations + self.chosenVol clear
+                        self.helperGeoGetTimer?.invalidate()
+                        self.localUserGeoUpdateTimer?.invalidate()
+                        self.chosenVolData = nil
+                        self.mapView.removeAnnotations(self.mapView.annotations)
+                        self.stopHelpButton.isEnabled = false
+                        UIView.animate(withDuration: 1, animations: {
+                            self.stopHelpButton.alpha = 0.0
+                        })
+                    } else if status == "false"{
+                        print("\nОшибка! Не удалось закончить сессию!\n")
+                    } else {
+                        print("some strange status handled!\n\(status)")
+                    }
+                } else {
+                    if let e = error{
+                        print(e.localizedDescription)
+                        // handle more errors here TODO!
+                        SCLAlertView().showError("Нет соединения с сервером!", subTitle: "Проверьте соединение с интернетом.", closeButtonTitle: "ОК")
+                    }
+                }
             }
         }
     }
